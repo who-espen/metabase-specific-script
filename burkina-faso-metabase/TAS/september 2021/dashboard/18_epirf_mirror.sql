@@ -10,15 +10,15 @@
 
 /*
  * This query is a sample of EPIRF mirror
- * Variable to rename Pre TAS, v_espen_bf_lf_tas1_3_resultat_fts_202010, v_espen_bf_lf_tas1_2_enrolement_202010,
- * espen_bf_lf_tas1_1_sites_202010
+ * Variable to rename Pre TAS, v_espen_bf_lf_tas3_3_resultat_fts_202109, v_espen_bf_lf_tas3_2_enrolement_202109,
+ * espen_bf_lf_tas3_1_sites_202109
  */
  SELECT
 
   'Pre TAS' "Survey of survey",
   null "Evaluation Unit",
   ds "Implementation Unit",
-  nom_grappe "Survey Site",
+  nom_de_la_grappe "Survey Site",
   TO_CHAR(c.created_at, 'Month') "Month",
   EXTRACT(YEAR FROM c.created_at) "Year",
   gps_lat "Latitude",
@@ -45,10 +45,10 @@
   null "Hydrocoele Nbr Health Facilities", --TODO: Update the Nbr Health Facilities
   null "Comments" --TODO: Update the comments
 
-FROM v_espen_bf_lf_tas1_3_resultat_fts_202010 d
-JOIN espen_bf_lf_tas1_1_sites_202010 c on d.d_cluster_id = c.nb_grappe
-JOIN v_espen_bf_lf_tas1_2_enrolement_202010 p on p.barcode = d.barcode
+FROM v_espen_bf_lf_tas3_3_resultat_fts_202109 d
+JOIN espen_bf_lf_tas3_1_sites_202109 c on d.d_cluster_id = c.nb_grappe
+JOIN v_espen_bf_lf_tas3_2_enrolement_202109 p on p.barcode = d.barcode
 
-GROUP BY ds, nom_grappe, "Month", "Year", gps_lat, gps_lng
+GROUP BY ds, nom_de_la_grappe, "Month", "Year", gps_lat, gps_lng
 
 

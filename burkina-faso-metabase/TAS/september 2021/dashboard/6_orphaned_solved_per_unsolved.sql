@@ -10,13 +10,13 @@
 
 /*
  * A query to get number of orphaned errors solved by the number of orphaned records unsolved
- * Variable to rename metabase_lf_tas_orphaned_202011
+ * Variable to rename metabase_lf_tas3_orphaned_202109
  */
 SELECT
     'Solved' status,
 	count(CASE WHEN status = 'Solved' THEN 1 ELSE NULL END) total
 
-FROM metabase_lf_tas_orphaned_202011
+FROM metabase_lf_tas3_orphaned_202109
 
 UNION
 
@@ -24,4 +24,4 @@ SELECT
     'Unsolved' status,
 	count(CASE WHEN status = 'Unsolved' THEN 1 ELSE NULL END) total
 
-FROM metabase_lf_tas_orphaned_202011
+FROM metabase_lf_tas3_orphaned_202109

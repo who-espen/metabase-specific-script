@@ -10,6 +10,6 @@
  */
 
 /*
- * Variable to rename v_espen_bf_lf_tas1_3_resultat_fts_202010
+ * Variable to rename v_espen_bf_lf_tas3_3_resultat_fts_202109
  */
-select * from v_espen_bf_lf_tas1_3_resultat_fts_202010
+select * from v_espen_bf_lf_tas3_3_resultat_fts_202109

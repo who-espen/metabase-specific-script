@@ -10,7 +10,7 @@
 
 /*
  * A query for listing all records that use the same ID twice
- * Variable to rename v_espen_bf_lf_tas1_2_enrolement_202010, v_espen_bf_lf_tas1_3_resultat_fts_202010, metabase_lf_tas_orphaned_202011
+ * Variable to rename v_espen_bf_lf_tas3_2_enrolement_202109, v_espen_bf_lf_tas3_3_resultat_fts_202109, metabase_lf_tas3_orphaned_202109
  */
 /*
  * File: 2_duplicates_errors.sql
@@ -24,7 +24,7 @@
 
 /*
  * A query for listing all records that use the same ID twice
- * Variable to rename metabase_lf_tas_duplicates_202011, v_espen_bf_lf_tas1_2_enrolement_202010, v_espen_bf_lf_tas1_3_resultat_fts_202010
+ * Variable to rename metabase_lf_tas3_duplicates_202109, v_espen_bf_lf_tas3_2_enrolement_202109, v_espen_bf_lf_tas3_3_resultat_fts_202109
  */
 SELECT
   "Formulaire",
@@ -43,7 +43,7 @@ FROM (
   SELECT
   m.form "Formulaire",
   p.nb_grappe "Code Site",
-  p.nom_grappe "Nom Site",
+  p.nom_de_la_grappe "Nom Site",
   m.barcode_participant "ID Participant",
   p.code_operateur "Code Opérateur",
   p.age "Age en années",
@@ -53,7 +53,7 @@ FROM (
   p.date_enregistrement date,
   status "Statut"
 
-FROM metabase_lf_tas_duplicates_202011 AS m, v_espen_bf_lf_tas1_2_enrolement_202010 AS p
+FROM metabase_lf_tas3_duplicates_202109 AS m, v_espen_bf_lf_tas3_2_enrolement_202109 AS p
   WHERE p.id::text = m.id_participant
 
 UNION ALL
@@ -71,7 +71,7 @@ SELECT
   d.date_enregistrement date,
   status "Statut"
 
-FROM metabase_lf_tas_duplicates_202011 AS m, v_espen_bf_lf_tas1_3_resultat_fts_202010 AS d
+FROM metabase_lf_tas3_duplicates_202109 AS m, v_espen_bf_lf_tas3_3_resultat_fts_202109 AS d
   WHERE d.id = m.id_results
 ) src
 

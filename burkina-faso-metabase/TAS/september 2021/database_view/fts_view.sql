@@ -10,13 +10,13 @@
 
 
 /*
- * Variable to rename  v_espen_bf_lf_tas1_3_resultat_fts_202010, espen_bf_lf_tas1_3_resultat_fts_202010, espen_bf_lf_tas1_1_sites_202010
+ * Variable to rename  v_espen_bf_lf_tas3_3_resultat_fts_202109, espen_bf_lf_tas3_3_resultat_sth_202109, espen_bf_lf_tas3_1_sites_202109
  */
-CREATE OR REPLACE VIEW public.v_espen_bf_lf_tas1_3_resultat_fts_202010
-AS SELECT d.id,
+ create or replace view  v_espen_bf_lf_tas3_3_resultat_fts_202109 as
+ SELECT d.id,
     d.code_operateur,
     d.ue,
-    s.ds,
+    s.drs,
     d.nb_grappe,
         CASE
             WHEN d.id_methode = 'Scanner'::text THEN d.barcode
@@ -46,5 +46,5 @@ AS SELECT d.id,
     d.observations,
     d.fin_enregistrement AS date_enregistrement,
     d.created_at AS date_telechargement
-   FROM espen_bf_lf_tas1_3_resultat_fts_202010 d
-     LEFT JOIN espen_bf_lf_tas1_1_sites_202010 s ON d.nb_grappe = s.nb_grappe;
+   FROM espen_bf_lf_tas3_3_resultat_sth_202109 d
+     LEFT JOIN espen_bf_lf_tas3_1_sites_202109 s ON d.nb_grappe = s.nb_grappe;

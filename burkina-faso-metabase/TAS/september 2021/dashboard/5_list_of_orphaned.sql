@@ -10,7 +10,7 @@
 
 /*
  * A query for listing all records that use the same ID twice
- * Variable to rename v_espen_bf_lf_tas1_2_enrolement_202010, v_espen_bf_lf_tas1_3_resultat_fts_202010, metabase_lf_tas_orphaned_202011
+ * Variable to rename v_espen_bf_lf_tas3_2_enrolement_202109, v_espen_bf_lf_tas3_3_resultat_fts_202109, metabase_lf_tas3_orphaned_202109
  */
 /*
  * File: 2_duplicates_errors.sql
@@ -24,12 +24,11 @@
 
 /*
  * A query for listing all records that use the same ID twice
- * Variable to rename metabase_lf_tas_duplicates_202011, v_espen_bf_lf_tas1_2_enrolement_202010, v_espen_bf_lf_tas1_3_resultat_fts_202010
+ * Variable to rename metabase_lf_tas3_duplicates_202109, v_espen_bf_lf_tas3_2_enrolement_202109, v_espen_bf_lf_tas3_3_resultat_fts_202109
  */
 SELECT
   "Formulaire",
   "Code Site",
-  "Nom Site",
   "ID Participant",
   "Code Opérateur",
   "Age en années",
@@ -42,8 +41,7 @@ SELECT
 FROM (
   SELECT
   m.form "Formulaire",
-  p.nb "Code Site",
-  p.nom_grappe "Nom Site",
+  p.nb_grappe "Code Site",
   m.barcode_participant "ID Participant",
   p.code_operateur "Code Opérateur",
   p.age "Age en années",
@@ -53,25 +51,24 @@ FROM (
   p.date_enregistrement date,
   status "Statut"
 
-FROM metabase_lf_tas_duplicates_202011 AS m, v_espen_bf_lf_tas1_2_enrolement_202010 AS p
+FROM metabase_lf_tas3_duplicates_202109 AS m, v_espen_bf_lf_tas3_2_enrolement_202109 AS p
   WHERE p.id = m.id_participant
 
 UNION ALL
 
 SELECT
   m.form "Formulaire",
-  d.d_cluster_id "Nom Site",
-  d.d_cluster_name "Nom Site",
+  d.nb_grappe::text "Code Site",
   m.barcode_results "ID Participant",
   d.code_operateur "Code Opérateur",
   null "Age en années",
   null "Scolarisé",
   null "Sexe",
   resultat_fts1 "Résultat Final",
-  d.d_date date,
+  d.date_enregistrement date,
   status "Statut"
 
-FROM metabase_lf_tas_duplicates_202011 AS m, v_espen_bf_lf_tas1_3_resultat_fts_202010 AS d
+FROM metabase_lf_tas3_duplicates_202109 AS m, v_espen_bf_lf_tas3_3_resultat_fts_202109 AS d
   WHERE d.id = m.id_results
 ) src
 

@@ -10,13 +10,13 @@
 
 /*
  * This query will display the FTS result by sex and result.
- * Variable to rename v_espen_bf_lf_tas1_2_enrolement_202010, espen_bf_lf_tas1_1_sites_202010
+ * Variable to rename v_espen_bf_lf_tas3_2_enrolement_202109, espen_bf_lf_tas3_1_sites_202109
  */
  SELECT
 nb_grappe "Site ID",
 c_eu_code "EU",
 ds "District",
-nom_grappe "Site Name",
+nom_de_la_grappe "Site Name",
 COUNT(p.id) "Enrolled",
 COUNT(CASE WHEN sexe = 'Male' THEN 1 ELSE NULL END) "Male",
 COUNT(CASE WHEN sexe = 'Female' THEN 1 ELSE NULL END) "Female",
@@ -28,9 +28,9 @@ COUNT(CASE WHEN (sexe = 'Female' and resultat_fts1 = 'Negative') THEN 1 ELSE NUL
 COUNT(CASE WHEN ( resultat_fts1 = 'Negative') THEN 1 ELSE NULL END) "Total Negative",
 COUNT(CASE WHEN ( resultat_fts1 = 'Invalid') THEN 1 ELSE NULL END) "Total Invalid"
 
-FROM v_espen_bf_lf_tas1_3_resultat_fts_202010 d
-LEFT JOIN espen_bf_lf_tas1_1_sites_202010 c on d.d_cluster_id::int = c.nb_grappe
-RIGHT JOIN v_espen_bf_lf_tas1_2_enrolement_202010 p on p.barcode = d.barcode
+FROM v_espen_bf_lf_tas3_3_resultat_fts_202109 d
+LEFT JOIN espen_bf_lf_tas3_1_sites_202109 c on d.d_cluster_id::int = c.nb_grappe
+RIGHT JOIN v_espen_bf_lf_tas3_2_enrolement_202109 p on p.barcode = d.barcode
 
 WHERE p.id IS NOT NULL
 
@@ -40,4 +40,4 @@ WHERE p.id IS NOT NULL
   -- [[and {{district}}]]
   -- [[and {{date}}]]
 
-GROUP BY nb_grappe, c_eu_code, ds, nom_grappe
+GROUP BY nb_grappe, c_eu_code, ds, nom_de_la_grappe

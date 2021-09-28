@@ -10,7 +10,7 @@
 
 /*
  * A query for listing all records that use the same ID twice
- * Variable to rename v_espen_bf_lf_tas1_2_enrolement_202010, v_espen_bf_lf_tas1_3_resultat_fts_202010, metabase_lf_tas_orphaned_202011
+ * Variable to rename v_espen_bf_lf_tas1_2_enrolement_202010, v_espen_bf_lf_tas1_3_resultat_fts_202010, metabase_lf_tas3_orphaned_202011
  */
 /*
  * File: 2_duplicates_errors.sql
@@ -24,7 +24,7 @@
 
 /*
  * A query for listing all records that use the same ID twice
- * Variable to rename metabase_lf_tas_duplicates_202011, v_espen_bf_lf_tas1_2_enrolement_202010, v_espen_bf_lf_tas1_3_resultat_fts_202010
+ * Variable to rename metabase_lf_tas3_duplicates_202011, v_espen_bf_lf_tas1_2_enrolement_202010, v_espen_bf_lf_tas1_3_resultat_fts_202010
  */
 SELECT
   "Formulaire",
@@ -53,7 +53,7 @@ FROM (
   p.date_enregistrement date,
   status "Statut"
 
-FROM metabase_lf_tas_duplicates_202011 AS m, v_espen_bf_lf_tas1_2_enrolement_202010 AS p
+FROM metabase_lf_tas3_duplicates_202011 AS m, v_espen_bf_lf_tas1_2_enrolement_202010 AS p
   WHERE p.id = m.id_participant
 
 UNION ALL
@@ -71,7 +71,7 @@ SELECT
   d.d_date date,
   status "Statut"
 
-FROM metabase_lf_tas_duplicates_202011 AS m, v_espen_bf_lf_tas1_3_resultat_fts_202010 AS d
+FROM metabase_lf_tas3_duplicates_202011 AS m, v_espen_bf_lf_tas1_3_resultat_fts_202010 AS d
   WHERE d.id = m.id_results
 ) src
 

@@ -9,9 +9,9 @@
  */
 
 /*
- * Variable to rename  espen_bf_lf_tas1_2_enrolement_202010, v_espen_bf_lf_tas1_2_enrolement_202010
+ * Variable to rename  espen_bf_lf_tas3_2_enrolement_202109, v_espen_bf_lf_tas3_2_enrolement_202109
 */
-CREATE OR REPLACE VIEW public.v_espen_bf_lf_tas1_2_enrolement_202010
+CREATE OR REPLACE VIEW public.v_espen_bf_lf_tas3_2_enrolement_202109
 AS SELECT p.id,
     p.code_operateur,
     p.ue,
@@ -32,4 +32,4 @@ AS SELECT p.id,
     p.commentaires,
     p.debut_enregistrement AS date_enregistrement,
     p.created_at AS date_telechargement
-   FROM espen_bf_lf_tas1_2_enrolement_202010 p;
+   FROM espen_bf_lf_tas3_2_enrolement_202109 p;

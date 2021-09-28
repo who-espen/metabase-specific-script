@@ -16,7 +16,7 @@
 /**
  * The table that will contain the list of action
  */
-CREATE TABLE IF NOT EXISTS metabase_lf_tas_action_todo_202011(
+CREATE TABLE IF NOT EXISTS metabase_lf_tas3_action_todo_202011(
   id SERIAL PRIMARY KEY,
   description TEXT NOT NULL,
   actor TEXT NOT NULL,

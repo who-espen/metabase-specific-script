@@ -10,11 +10,11 @@
 
 /*
  * The result from three from joint
- * Variable to rename v_espen_bf_lf_tas1_3_resultat_fts_202010, v_espen_bf_lf_tas1_2_enrolement_202010, espen_bf_lf_tas1_1_sites_202010
+ * Variable to rename v_espen_bf_lf_tas3_3_resultat_fts_202109, v_espen_bf_lf_tas3_2_enrolement_202109, espen_bf_lf_tas3_1_sites_202109
  */
 SELECT 
   ds "District", 
-  nom_grappe "Site", 
+  nom_de_la_grappe "Site", 
   nb_grappe "Code Site", 
   c_cluster_leader "Responsable Site", 
   c_consent "Consentement Responsable", 
@@ -38,5 +38,5 @@ SELECT
   resultat_fts1 "Résultat Final", 
 
   date_enregistrement "Date"
-FROM public.v_espen_bf_lf_tas1_1_sites_202010 c, v_espen_bf_lf_tas1_2_enrolement_202010 p, v_espen_bf_lf_tas1_3_resultat_fts_202010 d
+FROM public.v_espen_bf_lf_tas3_1_sites_202109 c, v_espen_bf_lf_tas3_2_enrolement_202109 p, v_espen_bf_lf_tas3_3_resultat_fts_202109 d
 where p.nb_grappe = c.nb_grappe and p.barcode = d.barcode;

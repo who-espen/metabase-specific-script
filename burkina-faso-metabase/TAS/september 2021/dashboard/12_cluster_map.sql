@@ -10,18 +10,18 @@
 
 /*
  * This query will use the GPS data to display a pin map of clusters.
- * Variable to rename espen_bf_lf_tas1_1_sites_202010
+ * Variable to rename espen_bf_lf_tas3_1_sites_202109
  */
  SELECT
 
- ds,
+ drs,
  nb_grappe,
- nom_grappe,
+ nom_de_la_grappe,
  gps_lat,
  gps_lng,
- created_at
+ date_enregistrement
 
-FROM espen_bf_lf_tas1_1_sites_202010
+FROM v_espen_bf_lf_tas3_1_sites_202109
 
   ------ Metabase filter -------
   -- [[and {{nb_grappe}}]]

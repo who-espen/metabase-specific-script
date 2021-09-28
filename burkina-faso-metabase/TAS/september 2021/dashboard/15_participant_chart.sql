@@ -10,7 +10,7 @@
 
 /*
  * This query will return the participant per sex
- * Variable to rename v_espen_bf_lf_tas1_2_enrolement_202010
+ * Variable to rename v_espen_bf_lf_tas3_2_enrolement_202109
  */
  select
 
@@ -21,7 +21,7 @@ FROM (
   SELECT
   	COUNT(case when sexe = 'Male' then 1 else null end ) male
 
-  FROM public.espen_bf_lf_tas1_2_enrolement_202010 P
+  FROM public.espen_bf_lf_tas3_2_enrolement_202109 P
 
 ) src
 
@@ -36,7 +36,7 @@ FROM (
   SELECT
   	COUNT(case when sexe = 'Femelle' then 1 else null end ) female
 
-  FROM public.espen_bf_lf_tas1_2_enrolement_202010 P
+  FROM public.espen_bf_lf_tas3_2_enrolement_202109 P
 
 ) src
 

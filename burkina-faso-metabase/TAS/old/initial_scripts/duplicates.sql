@@ -9,8 +9,8 @@
  */
 
 /*
- * Variable to rename metabase_lf_tas_duplicates_202011, identify_participant_duplicate_pretas_202009, v_espen_bf_lf_tas1_2_enrolement_202010,
- * v_espen_bf_lf_tas1_3_resultat_fts_202010, metabase_lf_pretas_result_duplicates_202009_trigger, metabase_lf_tas_duplicates_202011_trigger,
+ * Variable to rename metabase_lf_tas3_duplicates_202011, identify_participant_duplicate_pretas_202009, v_espen_bf_lf_tas1_2_enrolement_202010,
+ * v_espen_bf_lf_tas1_3_resultat_fts_202010, metabase_lf_pretas_result_duplicates_202009_trigger, metabase_lf_tas3_duplicates_202011_trigger,
  * v_espen_bf_lf_tas1_3_resultat_fts_202010
  */
 
@@ -19,7 +19,7 @@ BEGIN;
 /**
 * The table to track duplicates issues
 */
-CREATE TABLE IF NOT EXISTS metabase_lf_tas_duplicates_202011(
+CREATE TABLE IF NOT EXISTS metabase_lf_tas3_duplicates_202011(
   id SERIAL PRIMARY KEY,
   id_participant  VARCHAR(255) NULL, -- The id from participant table
   barcode_participant VARCHAR(255) NULL, -- The barcode from participant table
@@ -33,15 +33,15 @@ CREATE TABLE IF NOT EXISTS metabase_lf_tas_duplicates_202011(
 * Adding unique index in the duplicates tables
 */
   CREATE UNIQUE INDEX IF NOT EXISTS idx_duplicates_participant_id_barcode
-    ON metabase_lf_tas_duplicates_202011(id_participant, barcode_participant);
+    ON metabase_lf_tas3_duplicates_202011(id_participant, barcode_participant);
   CREATE UNIQUE INDEX IF NOT EXISTS idx_duplicates_results_id_barcode
-    ON metabase_lf_tas_duplicates_202011(id_results, barcode_results);
+    ON metabase_lf_tas3_duplicates_202011(id_results, barcode_results);
 
-  ALTER TABLE metabase_lf_tas_duplicates_202011
+  ALTER TABLE metabase_lf_tas3_duplicates_202011
     ADD CONSTRAINT unique_idx_duplicates_participant_id_barcode_tas_202011
     UNIQUE USING INDEX idx_duplicates_participant_id_barcode;
 
-  ALTER TABLE metabase_lf_tas_duplicates_202011
+  ALTER TABLE metabase_lf_tas3_duplicates_202011
     ADD CONSTRAINT unique_idx_duplicates_results_id_barcode_tas_202011
     UNIQUE USING INDEX idx_duplicates_results_id_barcode;
 
@@ -61,7 +61,7 @@ CREATE OR REPLACE FUNCTION identify_participant_duplicate_pretas_202009() RETURN
             AND (SELECT count (*)  FROM v_espen_bf_lf_tas1_2_enrolement_202010 inr WHERE src.barcode = inr.barcode ) > 1
             ) THEN
 
-        INSERT INTO metabase_lf_tas_duplicates_202011(id_participant, barcode_participant, form)
+        INSERT INTO metabase_lf_tas3_duplicates_202011(id_participant, barcode_participant, form)
           SELECT id, barcode, 'Participant'
             FROM (SELECT src.id, src.barcode FROM v_espen_bf_lf_tas1_2_enrolement_202010 src
               WHERE src.barcode = NEW.barcode) p
@@ -72,7 +72,7 @@ CREATE OR REPLACE FUNCTION identify_participant_duplicate_pretas_202009() RETURN
    END;
 $$ LANGUAGE PLPGSQL;
 
--- CREATE TRIGGER metabase_lf_tas_duplicates_202011_trigger AFTER INSERT OR UPDATE OR DELETE ON espen_bf_lf_tas1_2_enrolement_202010
+-- CREATE TRIGGER metabase_lf_tas3_duplicates_202011_trigger AFTER INSERT OR UPDATE OR DELETE ON espen_bf_lf_tas1_2_enrolement_202010
 -- FOR EACH ROW EXECUTE PROCEDURE identify_participant_duplicate_pretas_202009();
 
 
@@ -80,7 +80,7 @@ $$ LANGUAGE PLPGSQL;
 /**
 * Query to identifie the existing records with duplicates issues
 */
- INSERT INTO metabase_lf_tas_duplicates_202011(id_participant, barcode_participant, form)
+ INSERT INTO metabase_lf_tas3_duplicates_202011(id_participant, barcode_participant, form)
  SELECT id, barcode, 'Participant'
             FROM (
               SELECT src.id, src.barcode FROM v_espen_bf_lf_tas1_2_enrolement_202010 src
@@ -117,7 +117,7 @@ AS $$
             AND (SELECT count (*)  FROM v_espen_bf_lf_tas1_3_resultat_fts_202010 inr WHERE src.barcode = inr.barcode ) > 1
             ) THEN
 
-        INSERT INTO metabase_lf_tas_duplicates_202011(id_results, barcode_results, form)
+        INSERT INTO metabase_lf_tas3_duplicates_202011(id_results, barcode_results, form)
           SELECT id, barcode, 'Diagnostic'
             FROM (SELECT src.id, barcode FROM v_espen_bf_lf_tas1_3_resultat_fts_202010 src
               WHERE barcode = NEW.barcode) p
@@ -136,7 +136,7 @@ FOR EACH ROW EXECUTE PROCEDURE identify_pretas_diag_result_duplicate_202009();
 /**
 * Query to identifie the existing records with duplicates issues
 */
- INSERT INTO metabase_lf_tas_duplicates_202011(id_results, barcode_results, form)
+ INSERT INTO metabase_lf_tas3_duplicates_202011(id_results, barcode_results, form)
  SELECT id, barcode, 'Diagnostic'
             FROM (
               SELECT src.id, src.barcode FROM v_espen_bf_lf_tas1_3_resultat_fts_202010 src

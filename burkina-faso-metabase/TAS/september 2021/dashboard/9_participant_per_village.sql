@@ -11,24 +11,18 @@
 
 /*
  * This query will display the number of participants per village
- * Variable to rename espen_bf_lf_tas1_1_sites_202010, v_espen_bf_lf_tas1_2_enrolement_202010
+ * Variable to rename espen_bf_lf_tas3_1_sites_202109, v_espen_bf_lf_tas3_2_enrolement_202109
  */
 SELECT
-DISTINCT ON  (nb_grappe)
-	code_operateur "Code Opérateur",
-	ds "District",
-	nb_grappe "Cluster ID",
-  nom_grappe "Nom du Site",
-	count (p.id) "Total Participants",
-	c_village_pop "Total Population"
+DISTINCT ON  (c.nb_grappe)
+	c.code_operateur "Code Opérateur",
+	drs "District",
+	c.nb_grappe "Cluster ID",
+  c.nom_de_la_grappe "Nom du Site",
+	count (p.id) "Total Participants"
+FROM v_espen_bf_lf_tas3_1_sites_202109 c
+JOIN v_espen_bf_lf_tas3_2_enrolement_202109 p ON p.nb_grappe::INT = c.nb_grappe
 
-FROM espen_bf_lf_tas1_1_sites_202010 c
-JOIN v_espen_bf_lf_tas1_2_enrolement_202010 p ON p.nb_grappe::INT = c.nb_grappe
+WHERE c.id IS NOT NULL
 
-WHERE id IS NOT NULL
-
-  ------ Metabase filter -------
-  -- [[and {{district}}]]
-  -- [[and {{date}}]]
-
-GROUP BY code_operateur, nb_grappe, ds, c_village_pop
+GROUP BY c.code_operateur, c.nb_grappe, drs, c.nom_de_la_grappe

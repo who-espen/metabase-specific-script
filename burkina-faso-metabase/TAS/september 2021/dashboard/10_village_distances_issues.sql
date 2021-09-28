@@ -11,24 +11,24 @@
 
 /*
  * This query will will display the list of nearby villages less than <%village_dist_required%> KM
- * Variable to rename espen_bf_lf_tas1_1_sites_202010, <%village_dist_required%>
+ * Variable to rename espen_bf_lf_tas3_1_sites_202109, <%village_dist_required%>
  */
 SELECT
 
   calculate_distance(src.gps_lat , src.gps_lng , dest.gps_lat , dest.gps_lng,  'K') "Distances in KM",
   src.code_operateur "Code Opérateur 1",
   src.nb_grappe "Code Site 1",
-  src.nom_grappe "Site 1",
+  src.nom_de_la_grappe "Site 1",
   dest.code_operateur "Code Opérateur 2",
   dest.nb_grappe "Code Site 2",
-  dest.nom_grappe  "Site 2",
+  dest.nom_de_la_grappe  "Site 2",
   src.gps_lat "Latitude1",
   src.gps_lng "Longitude1",
   dest.gps_lat "Latitude2",
   dest.gps_lng "Longitude2"
 
-FROM espen_bf_lf_tas1_1_sites_202010 src
-  JOIN espen_bf_lf_tas1_1_sites_202010 dest on (
+FROM espen_bf_lf_tas3_1_sites_202109 src
+  JOIN espen_bf_lf_tas3_1_sites_202109 dest on (
     SELECT calculate_distance(src.gps_lat , src.gps_lng , dest.gps_lat , dest.gps_lng,  'K') < 5
     AND src.nb_grappe <> dest.nb_grappe
   )

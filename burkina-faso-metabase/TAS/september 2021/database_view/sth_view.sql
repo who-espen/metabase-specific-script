@@ -24,4 +24,4 @@ AS SELECT d.id,
     d.fin_enregistrement AS date_enregistrement,
     d.created_at AS date_telechargement
    FROM espen_bf_lf_tas1_3_resultat_sth_202010 d
-     LEFT JOIN espen_bf_lf_tas1_1_sites_202010 s ON d.nb_grappe = s.nb_grappe;
+     LEFT JOIN espen_bf_lf_tas3_1_sites_202109 s ON d.nb_grappe = s.nb_grappe;

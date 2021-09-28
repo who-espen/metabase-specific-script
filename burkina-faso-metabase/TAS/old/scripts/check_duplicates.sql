@@ -17,22 +17,22 @@ SELECT src.id, src.barcode FROM v_espen_bf_lf_tas1_2_enrolement_202010 src
 -- Check if there is solved orphaned participant then update
       IF EXISTS(
       SELECT * FROM v_lf_duplicates_of_participants p
-       RIGHT JOIN metabase_lf_tas_duplicates_202011 m on p.id::text = m.id_participant::text
+       RIGHT JOIN metabase_lf_tas3_duplicates_202011 m on p.id::text = m.id_participant::text
        WHERE p.id ISNULL
           ) THEN
 
-          UPDATE metabase_lf_tas_duplicates_202011
+          UPDATE metabase_lf_tas3_duplicates_202011
           SET status = 'Solved'
           where id_participant NOT IN (
             SELECT p.id
             FROM v_lf_duplicates_of_participants p
-            LEFT JOIN metabase_lf_tas_duplicates_202011 m ON p.id::text = m.id_participant::text
+            LEFT JOIN metabase_lf_tas3_duplicates_202011 m ON p.id::text = m.id_participant::text
             WHERE p.id IS NOT NULL
             ) and form = 'Participant';
 
       END IF;
 
-       INSERT INTO metabase_lf_tas_duplicates_202011(id_participant, barcode_participant, form)
+       INSERT INTO metabase_lf_tas3_duplicates_202011(id_participant, barcode_participant, form)
         SELECT id, barcode, 'Participant'
             FROM (
               SELECT src.id, src.barcode FROM v_espen_bf_lf_tas1_2_enrolement_202010 src
@@ -63,22 +63,22 @@ SELECT src.id, src.barcode FROM v_espen_bf_lf_tas1_3_resultat_fts_202010 src
 -- Check if there is solved orphaned participant then update
       IF EXISTS(
       SELECT * FROM v_lf_duplicates_of_fts_results p
-       RIGHT JOIN metabase_lf_tas_duplicates_202011 m on p.id = m.id_results
+       RIGHT JOIN metabase_lf_tas3_duplicates_202011 m on p.id = m.id_results
        WHERE p.id ISNULL
           ) THEN
 
-          UPDATE metabase_lf_tas_duplicates_202011
+          UPDATE metabase_lf_tas3_duplicates_202011
           SET status = 'Solved'
           where id_results NOT IN (
             SELECT p.id
             FROM v_lf_duplicates_of_fts_results p
-            LEFT JOIN metabase_lf_tas_duplicates_202011 m ON p.id = m.id_results            
+            LEFT JOIN metabase_lf_tas3_duplicates_202011 m ON p.id = m.id_results            
             WHERE p.id IS NOT NULL
             ) and form = 'Résultat FTS';
 
       END IF;
 
-       INSERT INTO metabase_lf_tas_duplicates_202011(id_results, barcode_results, form)
+       INSERT INTO metabase_lf_tas3_duplicates_202011(id_results, barcode_results, form)
         SELECT id, barcode, 'Résultat FTS'
             FROM (
               SELECT src.id, src.barcode FROM v_espen_bf_lf_tas1_3_resultat_fts_202010 src

@@ -11,7 +11,7 @@
 
 /*
  * A query to display the number of duplicates per recorder
- * Variable to rename metabase_lf_tas_duplicates_202011? espen_bf_lf_tas1_3_resultat_fts_202010
+ * Variable to rename metabase_lf_tas3_duplicates_202011? espen_bf_lf_tas1_3_resultat_fts_202010
  */
  SELECT
 
@@ -27,7 +27,7 @@ FROM (
     d_cluster_id::int cluster_id,
     d_cluster_name cluster_name
 
-    FROM public.metabase_lf_tas_duplicates_202011 m
+    FROM public.metabase_lf_tas3_duplicates_202011 m
     JOIN v_espen_bf_lf_tas1_3_resultat_fts_202010 d ON d.id = m.id_results
 
     GROUP BY d.code_operateur, d_district, d_cluster_id, d_cluster_name
@@ -42,7 +42,7 @@ FROM (
    	nb_grappe::int cluster_id,
    	nom_grappe cluster_name
 
-    FROM public.metabase_lf_tas_duplicates_202011 m
+    FROM public.metabase_lf_tas3_duplicates_202011 m
     JOIN espen_bf_lf_tas1_2_enrolement_202010 p ON p.id = m.id_participant
 
   group by p.code_operateur, p_district, nb_grappe, nom_grappe

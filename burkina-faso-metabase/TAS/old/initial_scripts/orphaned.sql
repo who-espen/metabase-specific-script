@@ -10,7 +10,7 @@
 
 
 /*
- * Variable to rename metabase_lf_tas_orphaned_202011, v_espen_bf_lf_tas1_2_enrolement_202010,
+ * Variable to rename metabase_lf_tas3_orphaned_202011, v_espen_bf_lf_tas1_2_enrolement_202010,
  * v_espen_bf_lf_tas1_3_resultat_fts_202010
  */
 BEGIN;
@@ -19,7 +19,7 @@ BEGIN;
  /**
 * The table to track orphaned issues
 */
-CREATE TABLE IF NOT EXISTS metabase_lf_tas_orphaned_202011(
+CREATE TABLE IF NOT EXISTS metabase_lf_tas3_orphaned_202011(
   id SERIAL PRIMARY KEY,
   recorder_id  VARCHAR(255) NOT NULL,
   id_participant INTEGER NULL, -- The id from participant table
@@ -34,15 +34,15 @@ CREATE TABLE IF NOT EXISTS metabase_lf_tas_orphaned_202011(
 * Adding unique index in the orphaned tables
 */
   CREATE UNIQUE INDEX IF NOT EXISTS idx_orphaned_participant_id_barcode_tas_202011
-    ON metabase_lf_tas_orphaned_202011(id_participant, barcode_participant);
+    ON metabase_lf_tas3_orphaned_202011(id_participant, barcode_participant);
   CREATE UNIQUE INDEX IF NOT EXISTS idx_orphaned_results_id_barcode_tas_202011
-    ON metabase_lf_tas_orphaned_202011(id_results, barcode_results);
+    ON metabase_lf_tas3_orphaned_202011(id_results, barcode_results);
 
-  ALTER TABLE metabase_lf_tas_orphaned_202011
+  ALTER TABLE metabase_lf_tas3_orphaned_202011
     ADD CONSTRAINT unique_idx_orphaned_participant_id_barcode_tas_202011
     UNIQUE USING INDEX idx_orphaned_participant_id_barcode_tas_202011;
 
-  ALTER TABLE metabase_lf_tas_orphaned_202011
+  ALTER TABLE metabase_lf_tas3_orphaned_202011
     ADD CONSTRAINT unique_idx_orphaned_results_id_barcode_tas_202011
     UNIQUE USING INDEX idx_orphaned_results_id_barcode_tas_202011;
 
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS metabase_lf_tas_orphaned_202011(
 /**
  * Insert the new participant without diagnostic results to the orphaned table
  */
-INSERT INTO metabase_lf_tas_orphaned_202011(id_participant, recorder_id, barcode_participant, orphaned_type)
+INSERT INTO metabase_lf_tas3_orphaned_202011(id_participant, recorder_id, barcode_participant, orphaned_type)
   SELECT id, p.code_operateur::int, barcode, 'Participant without FTS results'
     FROM (
       SELECT
@@ -88,23 +88,23 @@ BEGIN
 -- Check if there is solved orphaned participant then update
       IF EXISTS(
       SELECT * FROM v_lf_orphaned_of_participants p
-       RIGHT JOIN metabase_lf_tas_orphaned_202011 m on p.id = m.id_participant
+       RIGHT JOIN metabase_lf_tas3_orphaned_202011 m on p.id = m.id_participant
        WHERE p.id ISNULL
           ) THEN
 
-          UPDATE metabase_lf_tas_orphaned_202011
+          UPDATE metabase_lf_tas3_orphaned_202011
           SET status = 'Solved'          
           where id_participant NOT IN (
             SELECT p.id
             FROM v_lf_orphaned_of_participants p
-            LEFT JOIN metabase_lf_tas_orphaned_202011 m ON p.id = m.id_participant
+            LEFT JOIN metabase_lf_tas3_orphaned_202011 m ON p.id = m.id_participant
              WHERE p.id IS NOT NULL
             ) and orphaned_type = 'Participant without FTS results';
 
       END IF;
 
 -- Insert the new participant without diagnostic results to the orphaned table
-      INSERT INTO metabase_lf_tas_orphaned_202011(id_participant, recorder_id, barcode_participant, orphaned_type)
+      INSERT INTO metabase_lf_tas3_orphaned_202011(id_participant, recorder_id, barcode_participant, orphaned_type)
         SELECT id, code_operateur, barcode, 'Participant without FTS results'
           FROM (
             SELECT
@@ -131,7 +131,7 @@ BEGIN;
 /**
  * Insert the new diagnostic results without participant to the orphaned table
  */
-INSERT INTO metabase_lf_tas_orphaned_202011(id_results, recorder_id, barcode_results, orphaned_type)
+INSERT INTO metabase_lf_tas3_orphaned_202011(id_results, recorder_id, barcode_results, orphaned_type)
   SELECT id, code_operateur, barcode, 'FTS results without participant'
     FROM (
       SELECT
@@ -168,23 +168,23 @@ BEGIN
 -- Check if there is solved orphaned participant then update
       IF EXISTS(
       SELECT * FROM v_orphaned_of_diag_results p
-       RIGHT JOIN public.metabase_lf_tas_orphaned_202011 m on p.id = m.id_results
+       RIGHT JOIN public.metabase_lf_tas3_orphaned_202011 m on p.id = m.id_results
        WHERE p.id ISNULL
           ) THEN
 
-          UPDATE metabase_lf_tas_orphaned_202011
+          UPDATE metabase_lf_tas3_orphaned_202011
           SET status = 'Solved'          
           where id_results NOT IN (
             SELECT p.id
             FROM v_orphaned_of_diag_results p
-            LEFT JOIN metabase_lf_tas_orphaned_202011 m ON p.id = m.id_results            
+            LEFT JOIN metabase_lf_tas3_orphaned_202011 m ON p.id = m.id_results            
              WHERE p.id IS NOT NULL
             ) and orphaned_type = 'FTS results without participant';
 
       END IF;
 
 -- Insert the new participant without diagnostic results to the orphaned table
-    INSERT INTO metabase_lf_tas_orphaned_202011(id_results, recorder_id, barcode_results, orphaned_type)
+    INSERT INTO metabase_lf_tas3_orphaned_202011(id_results, recorder_id, barcode_results, orphaned_type)
       SELECT id, code_operateur, barcode, 'FTS results without participant'
         FROM (
           SELECT

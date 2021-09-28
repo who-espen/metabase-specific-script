@@ -16,12 +16,12 @@
 	code_operateur "Opérateur",
 	ds "District",
 	nb_grappe "Code Site",
-	nom_grappe  "Site",
+	nom_de_la_grappe  "Site",
 	gps_lat "Latitude",
 	gps_lng "Longitude",
  	gps_acc "Précision",
     date_enregistrement "Date"
-FROM v_espen_bf_lf_tas1_1_sites_202010
+FROM v_espen_bf_lf_tas3_1_sites_202109
 WHERE gps_acc > 20
 
 
