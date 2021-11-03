@@ -10,31 +10,30 @@
 
 SELECT
 
-  'cartographie' "Type d'enquête",
-  municipio "Nom de l'unité",
-  code_school "Code de l'école",
-  TO_CHAR(data, 'Month') "Date de l'enquête(mois)",
-  EXTRACT(YEAR FROM data) "Date de l'enquête(année)",
-  latitude "Latitude (decimal)",
-  longitude "Longitude (decimal)",
-  CONCAT(min(idade), ' - ', max(idade)) "Groupe d'âge interrogé",
-  'Filtration d''urine & Kato-Katz' "Test diagnostique",
-  count(*) "Urinaire - Nbr examinées",
-  count(case when fu_intensity > 0 then 1 else null end) "Urinaire - Nbr Positives",
-  count(case when fu_intensity > 0 then 1 else null end)*100/count(*) "Urinaire - % Positives",
-  sum(sch_haem_heavy_intensity)*100/count(*) "Urinaire - % Positives à  Forte intensité",
-  sum(sch_haem_low_intensity)*100/count(*) "Urinaire - % Positives à  Moyenne intensité",
+  'Sentinel site' "Survey Type",
+  p_district "Implementation Unit",
+  p_school_name "Site",
+  TO_CHAR(p_start, 'Month') "Month",
+  EXTRACT(YEAR FROM p_start) "Years",
+  w_gps_lat "Latitude (decimal)",
+  w_gps_lng "Longitude (decimal)",
+  CONCAT(min(p_age_yrs), ' - ', max(p_age_yrs)) "Group Age",
+  'Kato-Katz' "Diag Tast",
+  null "Urinaire - Nbr examined",
+  null "Urinaire - Nbr Positives",
+  null "Urinaire - % Positives",
+  null "Urinaire - % Heavy intensity",
+  null "Urinaire - % Moderate intensity",
   count(*) "Intestinal - Nbr examinées",
-  count(case when kk_mansoni > 0 then 1 else null end) "Intestinal - Nbr Positives",
-  count(case when kk_mansoni > 0 then 1 else null end)*100/count(*) "Intestinal - % Positives",
-  sum(sch_heavy_man_intensity)*100/count(*) "Intestinal - % Positives à  Forte intensité",
-  sum(sch_medium_man_intensity)*100/count(*) "Intestinal - % Positives à  Moyenne intensité"
+  count(case when k_sch_man_intensity > 0 then 1 else null end) "Intestinal - Nbr Positives",
+  count(case when k_sch_man_intensity > 0 then 1 else null end)*100/count(*) "Intestinal - % Positives",
+  sum(k_sch_man_heavy_intensity)*100/count(*) "Intestinal - % Heavy intensity",
+  sum(k_sch_man_moderate_intensity)*100/count(*) "Intestinal - % Moderate intensity"
 
-FROM public.v_cleaned_full_dataset
 
-WHERE sn IS NOT NULL
-[[and  {{provincia}}]]
-[[and municipio={{municipio}}]]
+FROM public.v_espen_bw_sch_sth_mid_term_evaluation_2_participant_v2_1 p
+left join public.v_espen_bw_sch_sth_mid_term_evaluation_1_school_v2_1 c on p.p_school_id = c.w_school_id 
+left join public.v_espen_bw_sch_sth_mid_term_evaluation_3_kato_katz_v2 k on p.p_generateid = k.k_generate_id 
 
-GROUP BY municipio, code_school, data, latitude, longitude
+GROUP BY p_district, p_school_name, p_start, w_gps_lat, w_gps_lng
 
