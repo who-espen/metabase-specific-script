@@ -10,31 +10,31 @@
 
 SELECT
 
-  'cartographie' "Type d'enquête",
-  municipio "Nom de l'unité",
-  code_school "Code de l'école",
-  TO_CHAR(data, 'Month') "Date de l'enquête(mois)",
-  EXTRACT(YEAR FROM data) "Date de l'enquête(année)",
-  latitude "Latitude (decimal)",
-  longitude "Longitude (decimal)",
-  CONCAT(min(idade), ' - ', max(idade)) "Groupe d'âge interrogé",
-  'Filtration d''urine & Kato-Katz' "Test diagnostique",
-  count(*) "Urinaire - Nbr examinées",
-  count(case when fu_intensity > 0 then 1 else null end) "Urinaire - Nbr Positives",
-  count(case when fu_intensity > 0 then 1 else null end)*100/count(*) "Urinaire - % Positives",
-  sum(sch_haem_heavy_intensity)*100/count(*) "Urinaire - % Positives à  Forte intensité",
-  sum(sch_haem_low_intensity)*100/count(*) "Urinaire - % Positives à  Moyenne intensité",
-  count(*) "Intestinal - Nbr examinées",
-  count(case when kk_mansoni > 0 then 1 else null end) "Intestinal - Nbr Positives",
-  count(case when kk_mansoni > 0 then 1 else null end)*100/count(*) "Intestinal - % Positives",
-  sum(sch_heavy_man_intensity)*100/count(*) "Intestinal - % Positives à  Forte intensité",
-  sum(sch_medium_man_intensity)*100/count(*) "Intestinal - % Positives à  Moyenne intensité"
+  'Mapping' "Survey Type",
+  u_municipality "Implementation Unit",
+  u_school "Site",
+  TO_CHAR(u_start, 'Month') "Month",
+  EXTRACT(YEAR FROM u_start) "Years",
+  w_gps_lat "Latitude (decimal)",
+  w_gps_lng "Longitude (decimal)",
+  CONCAT(7, ' - ', 10) "Group Age",
+  'CCA' "Diag Tast",
+  count(u.id) "Urinaire - Nbr examined",
+  count(case when u_nbr_eggs > 0 then 1 else null end) "Urinaire - Nbr Positives",
+  case when count(u.id) > 0 then count(case when u_nbr_eggs > 0 then 1 else null end)*100.0/count(u.id) else 0 end  "Urinaire - % Positives",
+  case when count(u.id) > 0 then count(case when is_haem_heavy_intensity > 0 then 1 else null end)*100.0/count(u.id) else 0 end  "Urinaire - % Heavy intensity",
+  case when count(u.id) > 0 then count(case when is_haem_low_intensity > 0 then 1 else null end)*100.0/count(u.id) else 0 end  "Urinaire - % Moderate intensity",
+  count(k.id) "Intestinal - Nbr examinées",
+  count(case when k_sch_man_intensity > 0 then 1 else null end) "Intestinal - Nbr Positives",
+  case when count(k.id) > 0 then count(case when k_sch_man_intensity > 0 then 1 else null end)*100.0/count(k.id) else 0 end "Intestinal - % Positives",
+  case when count(k.id) > 0 then sum(k_sch_man_heavy_intensity)*100.0/count(k.id) else 0 end  "Intestinal - % Heavy intensity",
+  case when count(k.id) > 0 then  sum(k_sch_man_moderate_intensity)*100.0/count(k.id) else 0 end "Intestinal - % Moderate intensity"
 
-FROM public.v_cleaned_full_dataset
+FROM public.v_espen_ao_sch_sth_baseline_4_urine_202105_full u
+left join public.v_espen_ao_sch_sth_baseline_1_school_wash_202105_v5_8 on u_school_id = w_school_id 
+left join public.v_espen_ao_sch_sth_baseline_3_kato_katz_202105_full k on u_code_id = k.k_code_id 
 
-WHERE sn IS NOT NULL
-[[and  {{provincia}}]]
-[[and municipio={{municipio}}]]
+GROUP BY u_municipality, u_school, u_start, w_gps_lat, w_gps_lng
 
-GROUP BY municipio, code_school, data, latitude, longitude
+order by u_municipality, u_school, u_start
 

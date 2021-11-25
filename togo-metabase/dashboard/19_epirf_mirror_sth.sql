@@ -10,7 +10,7 @@
 
 SELECT
 
-  'Mapping' "Survey Type",
+  'Sentinel site' "Syrvey Type",
   p_district "Implementation Unit",
   p_school_name "Site",
   null "Number of Round",
@@ -39,9 +39,9 @@ SELECT
   count(case when (k_ascaris_lumb_intensity > 0 or k_hookworm_intensity > 0 or k_trichuris_intensity > 0 ) then 1 else null end) "Géohelminthiases - Nbr Positives",
   count(case when (k_ascaris_lumb_intensity > 0 or k_hookworm_intensity > 0 or k_trichuris_intensity > 0) then 1 else null end)*100/count(*) "Géohelminthiases - % Positives"
 
-FROM public.v_espen_bw_sch_sth_mid_term_evaluation_2_participant_v2_1 p
-left join public.v_espen_bw_sch_sth_mid_term_evaluation_1_school_v2_1 c on p.p_school_id = c.w_school_id 
-left join public.v_espen_bw_sch_sth_mid_term_evaluation_3_kato_katz_v2 k on p.p_generateid = k.k_generate_id 
+FROM public.v_espen_tg_sch_sth_impact_2_child_202110_v6 p
+left join public.v_espen_tg_sch_sth_impact_1_school_202110_v6_1 c on p.p_school_id = c.w_school_id 
+left join public.v_espen_tg_sch_sth_impact_3_kato_katz_202110_v6 k on p.p_barcodeid = k.k_barcodeid 
 
 
 
