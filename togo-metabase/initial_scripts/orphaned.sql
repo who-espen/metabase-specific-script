@@ -304,7 +304,7 @@ ON CONFLICT ON CONSTRAINT unique_idx_orphaned_results_urine_id_barcode_202110 DO
 /**
  * A stored procedure for updating the status of orphaned records from Urine results record side
  */
-CREATE OR REPLACE FUNCTION update_sch_sth_orphaned_urine_result_without_participant_202110()
+CREATE OR REPLACE FUNCTION ²()
 RETURNS void
 LANGUAGE plpgsql
 AS $$
