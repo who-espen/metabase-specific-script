@@ -24,9 +24,9 @@ CREATE TABLE IF NOT EXISTS metabase_sch_sth_ia_orphaned_202110(
 * Adding unique index in the orphaned tables
 */
   CREATE UNIQUE INDEX IF NOT EXISTS idx_orphaned_participant_id_barcode_202110
-    ON metabase_sch_sth_ia_orphaned_202110(id_participant, barcode_participant, orphaned_type);
+    ON metabase_sch_sth_ia_orphaned_202110(id_participant, barcode_participant);
   CREATE UNIQUE INDEX IF NOT EXISTS idx_orphaned_results_kk_id_barcode_202110
-    ON metabase_sch_sth_ia_orphaned_202110(id_results_kk, barcode_results_urine);
+    ON metabase_sch_sth_ia_orphaned_202110(id_results_kk, barcode_results_kk);
   CREATE UNIQUE INDEX IF NOT EXISTS idx_orphaned_results_urine_id_barcode_202110
     ON metabase_sch_sth_ia_orphaned_202110(id_results_urine, barcode_results_urine);
 
