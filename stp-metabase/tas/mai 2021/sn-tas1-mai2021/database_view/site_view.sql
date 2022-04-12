@@ -9,26 +9,21 @@
  */
 
 /*
- * Variable to rename  v_espen_sn_lf_tas1_1_sites_202105, espen_sn_lf_tas1_1_sites_202105
+ * Variable to rename  v_espen_st_lf_tas1_1_sites_202204_3, espen_st_lf_tas1_1_sites_202204_3
  */
-CREATE view v_espen_sn_lf_tas1_1_sites_202105
-AS
-SELECT
-  id,
-  c_recorder,
-  c_eu_name,
-  c_commune,
-  c_cluster_name,
-  c_cluster_id,
-  c_cluster_leader_name,
-  c_consent,
-  c_population,
-  c_present,
-  c_gps_lat,
-  c_gps_lng,
-  c_gps_alt,
-  c_gps_acc,
-  c_cluster_notes,
-  c_end c_start
-FROM public.espen_sn_lf_tas1_1_sites_202105  c
+create view v_espen_st_lf_tas1_1_sites_202204_3 as
 
+SELECT 
+
+id, 
+c_recorder, 
+c_district, 
+c_cluster_name, 
+c_cluster_id, 
+c_gps_lat, 
+c_gps_lng, 
+c_gps_acc, 
+c_cluster_notes, 
+c_start
+
+FROM public.espen_st_lf_tas1_1_sites_202204_3 c

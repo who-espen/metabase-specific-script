@@ -11,7 +11,7 @@
 
 /*
  * This query will display the number of participant per EU by the total population
- * Variable to rename v_espen_sn_lf_tas1_2_partcipants_202105, espen_sn_lf_tas1_1_sites_202105
+ * Variable to rename v_espen_st_lf_tas1_2_partcipants_202204_3, espen_st_lf_tas1_1_sites_202204_3
  */
  SELECT
 
@@ -24,8 +24,8 @@
   COUNT(CASE WHEN p_sex = 'Female' THEN 1 ELSE NULL END) "Female",
   SUM (DISTINCT c_population)
 
-FROM v_espen_sn_lf_tas1_2_partcipants_202105 p
-LEFT JOIN espen_sn_lf_tas1_1_sites_202105 c ON p.p_cluster_id::INT = c.c_cluster_id1
+FROM v_espen_st_lf_tas1_2_partcipants_202204_3 p
+LEFT JOIN espen_st_lf_tas1_1_sites_202204_3 c ON p.p_cluster_id::INT = c.c_cluster_id1
 
 WHERE p.id IS NOT NULL
 

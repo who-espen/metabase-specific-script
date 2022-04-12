@@ -11,7 +11,7 @@
 
 /*
  * This query will will display the list of nearby villages less than <%village_dist_required%> KM
- * Variable to rename espen_sn_lf_tas1_1_sites_202105, <%village_dist_required%>
+ * Variable to rename espen_st_lf_tas1_1_sites_202204_3, <%village_dist_required%>
  */
 SELECT
 
@@ -27,8 +27,8 @@ SELECT
   dest.c_gps_lat "Latitude2",
   dest.c_gps_lng "Longitude2"
 
-FROM espen_sn_lf_tas1_1_sites_202105 src
-  JOIN espen_sn_lf_tas1_1_sites_202105 dest on (
+FROM espen_st_lf_tas1_1_sites_202204_3 src
+  JOIN espen_st_lf_tas1_1_sites_202204_3 dest on (
     SELECT calculate_distance(src.c_gps_lat , src.c_gps_lng , dest.c_gps_lat , dest.c_gps_lng,  'K') < 5
     AND src.c_cluster_id <> dest.c_cluster_id
   )

@@ -10,8 +10,8 @@
 
 /*
  * This query is a sample of EPIRF mirror
- * Variable to rename <%Epirf_Survey_Type%>, v_espen_sn_lf_tas1_3_fts_result_202105, v_espen_sn_lf_tas1_2_partcipants_202105,
- * espen_sn_lf_tas1_1_sites_202105
+ * Variable to rename <%Epirf_Survey_Type%>, v_espen_st_lf_tas1_3_fts_result_202204_3, v_espen_st_lf_tas1_2_partcipants_202204_3,
+ * espen_st_lf_tas1_1_sites_202204_3
  */
   SELECT
 
@@ -31,8 +31,8 @@
   'grappes' "Type d'enquête", -- TODO: Update the survey type
   350 "Taille Population cible",-- TODO: Update the sample size
   count(p.id) "Examiné",
-  COUNT(CASE WHEN d_final_result = 'Positive' THEN 1 ELSE NULL END) "Number de Positif",
-  ROUND(COUNT(CASE WHEN d_final_result = 'Positive' THEN 1 ELSE NULL END) * 100.0 / count(p.id), 2) "% positif",
+  COUNT(CASE WHEN d_result1 = 'Positive' THEN 1 ELSE NULL END) "Number de Positif",
+  ROUND(COUNT(CASE WHEN d_result1 = 'Positive' THEN 1 ELSE NULL END) * 100.0 / count(p.id), 2) "% positif",
   null "Number of invalid tests", --TODO: Update the number of invalid test
   null "Décision", --TODO: Update the decision
   null "Lymphoedema Total Patient Number", --TODO: Update the Total Patient Number
@@ -45,9 +45,9 @@
   null "Hydrocoele Nbr Health Facilities", --TODO: Update the Nbr Health Facilities
   null "Commentaires, --TODO: Update the comments"
  
-FROM v_espen_sn_lf_tas1_3_fts_result_202105 d
-LEFT JOIN v_espen_sn_lf_tas1_1_sites_202105 c on d.d_cluster_id = c.c_cluster_id
-RIGHT JOIN v_espen_sn_lf_tas1_2_partcipants_202105 p on p.p_generate_id = d.d_generate_id
+FROM v_espen_st_lf_tas1_3_fts_result_202204_3 d
+LEFT JOIN v_espen_st_lf_tas1_1_sites_202204_3 c on d.d_cluster_id = c.c_cluster_id
+RIGHT JOIN v_espen_st_lf_tas1_2_partcipants_202204_3 p on p.p_generate_id = d.d_generatedid
 
 GROUP BY c_eu_name, c_commune, c_cluster_name, "Mois", "Années", c_gps_lat, c_gps_lng
 
@@ -85,8 +85,8 @@ order by c_eu_name, c_commune, c_cluster_name
   'grappes' "Type d'enquête", -- TODO: Update the survey type
   count(distinct c.c_cluster_id)*50 "Taille Population cible",-- TODO: Update the sample size
   count(p.id) "Examiné",
-  COUNT(CASE WHEN d_final_result = 'Positive' THEN 1 ELSE NULL END) "Number de Positif",
-  ROUND(COUNT(CASE WHEN d_final_result = 'Positive' THEN 1 ELSE NULL END) * 100.0 / count(p.id), 2) "% positif",
+  COUNT(CASE WHEN d_result1 = 'Positive' THEN 1 ELSE NULL END) "Number de Positif",
+  ROUND(COUNT(CASE WHEN d_result1 = 'Positive' THEN 1 ELSE NULL END) * 100.0 / count(p.id), 2) "% positif",
   null "Décision", --TODO: Update the decision
   null "Number of invalid tests", --TODO: Update the number of invalid test
   null "Lymphoedema Total Patient Number", --TODO: Update the Total Patient Number
@@ -100,9 +100,9 @@ order by c_eu_name, c_commune, c_cluster_name
   null "Commentaires" --TODO: Update the comments
   
 
-FROM v_espen_sn_lf_tas1_3_fts_result_202105 d
-LEFT JOIN v_espen_sn_lf_tas1_1_sites_202105 c on d.d_cluster_id = c.c_cluster_id
-RIGHT JOIN v_espen_sn_lf_tas1_2_partcipants_202105 p on p.p_generate_id = d.d_generate_id
+FROM v_espen_st_lf_tas1_3_fts_result_202204_3 d
+LEFT JOIN v_espen_st_lf_tas1_1_sites_202204_3 c on d.d_cluster_id = c.c_cluster_id
+RIGHT JOIN v_espen_st_lf_tas1_2_partcipants_202204_3 p on p.p_generate_id = d.d_generatedid
 
 GROUP BY c_eu_name,  "Mois", "Années"
 

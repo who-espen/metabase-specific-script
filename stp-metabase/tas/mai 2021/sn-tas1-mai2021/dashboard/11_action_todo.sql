@@ -18,7 +18,7 @@ SELECT
  id "SN",
  description "Description",
  actor "Actor",
- status "Statut",
+ status "Estado",
  due_start "Due Date"
 FROM metabase_lf_tas1_action_todo_202105
 --WHERE surver_detail = '<%surver_detail%>'

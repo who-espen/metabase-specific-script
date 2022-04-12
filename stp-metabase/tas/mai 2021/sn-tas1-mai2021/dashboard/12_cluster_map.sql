@@ -10,7 +10,7 @@
 
 /*
  * This query will use the GPS data to display a pin map of clusters.
- * Variable to rename espen_sn_lf_tas1_1_sites_202105
+ * Variable to rename espen_st_lf_tas1_1_sites_202204_3
  */
  SELECT
 
@@ -22,10 +22,4 @@
  c_gps_lng,
  c_start
 
-FROM v_espen_sn_lf_tas1_1_sites_202105
-
-  ------ Metabase filter -------
-  -- [[and {{c_cluster_id}}]]
-  -- [[and {{cluster_name}}]]
-  -- [[and {{district}}]]
-  -- [[and {{date}}]]
+FROM v_espen_st_lf_tas1_1_sites_202204_3

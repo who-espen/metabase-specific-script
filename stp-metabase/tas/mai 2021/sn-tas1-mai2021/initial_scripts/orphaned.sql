@@ -10,8 +10,8 @@
 
 
 /*
- * Variable to rename metabase_lf_tas1_orphaned_202105, v_espen_sn_lf_tas1_2_partcipants_202105,
- * v_espen_sn_lf_tas1_3_fts_result_202105
+ * Variable to rename metabase_lf_tas1_orphaned_202204, v_espen_st_lf_tas1_2_partcipants_202204_3,
+ * v_espen_st_lf_tas1_3_fts_result_202204_3
  */
 BEGIN;
 
@@ -19,7 +19,7 @@ BEGIN;
  /**
 * The table to track orphaned issues
 */
-CREATE TABLE IF NOT EXISTS metabase_lf_tas1_orphaned_202105(
+CREATE TABLE IF NOT EXISTS metabase_lf_tas1_orphaned_202204(
   id SERIAL PRIMARY KEY,
   recorder_id INTEGER NOT NULL,
   id_participant INTEGER NULL, -- The id from participant table
@@ -33,86 +33,86 @@ CREATE TABLE IF NOT EXISTS metabase_lf_tas1_orphaned_202105(
 /**
 * Adding unique index in the orphaned tables
 */
-  CREATE UNIQUE INDEX IF NOT EXISTS idx_orphaned_participant_id_barcode_202105
-    ON metabase_lf_tas1_orphaned_202105(id_participant, barcode_participant);
-  CREATE UNIQUE INDEX IF NOT EXISTS idx_orphaned_results_id_barcode_202105
-    ON metabase_lf_tas1_orphaned_202105(id_results, barcode_results);
+  CREATE UNIQUE INDEX IF NOT EXISTS idx_orphaned_participant_id_barcode_202204
+    ON metabase_lf_tas1_orphaned_202204(id_participant, barcode_participant);
+  CREATE UNIQUE INDEX IF NOT EXISTS idx_orphaned_results_id_barcode_202204
+    ON metabase_lf_tas1_orphaned_202204(id_results, barcode_results);
 
-  ALTER TABLE metabase_lf_tas1_orphaned_202105
-    ADD CONSTRAINT unique_idx_orphaned_participant_id_barcode_202105
-    UNIQUE USING INDEX idx_orphaned_participant_id_barcode_202105;
+  ALTER TABLE metabase_lf_tas1_orphaned_202204
+    ADD CONSTRAINT unique_idx_orphaned_participant_id_barcode_202204
+    UNIQUE USING INDEX idx_orphaned_participant_id_barcode_202204;
 
-  ALTER TABLE metabase_lf_tas1_orphaned_202105
-    ADD CONSTRAINT unique_idx_orphaned_results_id_barcode_202105
-    UNIQUE USING INDEX idx_orphaned_results_id_barcode_202105;
+  ALTER TABLE metabase_lf_tas1_orphaned_202204
+    ADD CONSTRAINT unique_idx_orphaned_results_id_barcode_202204
+    UNIQUE USING INDEX idx_orphaned_results_id_barcode_202204;
 
 
 
 /**
  * Insert the new participant without diagnostic results to the orphaned table
  */
-INSERT INTO metabase_lf_tas1_orphaned_202105(id_participant, recorder_id, barcode_participant, orphaned_type)
+INSERT INTO metabase_lf_tas1_orphaned_202204(id_participant, recorder_id, barcode_participant, orphaned_type)
   SELECT id, p_recorder_id, p_generate_id, 'Participant without FTS results'
     FROM (
       SELECT
         p.id, p_recorder_id, p_generate_id
-        FROM v_espen_sn_lf_tas1_2_partcipants_202105 p
-         LEFT JOIN v_espen_sn_lf_tas1_3_fts_result_202105 d on p.p_generate_id = d.d_generate_id
+        FROM v_espen_st_lf_tas1_2_partcipants_202204_3 p
+         LEFT JOIN v_espen_st_lf_tas1_3_fts_result_202204_3 d on p.p_generate_id = d.d_generatedid
           WHERE d.id isnull
           ) p
-ON CONFLICT ON CONSTRAINT unique_idx_orphaned_participant_id_barcode_202105 DO NOTHING;
+ON CONFLICT ON CONSTRAINT unique_idx_orphaned_participant_id_barcode_202204 DO NOTHING;
 
 
 
 /**
  * A stored procedure for updating the status of orphaned records from participants side
  */
-CREATE OR REPLACE FUNCTION public.update_lf_tas1_orphaned_table_from_participant_202105()
+CREATE OR REPLACE FUNCTION public.update_lf_tas1_orphaned_table_from_participant_202204()
  RETURNS void
--- CREATE OR REPLACE PROCEDURE update_lf_tas1_orphaned_table_from_participant_202105()
+-- CREATE OR REPLACE PROCEDURE update_lf_tas1_orphaned_table_from_participant_202204()
 LANGUAGE plpgsql
 AS $$
 BEGIN
 
 -- Create a view to get the list of orphaned participants --.
 -- i.e. participant without diagnostic results
-    CREATE OR REPLACE TEMPORARY VIEW v_lf_orphaned_of_participants_202105 AS
+    CREATE OR REPLACE TEMPORARY VIEW v_lf_orphaned_of_participants_202204 AS
     SELECT
       p.id,
       p.p_recorder_id,
       p.p_generate_id
-    FROM v_espen_sn_lf_tas1_2_partcipants_202105 p
-    LEFT JOIN v_espen_sn_lf_tas1_3_fts_result_202105 d on p.p_generate_id = d.d_generate_id
+    FROM v_espen_st_lf_tas1_2_partcipants_202204_3 p
+    LEFT JOIN v_espen_st_lf_tas1_3_fts_result_202204_3 d on p.p_generate_id = d.d_generatedid
     WHERE d.id ISNULL;
 
 -- Check if there is solved orphaned participant then update
       IF EXISTS(
-      SELECT * FROM v_lf_orphaned_of_participants_202105 p
-       RIGHT JOIN metabase_lf_tas1_orphaned_202105 m on p.id = m.id_participant
+      SELECT * FROM v_lf_orphaned_of_participants_202204 p
+       RIGHT JOIN metabase_lf_tas1_orphaned_202204 m on p.id = m.id_participant
        WHERE p.id ISNULL
           ) THEN
 
-          UPDATE metabase_lf_tas1_orphaned_202105
+          UPDATE metabase_lf_tas1_orphaned_202204
           SET status = 'Solved'
           where id_participant NOT IN (
             SELECT p.id
-            FROM v_lf_orphaned_of_participants_202105 p
-            LEFT JOIN metabase_lf_tas1_orphaned_202105 m ON p.id = m.id_participant WHERE p.id IS NOT NULL
+            FROM v_lf_orphaned_of_participants_202204 p
+            LEFT JOIN metabase_lf_tas1_orphaned_202204 m ON p.id = m.id_participant WHERE p.id IS NOT NULL
             ) and orphaned_type = 'Participant without FTS results' ;
 
       END IF;
 
 -- Insert the new participant without diagnostic results to the orphaned table
-      INSERT INTO metabase_lf_tas1_orphaned_202105(id_participant, recorder_id, barcode_participant, orphaned_type)
+      INSERT INTO metabase_lf_tas1_orphaned_202204(id_participant, recorder_id, barcode_participant, orphaned_type)
         SELECT id, p_recorder_id, p_generate_id, 'Participant without FTS results'
           FROM (
             SELECT
               p.id, p_recorder_id, p_generate_id
-              FROM v_espen_sn_lf_tas1_2_partcipants_202105 p
-               LEFT JOIN v_espen_sn_lf_tas1_3_fts_result_202105 d on p.p_generate_id = d.d_generate_id
+              FROM v_espen_st_lf_tas1_2_partcipants_202204_3 p
+               LEFT JOIN v_espen_st_lf_tas1_3_fts_result_202204_3 d on p.p_generate_id = d.d_generatedid
                 WHERE d.id isnull
                 ) p
-      ON CONFLICT ON CONSTRAINT unique_idx_orphaned_participant_id_barcode_202105 DO NOTHING;
+      ON CONFLICT ON CONSTRAINT unique_idx_orphaned_participant_id_barcode_202204 DO NOTHING;
 
     -- COMMIT;
 END;
@@ -130,53 +130,53 @@ BEGIN;
 /**
  * Insert the new diagnostic results without participant to the orphaned table
  */
-INSERT INTO metabase_lf_tas1_orphaned_202105(id_results, recorder_id, barcode_results, orphaned_type)
-  SELECT id, d_recorder_id, d_generate_id, 'FTS results without participant'
+INSERT INTO metabase_lf_tas1_orphaned_202204(id_results, recorder_id, barcode_results, orphaned_type)
+  SELECT id, d_recorder_id, d_generatedid, 'FTS results without participant'
     FROM (
       SELECT
-        d.id, d_recorder_id, d_generate_id
-        FROM v_espen_sn_lf_tas1_2_partcipants_202105 p
-         RIGHT JOIN v_espen_sn_lf_tas1_3_fts_result_202105 d on p.p_generate_id = d.d_generate_id
+        d.id, d_recorder_id, d_generatedid
+        FROM v_espen_st_lf_tas1_2_partcipants_202204_3 p
+         RIGHT JOIN v_espen_st_lf_tas1_3_fts_result_202204_3 d on p.p_generate_id = d.d_generatedid
           WHERE p.id isnull
           ) p
-ON CONFLICT ON CONSTRAINT unique_idx_orphaned_results_id_barcode_202105 DO NOTHING;
+ON CONFLICT ON CONSTRAINT unique_idx_orphaned_results_id_barcode_202204 DO NOTHING;
 
 
 
 /**
  * A stored procedure for updating the status of orphaned records from dianostic results record side
  */
- CREATE OR REPLACE FUNCTION public.update_lf_tas1_orphaned_table_from_diag_result_202105()
+ CREATE OR REPLACE FUNCTION public.update_lf_tas1_orphaned_table_from_diag_result_202204()
  RETURNS void
--- CREATE OR REPLACE PROCEDURE update_lf_tas1_orphaned_table_from_diag_result_202105()
+-- CREATE OR REPLACE PROCEDURE update_lf_tas1_orphaned_table_from_diag_result_202204()
 LANGUAGE plpgsql
 AS $$
 BEGIN
 
 -- Create a view to get the list of orphaned participants --.
 -- i.e. participant without diagnostic results
-    CREATE OR REPLACE TEMPORARY VIEW v_orphaned_of_diag_results_202105 AS
+    CREATE OR REPLACE TEMPORARY VIEW v_orphaned_of_diag_results_202204 AS
     SELECT
       d.id,
       d.d_recorder_id,
-      d.d_generate_id
-    FROM v_espen_sn_lf_tas1_2_partcipants_202105 p
-    RIGHT JOIN v_espen_sn_lf_tas1_3_fts_result_202105 d on p.p_generate_id = d.d_generate_id
+      d.d_generatedid
+    FROM v_espen_st_lf_tas1_2_partcipants_202204_3 p
+    RIGHT JOIN v_espen_st_lf_tas1_3_fts_result_202204_3 d on p.p_generate_id = d.d_generatedid
     WHERE p.id ISNULL;
 
 -- Check if there is solved orphaned participant then update
       IF EXISTS(
-      SELECT * FROM v_orphaned_of_diag_results_202105 p
-       RIGHT JOIN public.metabase_lf_tas1_orphaned_202105 m on p.id = m.id_results
+      SELECT * FROM v_orphaned_of_diag_results_202204 p
+       RIGHT JOIN public.metabase_lf_tas1_orphaned_202204 m on p.id = m.id_results
        WHERE p.id ISNULL
           ) THEN
 
-          UPDATE metabase_lf_tas1_orphaned_202105
+          UPDATE metabase_lf_tas1_orphaned_202204
           SET status = 'Solved'
           where id_results NOT IN (
             SELECT p.id
-            FROM v_orphaned_of_diag_results_202105 p
-            LEFT JOIN metabase_lf_tas1_orphaned_202105 m ON p.id = m.id_results 
+            FROM v_orphaned_of_diag_results_202204 p
+            LEFT JOIN metabase_lf_tas1_orphaned_202204 m ON p.id = m.id_results 
              WHERE p.id IS NOT NULL
             ) and orphaned_type = 'FTS results without participant' ;
 
@@ -184,16 +184,16 @@ BEGIN
 
 -- Insert the new participant without diagnostic results to the orphaned table
 
-INSERT INTO metabase_lf_tas1_orphaned_202105(id_results, recorder_id, barcode_results, orphaned_type)
-  SELECT id, d_recorder_id, d_generate_id, 'FTS results without participant'
+INSERT INTO metabase_lf_tas1_orphaned_202204(id_results, recorder_id, barcode_results, orphaned_type)
+  SELECT id, d_recorder_id, d_generatedid, 'FTS results without participant'
     FROM (
       SELECT
-        d.id, d_recorder_id, d_generate_id
-        FROM v_espen_sn_lf_tas1_2_partcipants_202105 p
-         RIGHT JOIN v_espen_sn_lf_tas1_3_fts_result_202105 d on p.p_generate_id = d.d_generate_id
+        d.id, d_recorder_id, d_generatedid
+        FROM v_espen_st_lf_tas1_2_partcipants_202204_3 p
+         RIGHT JOIN v_espen_st_lf_tas1_3_fts_result_202204_3 d on p.p_generate_id = d.d_generatedid
           WHERE p.id isnull
           ) p
-ON CONFLICT ON CONSTRAINT unique_idx_orphaned_results_id_barcode_202105 DO NOTHING;
+ON CONFLICT ON CONSTRAINT unique_idx_orphaned_results_id_barcode_202204 DO NOTHING;
 
    -- COMMIT;
 END;

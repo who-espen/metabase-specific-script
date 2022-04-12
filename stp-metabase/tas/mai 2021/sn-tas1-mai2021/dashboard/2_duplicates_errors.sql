@@ -10,60 +10,56 @@
 
 /*
  * A query for listing all records that use the same ID twice
- * Variable to rename metabase_lf_tas1_duplicates_202105, v_espen_sn_lf_tas1_2_partcipants_202105, v_espen_sn_lf_tas1_3_fts_result_202105
+ * Variable to rename metabase_lf_tas1_duplicates_202105, v_espen_st_lf_tas1_2_partcipants_202204_3, v_espen_st_lf_tas1_3_fts_result_202204_3
  */
 SELECT
-  "Formulaire",
-  "Code Site",
-  "Nom Site",
-  "ID Participant",
-  "Code Opérateur",
-  "Age en années",
-  "Nbr année vécue dans le site",
-  "Sexe",
-  "Résultat Final",
+  "Formulário",
+  "Código do sítio",
+  "Nome Site",
+  "ID Participante",
+  "Código Opérateur",
+  "Idade em anos",
+  "Nº de anos de vida no site",
+  "Género",
+  "Resultado final",
   date,
-  "Statut"
+  "Estado"
 
 FROM (
   SELECT
-  m.form "Formulaire",
-  p.p_cluster_id "Code Site",
-  p.p_cluster_name "Nom Site",
-  m.barcode_participant "ID Participant",
-  p.p_recorder_id "Code Opérateur",
-  p.p_age_yrs "Age en années",
-  p.p_how_long_lived "Nbr année vécue dans le site",
-  p.p_sex "Sexe",
-  null "Résultat Final",
+  m.form "Formulário",
+  p.p_cluster_id "Código do sítio",
+  p.p_cluster_name "Nome Site",
+  m.barcode_participant "ID Participante",
+  p.p_recorder_id "Código Opérateur",
+  p.p_age_yrs "Idade em anos",
+  p.p_how_long_lived "Nº de anos de vida no site",
+  p.p_sex "Género",
+  null "Resultado final",
   p.p_start date,
-  status "Statut"
+  status "Estado"
 
-FROM metabase_lf_tas1_duplicates_202105 AS m, v_espen_sn_lf_tas1_2_partcipants_202105 AS p
+FROM metabase_lf_tas1_duplicates_202105 AS m, v_espen_st_lf_tas1_2_partcipants_202204_3 AS p
   WHERE p.id = m.id_participant
 
 UNION ALL
 
 SELECT
-  m.form "Formulaire",
-  d.d_cluster_id "Nom Site",
-  d.d_cluster_name "Nom Site",
-  m.barcode_results "ID Participant",
-  d.d_recorder_id "Code Opérateur",
-  null "Age en années",
-  null "Nbr année vécue dans le site",
-  null "Sexe",
-  d_final_result "Résultat Final",
+  m.form "Formulário",
+  d.d_cluster_id "Nome Site",
+  d.d_cluster_name "Nome Site",
+  m.barcode_results "ID Participante",
+  d.d_recorder_id "Código Opérateur",
+  null "Idade em anos",
+  null "Nº de anos de vida no site",
+  null "Género",
+  d_result1 "Resultado final",
   d.d_start date,
-  status "Statut"
+  status "Estado"
 
-FROM metabase_lf_tas1_duplicates_202105 AS m, v_espen_sn_lf_tas1_3_fts_result_202105 AS d
+FROM metabase_lf_tas1_duplicates_202105 AS m, v_espen_st_lf_tas1_3_fts_result_202204_3 AS d
   WHERE d.id = m.id_results
 ) src
 
-WHERE "Formulaire" IS NOT NULL
------- Metabase filter -------
--- [[and {{cluster_id}}]]
--- [[and {{cluster_name}}]]
--- [[and {{district}}]]
--- [[and {{date}}]]
+WHERE "Formulário" IS NOT NULL
+

@@ -10,9 +10,9 @@
 
 /*
  * This card will list all records with innacurate GPS
- * Variable to rename espen_sn_lf_tas1_1_sites_202105, <%number_villlage%>
+ * Variable to rename espen_st_lf_tas1_1_sites_202204_3, <%number_villlage%>
  */
  SELECT
 	concat(count(id), '/', 28)
-FROM v_espen_sn_lf_tas1_1_sites_202105
+FROM v_espen_st_lf_tas1_1_sites_202204_3
 WHERE id IS NOT NULL

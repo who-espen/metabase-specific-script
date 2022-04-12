@@ -9,42 +9,26 @@
  */
 
 /*
- * Variable to rename  espen_sn_lf_tas1_2_partcipants_202105, v_espen_sn_lf_tas1_2_partcipants_202105
+ * Variable to rename  espen_st_lf_tas1_2_partcipants_202204_3, v_espen_st_lf_tas1_2_partcipants_202204_3
  */
-CREATE VIEW v_espen_sn_lf_tas1_2_partcipants_202105
-AS
-SELECT
-  id,
-  p_recorder_id,
-  p_eu_name,
-  p_commune,
-  p_cluster_name,
-  p_cluster_id,
-  p_consent,
-  p_sex,
-  p_age_yrs,
-  p_how_long_lived,
+create view v_espen_st_lf_tas1_2_partcipants_202204_3 as
 
-  CASE WHEN p_id_method = 'Scanner' THEN p_generate_id ELSE p_generate_id END AS p_generate_id,
+SELECT 
 
-  p_notes,
-  c_end p_start
+id, 
+p_recorder_id, 
+p_district, 
+p_cluster_name, 
+p_cluster_id, 
+p_consent, 
+p_sex, 
+p_age_yrs, 
+p_how_long_lived, 
+p_generate_id,
+p_lymphod,
+p_lymph_location,
+p_hydrocele, 
+p_notes, 
+p_start
 
-FROM espen_sn_lf_tas1_2_partcipants_202105 p
-
-
--- SELECT 
--- id, 
--- p_recorder_id, 
--- p_eu_name,
--- p_commune, 
--- p_cluster_name, 
--- p_cluster_id,
--- p_consent, 
--- p_sex, 
--- p_age_yrs,
--- p_how_long_lived,
--- p_generate_id, 
--- p_notes, 
--- c_start p_start
--- FROM public.espen_sn_lf_tas1_2_partcipants_202105
+FROM public.espen_st_lf_tas1_2_partcipants_202204_3 p

@@ -10,7 +10,7 @@
 
 /*
  * The result from three from joint
- * Variable to rename v_espen_sn_lf_tas1_3_fts_result_202105, v_espen_sn_lf_tas1_2_partcipants_202105, espen_sn_lf_tas1_1_sites_202105
+ * Variable to rename v_espen_st_lf_tas1_3_fts_result_202204_3, v_espen_st_lf_tas1_2_partcipants_202204_3, espen_st_lf_tas1_1_sites_202204_3
  */
  SELECT
 
@@ -35,9 +35,9 @@
   d_lotnumber2,
   d_result2,
   d_why_invalid2,
-  d_final_result,
+  d_result1,
   d_start
 
-from v_espen_sn_lf_tas1_3_fts_result_202105 d
-left join espen_sn_lf_tas1_1_sites_202105 c on d.d_cluster_id::int = c.c_cluster_id1
-right join v_espen_sn_lf_tas1_2_partcipants_202105 p on p.p_generate_id = d.d_generate_id
+from v_espen_st_lf_tas1_3_fts_result_202204_3 d
+left join espen_st_lf_tas1_1_sites_202204_3 c on d.d_cluster_id::int = c.c_cluster_id1
+right join v_espen_st_lf_tas1_2_partcipants_202204_3 p on p.p_generate_id = d.d_generatedid

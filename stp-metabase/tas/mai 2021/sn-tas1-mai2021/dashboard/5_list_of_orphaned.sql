@@ -10,23 +10,23 @@
 
 /*
  * A query for listing all records that use the same ID twice
- * Variable to rename v_espen_sn_lf_tas1_2_partcipants_202105, v_espen_sn_lf_tas1_3_fts_result_202105, metabase_lf_tas1_orphaned_202105
+ * Variable to rename v_espen_st_lf_tas1_2_partcipants_202204_3, v_espen_st_lf_tas1_3_fts_result_202204_3, metabase_lf_tas1_orphaned_202105
  */
 
     SELECT
-      p.p_cluster_id "Code Site",
+      p.p_cluster_id "Código do sítio",
       NULL "Nom du Site",
-      p_generate_id "ID Participant",
-      p_recorder_id "Code Opérateur",
-      p_age_yrs "Age en années",
-      p_sex "Sexe",
+      p_generate_id "ID Participante",
+      p_recorder_id "Código Opérateur",
+      p_age_yrs "Idade em anos",
+      p_sex "Género",
       NULL "Diagnostic Results",
       'Participant data' "Missing Record",
       p_start "Date",
-      status "Statut"
+      status "Estado"
 
-    FROM v_espen_sn_lf_tas1_2_partcipants_202105 p
-      LEFT JOIN v_espen_sn_lf_tas1_3_fts_result_202105 d on p.p_generate_id = d.d_generate_id
+    FROM v_espen_st_lf_tas1_2_partcipants_202204_3 p
+      LEFT JOIN v_espen_st_lf_tas1_3_fts_result_202204_3 d on p.p_generate_id = d.d_generatedid
       LEFT JOIN metabase_lf_tas1_orphaned_202105 m on m.id_participant = p.id
       WHERE d.id isNULL
 
@@ -39,19 +39,19 @@
     UNION ALL
 
     SELECT
-      d_cluster_id "Code Site",
+      d_cluster_id "Código do sítio",
       NULL "Nom du Site",
-      d_generate_id "ID Participant",
-      d_recorder_id::int "Code Opérateur",
-      NULL "Age en années",
-      NULL "Sexe",
-      d_final_result "Diagnostic Results",
+      d_generatedid "ID Participante",
+      d_recorder_id::int "Código Opérateur",
+      NULL "Idade em anos",
+      NULL "Género",
+      d_result1 "Diagnostic Results",
       'FTS results' "Missing Record",
       d_start "Date",
-      status "Statut"
+      status "Estado"
 
-    FROM v_espen_sn_lf_tas1_3_fts_result_202105 d
-      LEFT JOIN v_espen_sn_lf_tas1_2_partcipants_202105 p on p.p_generate_id = d.d_generate_id
+    FROM v_espen_st_lf_tas1_3_fts_result_202204_3 d
+      LEFT JOIN v_espen_st_lf_tas1_2_partcipants_202204_3 p on p.p_generate_id = d.d_generatedid
       LEFT JOIN metabase_lf_tas1_orphaned_202105 m on m.id_results = d.id
       WHERE p.id isNULL
 

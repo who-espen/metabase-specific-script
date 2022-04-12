@@ -11,21 +11,19 @@
 
 /*
  * This query will display the number of participants per village
- * Variable to rename espen_sn_lf_tas1_1_sites_202105, v_espen_sn_lf_tas1_2_partcipants_202105
+ * Variable to rename espen_st_lf_tas1_1_sites_202204_3, v_espen_st_lf_tas1_2_partcipants_202204_3
  */
 SELECT
 DISTINCT ON  (c_cluster_id)
-	c_recorder "Code Opérateur",
-	c_eu_name "EU",
-	c_commune "Commune",
-	c_cluster_id "Cluster ID",
-  c_cluster_name "Nom du Site",
-	count (p.id) "Total Participants",
-	c_population "Total Population"
+	c_recorder "Código do operador",
+	c_district "Distrito",
+	c_cluster_id "Código do sítio",
+  c_cluster_name "sítio",
+	count (p.id) "Total de Participantes"
 
-FROM v_espen_sn_lf_tas1_1_sites_202105 c
-JOIN v_espen_sn_lf_tas1_2_partcipants_202105 p ON p.p_cluster_id = c.c_cluster_id
+FROM v_espen_st_lf_tas1_1_sites_202204_3 c
+JOIN v_espen_st_lf_tas1_2_partcipants_202204_3 p ON p.p_cluster_id = c.c_cluster_id
 
 
 
-GROUP BY c_recorder, c_cluster_id, c_eu_name, c_population, c_commune, c_cluster_name
+GROUP BY c_recorder, c_cluster_id, c_district, c_cluster_name

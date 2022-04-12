@@ -13,18 +13,12 @@
  * Variable to rename <%ab_cde_fgh_1_cluster%>
  */
  SELECT
-	c_recorder "Opérateur",
-	c_district "District",
-	c_cluster_id "Code Site",
+	c_recorder "Operador",
+	c_district "Distrito",
+	c_cluster_id "Código do sítio",
 	c_gps_lat "Latitude",
 	c_gps_lng "Longitude",
- 	c_gps_acc "Précision",
+ 	c_gps_acc "Precisão",
     c_start "Date"
-FROM v_espen_sn_lf_tas1_1_sites_202105
+FROM v_espen_st_lf_tas1_1_sites_202204_3
 WHERE c_gps_acc > 20
-
-  ------ Metabase filter -------
-  -- [[and {{c_cluster_id}}]]
-  -- [[and {{cluster_name}}]]
-  -- [[and {{district}}]]
-  -- [[and {{date}}]]

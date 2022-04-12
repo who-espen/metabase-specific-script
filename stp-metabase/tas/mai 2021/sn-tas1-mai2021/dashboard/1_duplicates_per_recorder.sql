@@ -11,7 +11,7 @@
 
 /*
  * A query to display the number of duplicates per recorder
- * Variable to rename metabase_lf_tas1_duplicates_202105? espen_sn_lf_tas1_3_fts_result_202105
+ * Variable to rename metabase_lf_tas1_duplicates_202105? espen_st_lf_tas1_3_fts_result_202204_3
  */
  SELECT
 
@@ -25,7 +25,7 @@ FROM (
     count(m.id) "Total des doublants"
 
     FROM public.metabase_lf_tas1_duplicates_202105 m
-    JOIN v_espen_sn_lf_tas1_3_fts_result_202105 d ON d.id = m.id_results
+    JOIN v_espen_st_lf_tas1_3_fts_result_202204_3 d ON d.id = m.id_results
 
     GROUP BY d.d_recorder_id
 
@@ -37,7 +37,7 @@ FROM (
     count(m.id) "Total des doublants"
 
     FROM public.metabase_lf_tas1_duplicates_202105 m
-    JOIN v_espen_sn_lf_tas1_2_partcipants_202105 p ON p.id = m.id_participant
+    JOIN v_espen_st_lf_tas1_2_partcipants_202204_3 p ON p.id = m.id_participant
 
   group by p.p_recorder_id
 
