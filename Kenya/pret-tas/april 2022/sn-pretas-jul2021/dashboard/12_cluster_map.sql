@@ -10,18 +10,18 @@
 
 /*
  * This query will use the GPS data to display a pin map of clusters.
- * Variable to rename espen_sn_lf_pretas_1_sites_202107_v2
+ * Variable to rename espen_ke_lf_pretas_1_site_202203_v4
  */
  SELECT
 
- c_district,
- c_cluster_id1,
+ c_subcounty,
+ c_cluster_id,
  c_cluster_name,
  c_gps_lat,
  c_gps_lng,
- created_at
+ c_start
 
-FROM espen_sn_lf_pretas_1_sites_202107_v2
+FROM v_espen_ke_lf_pretas_1_site_202203_v4
 
   ------ Metabase filter -------
   -- [[and {{c_cluster_id}}]]

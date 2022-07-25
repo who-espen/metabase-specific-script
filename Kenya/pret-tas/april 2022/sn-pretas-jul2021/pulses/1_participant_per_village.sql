@@ -10,18 +10,18 @@
 
 /*
  * This query will return a table that will contain the number of participants per village surveyed the day before.
- * Variable to rename v_espen_sn_lf_pretas_1_sites_202107_v2, v_espen_sn_lf_pretas_2_partcipants_202107_v2
+ * Variable to rename v_espen_ke_lf_pretas_1_site_202203_v4, v_espen_ke_lf_pretas_2_participant_202203_v4
  */
  SELECT
-  p_recorder_id "Code Opérateur",
-  c_district "Duistrict",
+  p_enumerator "Operator",
+  c_subcounty "Duistrict",
   c_cluster_id "Cluster ID",
-  c_cluster_name "Nom du Site",
+  c_cluster_name "Site Name",
   COUNT(p.id) "# Participant"
 
-FROM v_espen_sn_lf_pretas_1_sites_202107_v2 c
-LEFT JOIN v_espen_sn_lf_pretas_2_partcipants_202107_v2 p ON c.c_cluster_id = p.p_cluster_id::INT
+FROM v_espen_ke_lf_pretas_1_site_202203_v4 c
+LEFT JOIN v_espen_ke_lf_pretas_2_participant_202203_v4 p ON c.c_cluster_id = p.p_cluster_id::INT
 
 where p.p_start > CURRENT_start - 1
 
-GROUP BY p_recorder_id, c_district, c_cluster_id, c_cluster_name
+GROUP BY p_enumerator, c_subcounty, c_cluster_id, c_cluster_name

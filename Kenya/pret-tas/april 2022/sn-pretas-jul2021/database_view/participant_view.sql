@@ -9,23 +9,34 @@
  */
 
 /*
- * Variable to rename  espen_sn_lf_pretas_2_partcipants_202107_v2, v_espen_sn_lf_pretas_2_partcipants_202107_v2
+ * Variable to rename  espen_ke_lf_pretas_2_participant_202203_v4, v_espen_ke_lf_pretas_2_participant_202203_v4
  */
-CREATE VIEW v_espen_sn_lf_pretas_2_partcipants_202107_v2
-AS
-SELECT
-  id,
-  p_recorder_id,
-  p_district,
-  p_cluster_name,
-  p_cluster_id,
-  p_consent,
-  p_sex,
-  p_age_yrs,
-  p_how_long_lived,
-  p_code_id,
+create view v_espen_ke_lf_pretas_2_participant_202203_v4 as 
+SELECT 
 
-  p_notes,
-  c_end p_start
+id, 
+p_enumerator, 
+p_county,
+p_subcounty, 
+p_cluster_name,
+p_cluster_id, 
+p_consent,
 
-FROM espen_sn_lf_pretas_2_partcipants_202107_v2 p
+case when p_id_method = 'Scanner' then p_barcode_id else p_barcode_id end p_barcode_id,
+
+p_sex,
+p_age_yrs,
+
+concat (p_dob__date, ' ', p_dob__month, ' ', p_dob__year) p_birth_date,
+
+ p_lived_last_1yr,
+ p_oth_recent_subcounties, 
+ p_length_reside, 
+ p_bednet, 
+ p_bednet_lastnight, 
+ p_previous_trt, 
+ p_notes, p_start,
+ p_end
+
+FROM public.espen_ke_lf_pretas_2_participant_202203_v4 p
+

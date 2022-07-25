@@ -9,9 +9,9 @@
  */
 
 /*
- * Variable to rename metabase_lf_pretas_duplicates_202108, identify_participant_duplicate_pretas_202108, v_espen_sn_lf_pretas_2_partcipants_202107_v2,
- * v_espen_bj_lf_pretas_3_fts_result_202107_v2, metabase_lf_pretas_result_duplicates_202108_trigger, metabase_lf_pretas_duplicates_202108_trigger,
- * v_espen_bj_lf_pretas_3_fts_result_202107_v2
+ * Variable to rename metabase_lf_pretas_duplicates_202204, identify_participant_duplicate_pretas_202204, v_espen_ke_lf_pretas_2_participant_202203_v4,
+ * v_espen_ke_lf_pretas_3_resultat_fts_202203_v4, metabase_lf_pretas_result_duplicates_202204_trigger, metabase_lf_pretas_duplicates_202204_trigger,
+ * v_espen_ke_lf_pretas_3_resultat_fts_202203_v4
  */
 
 BEGIN;
@@ -19,31 +19,7 @@ BEGIN;
 /**
 * The table to track duplicates issues
 */
-CREATE TABLE IF NOT EXISTS metabase_lf_pretas_duplicates_202108(
-  id SERIAL PRIMARY KEY,
-  id_participant INTEGER NULL, -- The id from participant table
-  barcode_participant VARCHAR(255) NULL, -- The barcode from participant table
-  id_results INTEGER NULL, -- The id from result table
-  barcode_results VARCHAR(255) NULL, -- The barcode from result table
-  form VARCHAR(255) NOT NULL,
-  status VARCHAR(255) NOT NULL DEFAULT 'Unsolved'
-  );
 
-/**
-* Adding unique index in the duplicates tables
-*/
-  CREATE UNIQUE INDEX IF NOT EXISTS idx_duplicates_participant_id_barcode_202108
-    ON metabase_lf_pretas_duplicates_202108(id_participant, barcode_participant);
-  CREATE UNIQUE INDEX IF NOT EXISTS idx_duplicates_results_id_barcode_202108
-    ON metabase_lf_pretas_duplicates_202108(id_results, barcode_results);
-
-  ALTER TABLE metabase_lf_pretas_duplicates_202108
-    ADD CONSTRAINT unique_idx_duplicates_participant_id_barcode_202108
-    UNIQUE USING INDEX idx_duplicates_participant_id_barcode_202108;
-
-  ALTER TABLE metabase_lf_pretas_duplicates_202108
-    ADD CONSTRAINT unique_idx_duplicates_results_id_barcode_202108
-    UNIQUE USING INDEX idx_duplicates_results_id_barcode_202108;
 
 
 
@@ -52,42 +28,42 @@ CREATE TABLE IF NOT EXISTS metabase_lf_pretas_duplicates_202108(
 * and will insert it to the duplicate table created above.
 * Returns: trigger
 */
-CREATE OR REPLACE FUNCTION identify_participant_duplicate_pretas_202108() RETURNS TRIGGER AS $$
+CREATE OR REPLACE FUNCTION identify_participant_duplicate_pretas_202204() RETURNS TRIGGER AS $$
    BEGIN
 
       IF EXISTS(
-        SELECT src.id, src.p_code_id FROM v_espen_sn_lf_pretas_2_partcipants_202107_v2 src
-          WHERE src.p_code_id = NEW.p_code_id
-            AND (SELECT count (*)  FROM v_espen_sn_lf_pretas_2_partcipants_202107_v2 inr WHERE src.p_code_id = inr.p_code_id ) > 1
+        SELECT src.id, src.p_barcode_id FROM v_espen_ke_lf_pretas_2_participant_202203_v4 src
+          WHERE src.p_barcode_id = NEW.p_barcode_id
+            AND (SELECT count (*)  FROM v_espen_ke_lf_pretas_2_participant_202203_v4 inr WHERE src.p_barcode_id = inr.p_barcode_id ) > 1
             ) THEN
 
-        INSERT INTO metabase_lf_pretas_duplicates_202108(id_participant, barcode_participant, form)
-          SELECT id, p_code_id, 'Participant'
-            FROM (SELECT src.id, src.p_code_id FROM v_espen_sn_lf_pretas_2_partcipants_202107_v2 src
-              WHERE src.p_code_id = NEW.p_code_id) p
-          ON CONFLICT ON CONSTRAINT unique_idx_duplicates_participant_id_barcode_202108 DO NOTHING;
+        INSERT INTO metabase_lf_pretas_duplicates_202204(id_participant, barcode_participant, form)
+          SELECT id, p_barcode_id, 'Participant'
+            FROM (SELECT src.id, src.p_barcode_id FROM v_espen_ke_lf_pretas_2_participant_202203_v4 src
+              WHERE src.p_barcode_id = NEW.p_barcode_id) p
+          ON CONFLICT ON CONSTRAINT unique_idx_duplicates_participant_id_barcode_202204 DO NOTHING;
 
       END IF;
       RETURN NEW;
    END;
 $$ LANGUAGE PLPGSQL;
 
-CREATE TRIGGER metabase_lf_pretas_duplicates_202108_trigger AFTER INSERT OR UPDATE OR DELETE ON espen_sn_lf_pretas_2_partcipants_202107_v2
-FOR EACH ROW EXECUTE PROCEDURE identify_participant_duplicate_pretas_202108();
+CREATE TRIGGER metabase_lf_pretas_duplicates_202204_trigger AFTER INSERT OR UPDATE OR DELETE ON espen_ke_lf_pretas_2_participant_202203_v4
+FOR EACH ROW EXECUTE PROCEDURE identify_participant_duplicate_pretas_202204();
 
 
 
 /**
 * Query to identifie the existing records with duplicates issues
 */
- INSERT INTO metabase_lf_pretas_duplicates_202108(id_participant, barcode_participant, form)
- SELECT id, p_code_id, 'Participant'
+ INSERT INTO metabase_lf_pretas_duplicates_202204(id_participant, barcode_participant, form)
+ SELECT id, p_barcode_id, 'Participant'
             FROM (
-              SELECT src.id, src.p_code_id FROM v_espen_sn_lf_pretas_2_partcipants_202107_v2 src
-                WHERE (SELECT count (*)  FROM v_espen_sn_lf_pretas_2_partcipants_202107_v2 inr WHERE src.p_code_id = inr.p_code_id ) > 1
+              SELECT src.id, src.p_barcode_id FROM v_espen_ke_lf_pretas_2_participant_202203_v4 src
+                WHERE (SELECT count (*)  FROM v_espen_ke_lf_pretas_2_participant_202203_v4 inr WHERE src.p_barcode_id = inr.p_barcode_id ) > 1
             ) p
 
-ON CONFLICT ON CONSTRAINT unique_idx_duplicates_participant_id_barcode_202108 DO NOTHING;
+ON CONFLICT ON CONSTRAINT unique_idx_duplicates_participant_id_barcode_202204 DO NOTHING;
 
 COMMIT;
 
@@ -105,48 +81,48 @@ BEGIN;
 * and will insert it to the duplicate table created above.
 * Returns: trigger
 */
-CREATE OR REPLACE FUNCTION identify_pretas_diag_result_duplicate_202108() RETURNS TRIGGER AS $$
+CREATE OR REPLACE FUNCTION identify_pretas_diag_result_duplicate_202204() RETURNS TRIGGER AS $$
    BEGIN
 
       IF EXISTS(
-        SELECT src.id, d_code_id FROM v_espen_bj_lf_pretas_3_fts_result_202107_v2 src
-          WHERE d_code_id = NEW.d_code_id
-            AND (SELECT count (*)  FROM v_espen_bj_lf_pretas_3_fts_result_202107_v2 inr WHERE src.d_code_id = inr.d_code_id ) > 1
+        SELECT src.id, d_barcode_id FROM v_espen_ke_lf_pretas_3_resultat_fts_202203_v4 src
+          WHERE d_barcode_id = NEW.d_barcode_id
+            AND (SELECT count (*)  FROM v_espen_ke_lf_pretas_3_resultat_fts_202203_v4 inr WHERE src.d_barcode_id = inr.d_barcode_id ) > 1
             ) THEN
 
-        INSERT INTO metabase_lf_pretas_duplicates_202108(id_results, barcode_results, form)
-          SELECT id, d_code_id, 'Diagnostic'
-            FROM (SELECT src.id, d_code_id FROM v_espen_bj_lf_pretas_3_fts_result_202107_v2 src
-              WHERE d_code_id = NEW.d_code_id) p
-          ON CONFLICT ON CONSTRAINT unique_idx_duplicates_results_id_barcode_202108 DO NOTHING;
+        INSERT INTO metabase_lf_pretas_duplicates_202204(id_results, barcode_results, form)
+          SELECT id, d_barcode_id, 'Diagnostic'
+            FROM (SELECT src.id, d_barcode_id FROM v_espen_ke_lf_pretas_3_resultat_fts_202203_v4 src
+              WHERE d_barcode_id = NEW.d_barcode_id) p
+          ON CONFLICT ON CONSTRAINT unique_idx_duplicates_results_id_barcode_202204 DO NOTHING;
 
       END IF;
       RETURN NEW;
    END;
 $$ LANGUAGE PLPGSQL;
 
-CREATE TRIGGER metabase_lf_pretas_result_duplicates_202108_trigger AFTER INSERT OR UPDATE OR DELETE ON espen_bj_lf_pretas_3_fts_result_202107_v2
-FOR EACH ROW EXECUTE PROCEDURE identify_pretas_diag_result_duplicate_202108();
+CREATE TRIGGER metabase_lf_pretas_result_duplicates_202204_trigger AFTER INSERT OR UPDATE OR DELETE ON espen_ke_lf_pretas_3_resultat_fts_202203_v4
+FOR EACH ROW EXECUTE PROCEDURE identify_pretas_diag_result_duplicate_202204();
 
 
 
 /**
 * Query to identifie the existing records with duplicates issues
 */
- INSERT INTO metabase_lf_pretas_duplicates_202108(id_results, barcode_results, form)
- SELECT id, d_code_id, 'Diagnostic'
+ INSERT INTO metabase_lf_pretas_duplicates_202204(id_results, barcode_results, form)
+ SELECT id, d_barcode_id, 'Diagnostic'
             FROM (
-              SELECT src.id, src.d_code_id FROM v_espen_bj_lf_pretas_3_fts_result_202107_v2 src
-                WHERE (SELECT count (*)  FROM v_espen_bj_lf_pretas_3_fts_result_202107_v2 inr WHERE src.d_code_id = inr.d_code_id ) > 1
+              SELECT src.id, src.d_barcode_id FROM v_espen_ke_lf_pretas_3_resultat_fts_202203_v4 src
+                WHERE (SELECT count (*)  FROM v_espen_ke_lf_pretas_3_resultat_fts_202203_v4 inr WHERE src.d_barcode_id = inr.d_barcode_id ) > 1
             ) p
 
-ON CONFLICT ON CONSTRAINT unique_idx_duplicates_results_id_barcode_202108 DO NOTHING;
+ON CONFLICT ON CONSTRAINT unique_idx_duplicates_results_id_barcode_202204 DO NOTHING;
 
 COMMIT;
 
 
 
 UPDATE public.espen_mz_lf_pretas_3_resultat_fts_202011_v3 
-SET d_recorder_id=0, d_eu='', d_district='', d_cluster_name='', d_cluster_id='', d_id_sequence='', d_code_id='' 
+SET d_enumerator=0, d_eu='', d_subcounty='', d_cluster_name='', d_cluster_id='', d_id_sequence='', d_barcode_id='' 
 WHERE id=0;
 

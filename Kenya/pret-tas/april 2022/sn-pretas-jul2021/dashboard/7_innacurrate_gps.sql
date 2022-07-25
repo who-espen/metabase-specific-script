@@ -13,12 +13,12 @@
  * Variable to rename <%ab_cde_fgh_1_cluster%>
  */
  SELECT
-	c_recorder "Opérateur",
-	c_district "District",
+	c_enumerator "Enumerator",
+	c_subcounty "District",
 	c_cluster_id "Code Site",
 	c_gps_lat "Latitude",
 	c_gps_lng "Longitude",
- 	c_gps_acc "Précision",
+ 	c_gps_acc "Accuracy",
     c_start "Date"
-FROM v_espen_sn_lf_pretas_1_sites_202107_v2
+FROM v_espen_ke_lf_pretas_1_site_202203_v4
 WHERE c_gps_acc > 20

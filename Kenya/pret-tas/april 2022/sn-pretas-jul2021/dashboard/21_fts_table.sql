@@ -10,6 +10,6 @@
  */
 
 /*
- * Variable to rename v_espen_bj_lf_pretas_3_fts_result_202107_v2
+ * Variable to rename v_espen_ke_lf_pretas_3_resultat_fts_202203_v4
  */
-select * from v_espen_bj_lf_pretas_3_fts_result_202107_v2
+select * from v_espen_ke_lf_pretas_3_resultat_fts_202203_v4

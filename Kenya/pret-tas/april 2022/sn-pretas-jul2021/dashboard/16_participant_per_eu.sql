@@ -11,21 +11,21 @@
 
 /*
  * This query will display the number of participant per EU by the total population
- * Variable to rename v_espen_sn_lf_pretas_2_partcipants_202107_v2, espen_sn_lf_pretas_1_sites_202107_v2
+ * Variable to rename v_espen_ke_lf_pretas_2_participant_202203_v4, espen_ke_lf_pretas_1_site_202203_v4
  */
  SELECT
 
   c.c_cluster_id1 "Site ID",
   c_eu_code "EU",
-  c_district "District",
+  c_subcounty "District",
   c_cluster_name "Site Name",
   COUNT(p.id) "Enrolled",
   COUNT(CASE WHEN p_sex = 'Male' THEN 1 ELSE NULL END) "Male",
   COUNT(CASE WHEN p_sex = 'Female' THEN 1 ELSE NULL END) "Female",
   SUM (DISTINCT c_population)
 
-FROM v_espen_sn_lf_pretas_2_partcipants_202107_v2 p
-LEFT JOIN espen_sn_lf_pretas_1_sites_202107_v2 c ON p.p_cluster_id::INT = c.c_cluster_id1
+FROM v_espen_ke_lf_pretas_2_participant_202203_v4 p
+LEFT JOIN espen_ke_lf_pretas_1_site_202203_v4 c ON p.p_cluster_id::INT = c.c_cluster_id1
 
 WHERE p.id IS NOT NULL
 
@@ -35,4 +35,4 @@ WHERE p.id IS NOT NULL
   -- [[and {{district}}]]
   -- [[and {{date}}]]
 
-GROUP BY c_cluster_id1, c_eu_code, c_district, c_cluster_name
+GROUP BY c_cluster_id1, c_eu_code, c_subcounty, c_cluster_name

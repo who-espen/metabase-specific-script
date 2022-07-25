@@ -9,24 +9,25 @@
  */
 
 /*
- * Variable to rename  v_espen_sn_lf_pretas_1_sites_202107_v2, espen_sn_lf_pretas_1_sites_202107_v2
+ * Variable to rename  v_espen_ke_lf_pretas_1_site_202203_v4, espen_ke_lf_pretas_1_site_202203_v4
  */
-CREATE view v_espen_sn_lf_pretas_1_sites_202107_v2
-AS
-SELECT
-  id,
-  c_recorder,
-  c_district,
-  c_cluster_name,
-  c_cluster_id,
-  c_cluster_leader_name,
-  c_consent,
-  c_population,
-  c_present,
-  c_gps_lat,
-  c_gps_lng,
-  c_gps_alt,
-  c_gps_acc,
-  c_cluster_notes,
-  c_end c_start
-FROM public.espen_sn_lf_pretas_1_sites_202107_v2  c
+create view v_espen_ke_lf_pretas_1_site_202203_v4 as
+
+SELECT 
+
+id, 
+c_date_visit, 
+c_enumerator, 
+c_county,
+c_subcounty, 
+c_cluster_name, 
+c_cluster_id, 
+c_site_type, 
+c_gps_lat, 
+c_gps_lng, 
+c_gps_alt, 
+c_gps_acc, 
+c_cluster_notes, 
+c_start
+
+FROM public.espen_ke_lf_pretas_1_site_202203_v4 c

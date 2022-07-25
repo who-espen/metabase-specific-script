@@ -10,32 +10,32 @@
 
 
 /*
- * Variable to rename  v_espen_bj_lf_pretas_3_fts_result_202107_v2, espen_bj_lf_pretas_3_fts_result_202107_v2, espen_sn_lf_pretas_1_sites_202107_v2
+ * Variable to rename  v_espen_ke_lf_pretas_3_resultat_fts_202203_v4, espen_ke_lf_pretas_3_resultat_fts_202203_v4, espen_ke_lf_pretas_1_site_202203_v4
  */
- CREATE view v_espen_bj_lf_pretas_3_fts_result_202107_v2
-AS
-SELECT
-  id,
-  d_recorder_id,
-  d_district,
-  d_cluster_id,
-  d_cluster_name,
 
-  d_code_id,
-
-  d_lotnumber1,
-  d_result1,
-
-  CASE WHEN d_why_invalid1 = 'Other' THEN d_why_invalid_other1 ELSE d_why_invalid1 END AS d_why_invalid1,
-
-  d_display_result1,
-  d_lotnumber2,
-  d_result2,
-
-  CASE WHEN d_why_invalid2 = 'Other' THEN d_why_invalid_other2 ELSE d_why_invalid_other2 END AS d_why_invalid2,
-
-  d_display_result2,
-  case when d_result1 = 'Negative' then 'Negative' else d_final_result end as d_final_result,
-  c_end d_start
-
-FROM public.espen_bj_lf_pretas_3_fts_result_202107_v2 d
+CREATE OR REPLACE VIEW public.v_espen_ke_lf_pretas_3_resultat_fts_202203_v4
+AS SELECT d.id,
+    d.d_enumerator,
+    d.d_county,
+    d.d_subcounty,
+    d.d_cluster_name,
+    d.d_cluster_id,
+        CASE
+            WHEN d.d_id_method = 'Scanner'::text THEN d.p_barcode_id
+            ELSE d.d_code_id
+        END AS d_barcode_id,
+    d.d_blood_sample,
+    d.d_dbs_prepared,
+    d.d_filter_paper_stored,
+    d.d_lotnumber1,
+    d.d_result1,
+    d.d_why_invalid1,
+    d.d_display_result1,
+    d.d_need_second_test,
+    d.d_lotnumber2,
+    d.d_result2,
+    d.d_why_invalid2,
+    d.d_display_result2,
+    d.d_final_result,
+    d.d_start
+   FROM espen_ke_lf_pretas_3_resultat_fts_202203_v4 d;

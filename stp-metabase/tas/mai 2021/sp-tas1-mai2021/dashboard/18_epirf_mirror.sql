@@ -13,11 +13,12 @@
  * Variable to rename <%Epirf_Survey_Type%>, v_espen_st_lf_tas1_3_fts_result_202204_3, v_espen_st_lf_tas1_2_partcipants_202204_3,
  * espen_st_lf_tas1_1_sites_202204_3
  */
+
   SELECT
 
   'TAS1' "Type d'enquête",
-  INITCAP(c_eu_name) "Unité d'Evaluation",
-  initcap(c_commune) "Unité d'implémentation",
+  INITCAP(ue) "Unité d'Evaluation",
+  initcap(c_district) "Unité d'implémentation",
   initcap(c_cluster_name) "Site d'enquête",
   TO_CHAR(c.c_start, 'Month') "Mois",
   EXTRACT(YEAR FROM c.c_start) "Années",
@@ -29,10 +30,10 @@
   CONCAT(min(p_age_yrs), ' - ', max(p_age_yrs)) "Tranche d'âge(Min - Max)",
   'école' "Site enquete",
   'grappes' "Type d'enquête", -- TODO: Update the survey type
-  350 "Taille Population cible",-- TODO: Update the sample size
+  null "Taille Population cible",-- TODO: Update the sample size
   count(p.id) "Examiné",
-  COUNT(CASE WHEN d_result1 = 'Positive' THEN 1 ELSE NULL END) "Number de Positif",
-  ROUND(COUNT(CASE WHEN d_result1 = 'Positive' THEN 1 ELSE NULL END) * 100.0 / count(p.id), 2) "% positif",
+  COUNT(CASE WHEN d_result1 = 'Positivo' THEN 1 ELSE NULL END) "Number de Positif",
+  ROUND(COUNT(CASE WHEN d_result1 = 'Positivo' THEN 1 ELSE NULL END) * 100.0 / count(p.id), 2) "% positif",
   null "Number of invalid tests", --TODO: Update the number of invalid test
   null "Décision", --TODO: Update the decision
   null "Lymphoedema Total Patient Number", --TODO: Update the Total Patient Number
@@ -45,13 +46,16 @@
   null "Hydrocoele Nbr Health Facilities", --TODO: Update the Nbr Health Facilities
   null "Commentaires, --TODO: Update the comments"
  
-FROM v_espen_st_lf_tas1_3_fts_result_202204_3 d
-LEFT JOIN v_espen_st_lf_tas1_1_sites_202204_3 c on d.d_cluster_id = c.c_cluster_id
-RIGHT JOIN v_espen_st_lf_tas1_2_partcipants_202204_3 p on p.p_generate_id = d.d_generatedid
 
-GROUP BY c_eu_name, c_commune, c_cluster_name, "Mois", "Années", c_gps_lat, c_gps_lng
+from v_espen_st_lf_tas1_2_partcipants_202204_3 p 
+LEFT JOIN v_espen_st_lf_tas1_1_sites_202204_3 c on p.p_cluster_id = c.c_cluster_id
+left join public.espen_st_lf_tas1_5_ue u on u.district = p.p_district 
+left JOIN v_espen_st_lf_tas1_3_fts_result_202204_3 d on p.p_generate_id = d.d_generatedid
 
-order by c_eu_name, c_commune, c_cluster_name
+
+GROUP BY ue, c_district, c_cluster_name,  "Mois", "Années", c_gps_lat, c_gps_lng
+
+order by ue, c_district, c_cluster_name
 
 
 

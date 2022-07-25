@@ -12,13 +12,13 @@
 
 /*
  * This query will provide the list of actions to do for fixing the mistakes on data
- * Variable to rename <%surver_detail%>, metabase_lf_pretas_action_todo_202108
+ * Variable to rename <%surver_detail%>, metabase_lf_pretas_action_todo_202204
  */
 SELECT
  id "SN",
  description "Description",
  actor "Actor",
- status "Statut",
+ status "Status",
  due_start "Due Date"
-FROM metabase_lf_pretas_action_todo_202108
+FROM metabase_lf_pretas_action_todo_202204
 --WHERE surver_detail = '<%surver_detail%>'

@@ -10,13 +10,13 @@
 
 
 /*
- * Variables metabase_lf_pretas_action_todo_202108
+ * Variables metabase_lf_pretas_action_todo_202204
  */
 
 /**
  * The table that will contain the list of action
  */
-CREATE TABLE IF NOT EXISTS metabase_lf_pretas_action_todo_202108(
+CREATE TABLE IF NOT EXISTS metabase_lf_pretas_action_todo_202204(
   id SERIAL PRIMARY KEY,
   description TEXT NOT NULL,
   actor TEXT NOT NULL,

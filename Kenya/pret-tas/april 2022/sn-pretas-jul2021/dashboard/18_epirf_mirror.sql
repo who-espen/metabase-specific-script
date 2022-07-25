@@ -10,14 +10,14 @@
 
 /*
  * This query is a sample of EPIRF mirror
- * Variable to rename <%Epirf_Survey_Type%>, v_espen_bj_lf_pretas_3_fts_result_202107_v2, v_espen_sn_lf_pretas_2_partcipants_202107_v2,
- * espen_sn_lf_pretas_1_sites_202107_v2
+ * Variable to rename <%Epirf_Survey_Type%>, v_espen_ke_lf_pretas_3_resultat_fts_202203_v4, v_espen_ke_lf_pretas_2_participant_202203_v4,
+ * espen_ke_lf_pretas_1_site_202203_v4
  */
  SELECT
 
   null "Type d'ênquestes",
   null "Unité d'évaluation",
-  c_district "Unité d'Implémentation",
+  c_subcounty "Unité d'Implémentation",
   c_cluster_name "Site de l'enquête",
   TO_CHAR(c.c_start, 'Month') "Mois",
   EXTRACT(YEAR FROM c.c_start) "Année",
@@ -45,10 +45,10 @@
   null "Hydrocoele Nbr Centre de santé", --TODO: Update the Nbr Health Facilities
   null "Commentaires" --TODO: Update the comments
 
-FROM v_espen_bj_lf_pretas_3_fts_result_202107_v2 d
-LEFT JOIN v_espen_sn_lf_pretas_1_sites_202107_v2 c on d.d_cluster_id = c.c_cluster_id
-RIGHT JOIN v_espen_sn_lf_pretas_2_partcipants_202107_v2 p on p.p_code_id = d.d_code_id
+FROM v_espen_ke_lf_pretas_3_resultat_fts_202203_v4 d
+LEFT JOIN v_espen_ke_lf_pretas_1_site_202203_v4 c on d.d_cluster_id = c.c_cluster_id
+RIGHT JOIN v_espen_ke_lf_pretas_2_participant_202203_v4 p on p.p_barcode_id = d.d_barcode_id
 
-GROUP BY c_district, c_cluster_name, "Mois", "Année", c_gps_lat, c_gps_lng
+GROUP BY c_subcounty, c_cluster_name, "Mois", "Année", c_gps_lat, c_gps_lng
 
 

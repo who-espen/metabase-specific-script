@@ -11,15 +11,15 @@
 
 /*
  * This query will will display the list of nearby villages less than <%village_dist_required%> KM
- * Variable to rename espen_sn_lf_pretas_1_sites_202107_v2, <%village_dist_required%>
+ * Variable to rename espen_ke_lf_pretas_1_site_202203_v4, <%village_dist_required%>
  */
 SELECT
 
   calculate_distance(src.c_gps_lat , src.c_gps_lng , dest.c_gps_lat , dest.c_gps_lng,  'K') "Distances in KM",
-  src.c_recorder "Code Opérateur 1",
+  src.c_enumerator "Operator 1",
   src.c_cluster_id "Code Site 1",
   src.c_cluster_name "Site 1",
-  dest.c_recorder "Code Opérateur 2",
+  dest.c_enumerator "Operator 2",
   dest.c_cluster_id "Code Site 2",
   dest.c_cluster_name  "Site 2",
   src.c_gps_lat "Latitude1",
@@ -27,8 +27,8 @@ SELECT
   dest.c_gps_lat "Latitude2",
   dest.c_gps_lng "Longitude2"
 
-FROM espen_sn_lf_pretas_1_sites_202107_v2 src
-  JOIN espen_sn_lf_pretas_1_sites_202107_v2 dest on (
+FROM espen_ke_lf_pretas_1_site_202203_v4 src
+  JOIN espen_ke_lf_pretas_1_site_202203_v4 dest on (
     SELECT calculate_distance(src.c_gps_lat , src.c_gps_lng , dest.c_gps_lat , dest.c_gps_lng,  'K') < 5
     AND src.c_cluster_id <> dest.c_cluster_id
   )

@@ -10,36 +10,36 @@
 
 /*
  * This query will return the participant per sex
- * Variable to rename v_espen_sn_lf_pretas_2_partcipants_202107_v2
+ * Variable to rename v_espen_ke_lf_pretas_2_participant_202203_v4
  */
  select
 
-  'Masculin' sexe,
+  'Masculin' Sex,
   sum(male) total
 
 FROM (
   SELECT
   	COUNT(case when p_sex = 'Masculin' then 1 else null end ) male
 
-  FROM v_espen_sn_lf_pretas_2_partcipants_202107_v2 P
+  FROM v_espen_ke_lf_pretas_2_participant_202203_v4 P
 
-  GROUP BY p_district,  p_cluster_id, p_cluster_name
+  GROUP BY p_subcounty,  p_cluster_id, p_cluster_name
 ) src
 
   UNION
 
    select
 
-  'Féminin' sexe,
+  'Féminin' Sex,
   sum(female) total
 
 FROM (
   SELECT
   	COUNT(case when p_sex = 'Féminin' then 1 else null end ) female
 
-  FROM v_espen_sn_lf_pretas_2_partcipants_202107_v2 P
+  FROM v_espen_ke_lf_pretas_2_participant_202203_v4 P
 
-  GROUP BY p_district,  p_cluster_id, p_cluster_name
+  GROUP BY p_subcounty,  p_cluster_id, p_cluster_name
 ) src
 
   ------ Metabase filter -------
