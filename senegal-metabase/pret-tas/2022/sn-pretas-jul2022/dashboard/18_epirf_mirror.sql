@@ -14,8 +14,21 @@
  * espen_sn_lf_pretas_1_sites_202207_v1
  */
  SELECT
+ with src as (select 
+distinct on (c_cluster_id)
+c_region,
+c_district,
+c_cluster_name,
+c_cluster_id,
+c_gps_lat,
+c_gps_lng,
+c_start
+from public.v_espen_sn_lf_pretas_1_sites_202207_v1)
 
-  null "Type d'ênquestes",
+SELECT
+
+  case when (c_cluster_id = '101' or c_cluster_id = '103' or c_cluster_id = '107' or c_cluster_id = '109' or c_cluster_id = '111' or c_cluster_id = '113')
+  then 'sentinelle' else 'contrôle ponctuel' end "Type d'ênquestes",
   null "Unité d'évaluation",
   c_district "Unité d'Implémentation",
   c_cluster_name "Site de l'enquête",
@@ -29,7 +42,7 @@
   CONCAT(min(p_age_yrs), ' - ', max(p_age_yrs)) "Tranche d'âge(Min - Max)",
   'école' "Site enquete",
   'grappes' "Type enquete", -- TODO: Update the survey type
-  350 "Taille de la Population Cible",-- TODO: Update the sample size
+  null "Taille de la Population Cible",-- TODO: Update the sample size
   count(p.id) "Nombre Examiné",
   COUNT(CASE WHEN d_final_result = 'Positive' THEN 1 ELSE NULL END) "Nombre de Positifs",
   ROUND(COUNT(CASE WHEN d_final_result = 'Positive' THEN 1 ELSE NULL END) * 100.0 / count(p.id), 2) "% de positifs",
@@ -46,9 +59,10 @@
   null "Commentaires" --TODO: Update the comments
 
 FROM v_espen_sn_lf_pretas_3_fts_result_202207_v1 d
-LEFT JOIN v_espen_sn_lf_pretas_1_sites_202207_v1 c on d.d_cluster_id = c.c_cluster_id
-RIGHT JOIN v_espen_sn_lf_pretas_2_partcipants_202207_v1 p on p.p_code_id = d.d_code_id
+LEFT JOIN src c on d.d_cluster_id = c.c_cluster_id
+LEFT JOIN v_espen_sn_lf_pretas_2_partcipants_202207_v1 p on p.p_code_id = d.d_code_id
 
-GROUP BY c_district, c_cluster_name, "Mois", "Année", c_gps_lat, c_gps_lng
+GROUP BY c_district, c_cluster_name, "Mois", "Année", c_gps_lat, c_gps_lng, c_cluster_id
+
 
 
