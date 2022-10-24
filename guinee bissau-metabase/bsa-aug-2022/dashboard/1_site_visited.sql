@@ -1,0 +1,1 @@
+select count(*) from public.v_espen_gw_oncho_bsc_1_river_inspection_202209
