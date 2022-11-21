@@ -11,14 +11,14 @@
 
 /*
  * A query to get the the number/percentages of duplicates fix by the number/percentages of duplicates unfixed
- * Variable to rename metabase_lr_lf_tas1_duplicates_202210
+ * Variable to rename metabase_lr_lf_pre_duplicates_202210
  */
 SELECT
     'Solved' status,
 	count(CASE WHEN status = 'Solved' THEN 1 ELSE NULL END) total
 
 
-FROM metabase_lr_lf_tas1_duplicates_202210
+FROM metabase_lr_lf_pre_duplicates_202210
 
 UNION
 
@@ -26,4 +26,4 @@ SELECT
     'Unsolved' status,
 	count(CASE WHEN status = 'Unsolved' THEN 1 ELSE NULL END) total
 
-FROM metabase_lr_lf_tas1_duplicates_202210
+FROM metabase_lr_lf_pre_duplicates_202210

@@ -1,0 +1,21 @@
+CREATE OR REPLACE VIEW public.v_espen_mz_oncho_bsa_2_river_inspection_202211_v1_2
+AS SELECT r.id,
+    r.r_recorder_id AS "ID do gravador",
+    r.r_province AS "Província",
+    r.r_district AS "Distrito",
+    r.r_site AS "Sítio",
+    r.r_date AS "Date",
+    r.r_gps_lat AS "Latitude",
+    r.r_gps_lng AS "Longitude",
+    r.r_gps_acc AS "Precisão",
+    r.r_river AS "Rio",
+    r.r_river_bassin AS "Rio Bassin",
+    r.r_water_temperature AS "Temperatura da água",
+    r.r_water_ph AS "PH",
+    r.r_inspection_time AS "Tempo de inspecção",
+    r.r_site_suitability AS "Adequação do site",
+    r.r_larvae_evidence AS "Provas de larvas",
+    r.r_abundance AS "Abundância",
+    r.r_note AS "Nota",
+    r.r_start AS "Data e hora de registo"
+   FROM espen_mz_oncho_bsa_2_river_inspection_202211_v1_2 r;

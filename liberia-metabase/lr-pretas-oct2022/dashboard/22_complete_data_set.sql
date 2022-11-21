@@ -10,7 +10,7 @@
 
 /*
  * The result from three from joint
- * Variable to rename v_espen_lr_lf_tas1_3_resultat_fts_202210, v_espen_lr_lf_tas1_2_participant_202210_v0, espen_lr_lf_tas1_1_site_202210
+ * Variable to rename v_espen_lr_lf_pretas_3_resultat_fts_202210, v_espen_lr_lf_pretas_2_participant_202210, espen_lr_lf_pretas_1_site_202210
  */
  SELECT
 
@@ -28,16 +28,16 @@
   p_sex,
   p_age_yrs,
   p_how_long_lived,
-  p_barcode_id,
+  p_code_id,
   d_lotnumber1,
   d_result1,
   d_why_invalid1,
   d_lotnumber2,
   d_result2,
   d_why_invalid2,
-  final_result,
+  d_final_result,
   d_start
 
-from v_espen_lr_lf_tas1_3_resultat_fts_202210 d
-left join espen_lr_lf_tas1_1_site_202210 c on d.d_cluster_id::int = c.c_cluster_id1
-right join v_espen_lr_lf_tas1_2_participant_202210_v0 p on p.p_barcode_id = d.d_barcode_id
+from v_espen_lr_lf_pretas_3_resultat_fts_202210 d
+left join espen_lr_lf_pretas_1_site_202210 c on d.d_cluster_id::int = c.c_cluster_id1
+right join v_espen_lr_lf_pretas_2_participant_202210 p on p.p_code_id = d.d_code_id

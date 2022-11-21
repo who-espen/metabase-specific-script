@@ -10,8 +10,8 @@
 
 /*
  * This query is a sample of EPIRF mirror
- * Variable to rename <%Epirf_Survey_Type%>, v_espen_lr_lf_tas1_3_resultat_fts_202210, v_espen_lr_lf_tas1_2_participant_202210_v0,
- * espen_lr_lf_tas1_1_site_202210
+ * Variable to rename <%Epirf_Survey_Type%>, v_espen_lr_lf_pretas_3_resultat_fts_202210, v_espen_lr_lf_pretas_2_participant_202210,
+ * espen_lr_lf_pretas_1_site_202210
  */
  SELECT
 
@@ -31,9 +31,9 @@
   'grappes' "Type enquete", -- TODO: Update the survey type
   350 "Taille de la Population Cible",-- TODO: Update the sample size
   count(p.id) "Nombre Examiné",
-  COUNT(CASE WHEN final_result = 'Positive' THEN 1 ELSE NULL END) "Nombre de Positifs",
-  ROUND(COUNT(CASE WHEN final_result = 'Positive' THEN 1 ELSE NULL END) * 100.0 / count(p.id), 2) "% de positifs",
-  COUNT(CASE WHEN final_result = 'Indeterminate' THEN 1 ELSE NULL END) "Nombre de Test Invalide", --TODO: Update the number of invalid test
+  COUNT(CASE WHEN d_final_result = 'Positive' THEN 1 ELSE NULL END) "Nombre de Positifs",
+  ROUND(COUNT(CASE WHEN d_final_result = 'Positive' THEN 1 ELSE NULL END) * 100.0 / count(p.id), 2) "% de positifs",
+  COUNT(CASE WHEN d_final_result = 'Indeterminate' THEN 1 ELSE NULL END) "Nombre de Test Invalide", --TODO: Update the number of invalid test
   null "Decision", --TODO: Update the decision
   null "Lymphoedema Total de Patient", --TODO: Update the Total Patient Number
   null "Lymphoedema Method d'Estimation", --TODO: Update the  Method Estimation
@@ -45,9 +45,9 @@
   null "Hydrocoele Nbr Centre de santé", --TODO: Update the Nbr Health Facilities
   null "Commentaires" --TODO: Update the comments
 
-FROM v_espen_lr_lf_tas1_3_resultat_fts_202210 d
-LEFT JOIN v_espen_lr_lf_tas1_1_site_202210 c on d.d_cluster_id = c.c_cluster_id
-RIGHT JOIN v_espen_lr_lf_tas1_2_participant_202210_v0 p on p.p_barcode_id = d.d_barcode_id
+FROM v_espen_lr_lf_pretas_3_resultat_fts_202210 d
+LEFT JOIN v_espen_lr_lf_pretas_1_site_202210 c on d.d_cluster_id = c.c_cluster_id
+RIGHT JOIN v_espen_lr_lf_pretas_2_participant_202210 p on p.p_code_id = d.d_code_id
 
 GROUP BY c_district, c_cluster_name, "Mois", "Année", c_gps_lat, c_gps_lng
 

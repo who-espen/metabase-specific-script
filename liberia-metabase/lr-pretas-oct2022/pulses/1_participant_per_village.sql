@@ -10,7 +10,7 @@
 
 /*
  * This query will return a table that will contain the number of participants per village surveyed the day before.
- * Variable to rename v_espen_lr_lf_tas1_1_site_202210, v_espen_lr_lf_tas1_2_participant_202210_v0
+ * Variable to rename v_espen_lr_lf_pretas_1_site_202210, v_espen_lr_lf_pretas_2_participant_202210
  */
  SELECT
   p_recorder_id "Operator",
@@ -19,8 +19,8 @@
   c_cluster_name "Site Name",
   COUNT(p.id) "# Participant"
 
-FROM v_espen_lr_lf_tas1_1_site_202210 c
-LEFT JOIN v_espen_lr_lf_tas1_2_participant_202210_v0 p ON c.c_cluster_id = p.p_cluster_id::INT
+FROM v_espen_lr_lf_pretas_1_site_202210 c
+LEFT JOIN v_espen_lr_lf_pretas_2_participant_202210 p ON c.c_cluster_id = p.p_cluster_id::INT
 
 where p.p_start > CURRENT_start - 1
 

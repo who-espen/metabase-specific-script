@@ -11,7 +11,7 @@
 
 /*
  * A query to display the number of duplicates per recorder
- * Variable to rename metabase_lr_lf_tas1_duplicates_202210? espen_ke_lf_pretas_3_resultat_fts_202203_v4
+ * Variable to rename metabase_lr_lf_pre_duplicates_202210? espen_ke_lf_pretas_3_resultat_fts_202203_v4
  */
   SELECT
 
@@ -23,14 +23,14 @@ FROM (
 
     d.d_recorder_id "Operators",
     count(m.id) "Total duplicates",
-    d_subcounty district,
+    d_iu district,
     d_cluster_id cluster_id,
     d_cluster_name cluster_name
 
-    FROM public.metabase_lr_lf_tas1_duplicates_202210 m
-    JOIN v_espen_lr_lf_tas1_3_resultat_fts_202210 d ON d.id = m.id_results
+    FROM public.metabase_lr_lf_pre_duplicates_202210 m
+    JOIN v_espen_lr_lf_pretas_3_resultat_fts_202210 d ON d.id = m.id_results
 
-    GROUP BY d.d_recorder_id, d_subcounty, d_cluster_id, d_cluster_name
+    GROUP BY d.d_recorder_id, d_iu, d_cluster_id, d_cluster_name
 
   UNION
 
@@ -38,14 +38,14 @@ FROM (
 
     p.p_recorder_id "Operators",
     count(m.id) "Total duplicates",
-   	p_subcounty district,
+   	p_iu district,
    p_cluster_id cluster_id,
    	p_cluster_name cluster_name
 
-    FROM public.metabase_lr_lf_tas1_duplicates_202210 m
-    JOIN v_espen_lr_lf_tas1_2_participant_202210_v0 p ON p.id = m.id_participant::int
+    FROM public.metabase_lr_lf_pre_duplicates_202210 m
+    JOIN v_espen_lr_lf_pretas_2_participant_202210 p ON p.id = m.id_participant::int
 
-  group by p.p_recorder_id, p_subcounty, p_cluster_id, p_cluster_name
+  group by p.p_recorder_id, p_iu, p_cluster_id, p_cluster_name
 
 ) src
 

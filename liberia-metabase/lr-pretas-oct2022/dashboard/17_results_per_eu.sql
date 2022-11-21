@@ -10,7 +10,7 @@
 
 /*
  * This query will display the FTS result by sex and result.
- * Variable to rename v_espen_lr_lf_tas1_2_participant_202210_v0, espen_lr_lf_tas1_1_site_202210
+ * Variable to rename v_espen_lr_lf_pretas_2_participant_202210, espen_lr_lf_pretas_1_site_202210
  */
  SELECT
 c_cluster_id1 "Site ID",
@@ -20,17 +20,17 @@ c_cluster_name "Site Name",
 COUNT(p.id) "Enrolled",
 COUNT(CASE WHEN p_sex = 'Male' THEN 1 ELSE NULL END) "Male",
 COUNT(CASE WHEN p_sex = 'Female' THEN 1 ELSE NULL END) "Female",
-COUNT(CASE WHEN (p_sex = 'Male' and final_result = 'Positive') THEN 1 ELSE NULL END) "Positive Male",
-COUNT(CASE WHEN (p_sex = 'Female' and final_result = 'Positive') THEN 1 ELSE NULL END) "Positive Female",
-COUNT(CASE WHEN (final_result = 'Positive') THEN 1 ELSE NULL END) "Total Positive",
-COUNT(CASE WHEN (p_sex = 'Male' and final_result = 'Negative') THEN 1 ELSE NULL END) "Negative Male",
-COUNT(CASE WHEN (p_sex = 'Female' and final_result = 'Negative') THEN 1 ELSE NULL END) "Negative Female",
-COUNT(CASE WHEN ( final_result = 'Negative') THEN 1 ELSE NULL END) "Total Negative",
-COUNT(CASE WHEN ( final_result = 'Invalid') THEN 1 ELSE NULL END) "Total Invalid"
+COUNT(CASE WHEN (p_sex = 'Male' and d_final_result = 'Positive') THEN 1 ELSE NULL END) "Positive Male",
+COUNT(CASE WHEN (p_sex = 'Female' and d_final_result = 'Positive') THEN 1 ELSE NULL END) "Positive Female",
+COUNT(CASE WHEN (d_final_result = 'Positive') THEN 1 ELSE NULL END) "Total Positive",
+COUNT(CASE WHEN (p_sex = 'Male' and d_final_result = 'Negative') THEN 1 ELSE NULL END) "Negative Male",
+COUNT(CASE WHEN (p_sex = 'Female' and d_final_result = 'Negative') THEN 1 ELSE NULL END) "Negative Female",
+COUNT(CASE WHEN ( d_final_result = 'Negative') THEN 1 ELSE NULL END) "Total Negative",
+COUNT(CASE WHEN ( d_final_result = 'Invalid') THEN 1 ELSE NULL END) "Total Invalid"
 
-FROM v_espen_lr_lf_tas1_3_resultat_fts_202210 d
-LEFT JOIN espen_lr_lf_tas1_1_site_202210 c on d.d_cluster_id::int = c.c_cluster_id1
-RIGHT JOIN v_espen_lr_lf_tas1_2_participant_202210_v0 p on p.p_barcode_id = d.d_barcode_id
+FROM v_espen_lr_lf_pretas_3_resultat_fts_202210 d
+LEFT JOIN espen_lr_lf_pretas_1_site_202210 c on d.d_cluster_id::int = c.c_cluster_id1
+RIGHT JOIN v_espen_lr_lf_pretas_2_participant_202210 p on p.p_code_id = d.d_code_id
 
 WHERE p.id IS NOT NULL
 

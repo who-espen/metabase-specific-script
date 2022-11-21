@@ -20,5 +20,5 @@
 	c_gps_lng "Longitude",
  	c_gps_acc "Accuracy",
     c_start "Date"
-FROM v_espen_lr_lf_tas1_1_site_202210
+FROM v_espen_lr_lf_pretas_1_site_202210
 WHERE c_gps_acc > 20

@@ -10,6 +10,6 @@
  */
 
 /*
- * Variable to rename v_espen_lr_lf_tas1_2_participant_202210_v0
+ * Variable to rename v_espen_lr_lf_pretas_2_participant_202210
  */
-select * from v_espen_lr_lf_tas1_2_participant_202210_v0
+select * from v_espen_lr_lf_pretas_2_participant_202210

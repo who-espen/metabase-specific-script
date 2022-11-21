@@ -11,7 +11,7 @@
 
 /*
  * This query will display the number of participants per village
- * Variable to rename espen_lr_lf_tas1_1_site_202210, v_espen_lr_lf_tas1_2_participant_202210_v0
+ * Variable to rename espen_lr_lf_pretas_1_site_202210, v_espen_lr_lf_pretas_2_participant_202210
  */
 SELECT
 DISTINCT ON  (c_cluster_id)
@@ -22,8 +22,8 @@ DISTINCT ON  (c_cluster_id)
 	count (p.id) "Total Participants"
 	--c_population "Total Population"
 
-FROM v_espen_lr_lf_tas1_1_site_202210 c
-JOIN v_espen_lr_lf_tas1_2_participant_202210_v0 p ON p.p_cluster_id = c.c_cluster_id
+FROM v_espen_lr_lf_pretas_1_site_202210 c
+JOIN v_espen_lr_lf_pretas_2_participant_202210 p ON p.p_cluster_id = c.c_cluster_id
 
 WHERE c.id IS NOT NULL
 

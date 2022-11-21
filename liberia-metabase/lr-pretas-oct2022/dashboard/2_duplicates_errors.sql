@@ -10,12 +10,12 @@
 
 /*
  * A query for listing all records that use the same ID twice
- * Variable to rename metabase_lr_lf_tas1_duplicates_202210, v_espen_lr_lf_tas1_2_participant_202210_v0, v_espen_lr_lf_tas1_3_resultat_fts_202210
+ * Variable to rename metabase_lr_lf_pre_duplicates_202210, v_espen_lr_lf_pretas_2_participant_202210, v_espen_lr_lf_pretas_3_resultat_fts_202210
  */
  
- SELECT
+SELECT
   "Forms",
-  "EU",
+  "District",
   "Code Site",
   "Site Name",
   "ID Participant",
@@ -30,7 +30,7 @@
 FROM (
   SELECT
   m.form "Forms",
-  p_eu "EU",
+  p.p_iu "District",
   p.p_cluster_id "Code Site",
   p.p_cluster_name "Site Name",
   m.barcode_participant "ID Participant",
@@ -42,14 +42,14 @@ FROM (
   p.p_start date,
   status "Status"
 
-FROM metabase_lr_lf_tas1_duplicates_202210 AS m, v_espen_lr_lf_tas1_2_participant_202210_v0 AS p
+FROM metabase_lr_lf_pre_duplicates_202210 AS m, v_espen_lr_lf_pretas_2_participant_202210 AS p
   WHERE p.id = m.id_participant
 
 UNION ALL
 
 SELECT
   m.form "Forms",
-  d_eu "EU",
+  d_iu "District",
   d.d_cluster_id "Site Name",
   d.d_cluster_name "Site Name",
   m.barcode_results "ID Participant",
@@ -57,11 +57,11 @@ SELECT
   null "Age",
   null "Nbr year lived in the site",
   null "Sex",
-  final_result "Final result",
+  d_final_result "Final result",
   d.d_start date,
   status "Status"
 
-FROM metabase_lr_lf_tas1_duplicates_202210 AS m, v_espen_lr_lf_tas1_3_resultat_fts_202210 AS d
+FROM metabase_lr_lf_pre_duplicates_202210 AS m, v_espen_lr_lf_pretas_3_resultat_fts_202210 AS d
   WHERE d.id = m.id_results
 ) src
 

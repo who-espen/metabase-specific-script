@@ -10,36 +10,36 @@
 
 /*
  * This query will return the participant per sex
- * Variable to rename v_espen_lr_lf_tas1_2_participant_202210_v0
+ * Variable to rename v_espen_lr_lf_pretas_2_participant_202210
  */
  select
 
-  'Masculin' Sex,
+  'Male' Sex,
   sum(male) total
 
 FROM (
   SELECT
-  	COUNT(case when p_sex = 'Masculin' then 1 else null end ) male
+  	COUNT(case when p_sex = 'Male' then 1 else null end ) male
 
-  FROM v_espen_lr_lf_tas1_2_participant_202210_v0 P
+  FROM v_espen_lr_lf_pretas_2_participant_202210 P
 
-  GROUP BY p_subcounty,  p_cluster_id, p_cluster_name
+  GROUP BY p_iu,  p_cluster_id, p_cluster_name
 ) src
 
   UNION
 
    select
 
-  'Féminin' Sex,
+  'Female' Sex,
   sum(female) total
 
 FROM (
   SELECT
-  	COUNT(case when p_sex = 'Féminin' then 1 else null end ) female
+  	COUNT(case when p_sex = 'Female' then 1 else null end ) female
 
-  FROM v_espen_lr_lf_tas1_2_participant_202210_v0 P
+  FROM v_espen_lr_lf_pretas_2_participant_202210 P
 
-  GROUP BY p_subcounty,  p_cluster_id, p_cluster_name
+  GROUP BY p_iu,  p_cluster_id, p_cluster_name
 ) src
 
 

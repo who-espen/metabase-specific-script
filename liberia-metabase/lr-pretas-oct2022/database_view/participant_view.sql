@@ -9,9 +9,9 @@
  */
 
 /*
- * Variable to rename  v_espen_lr_lf_tas1_2_participant_202210_v0, v_espen_lr_lf_tas1_2_participant_202210_v0
+ * Variable to rename  v_espen_lr_lf_pretas_2_participant_202210, v_espen_lr_lf_pretas_2_participant_202210
  */
-create view v_espen_lr_lf_tas1_2_participant_202210_v0 as
+create view v_espen_lr_lf_pretas_2_participant_202210 as
 
 SELECT 
 
@@ -23,7 +23,7 @@ p_cluster_name,
 p_cluster_id, 
 p_consent,
 
-case when p_id_method = 'ID_generation' then  p_code_id else p_barcode_id end p_barcode_id,
+case when p_id_method = 'ID_generation' then  p_code_id else p_code_id end p_code_id,
 
 p_sex, 
 p_age_yrs,
@@ -32,5 +32,5 @@ p_notes,
 p_start
 
 
-FROM public.espen_lr_lf_tas1_1_site_202210_v0 p
+FROM public.espen_lr_lf_pretas_2_participant_202210 p
 

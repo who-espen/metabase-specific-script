@@ -9,24 +9,29 @@
  */
 
 /*
- * Variable to rename  v_espen_lr_lf_tas1_1_site_202210, espen_lr_lf_tas1_1_site_202210
+ * Variable to rename  v_espen_lr_lf_pretas_1_site_202210, espen_lr_lf_pretas_1_site_202210
  */
-create view v_espen_lr_lf_tas1_1_site_202210 as
+create view v_espen_lr_lf_pretas_1_site_202210 as
 
-SELECT 
+SELECT
 
-id,
-c_date_visit, 
-c_recorder, c_eu, 
-c_district,
-c_cluster_name,
+id, 
+c_recorder,
+c_iu,
+c_district, 
+c_cluster_name, 
 c_cluster_id, 
-c_gps_lat, 
-c_gps_lng,
- c_gps_acc,
- c_cluster_leader, 
- c_cluster_notes, 
- c_start
+c_site_type,
+c_cluster_leader, 
+c_consent,
+c_gps_lat,
+c_gps_lng, 
+c_gps_alt, 
+c_gps_acc, 
+c_ending_survey_note, 
+c_cluster_notes, 
+c_start
 
-FROM public.espen_lr_lf_tas1_1_site_202210 c
+
+FROM public.espen_lr_lf_pretas_1_site_202210 c
 
