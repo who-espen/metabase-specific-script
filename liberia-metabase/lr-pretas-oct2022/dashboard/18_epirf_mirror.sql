@@ -52,3 +52,46 @@ RIGHT JOIN v_espen_lr_lf_pretas_2_participant_202210 p on p.p_code_id = d.d_code
 GROUP BY c_district, c_cluster_name, "Mois", "Année", c_gps_lat, c_gps_lng
 
 
+with sites as (select distinct on (c_cluster_id) c_cluster_id, c_site_type, c_iu, c_cluster_name, c_start, c_gps_lat, c_gps_lng
+	from  v_espen_lr_lf_pretas_1_site_202210),
+     dignostic as (select distinct on (d_code_id) d_code_id, d_final_result from v_espen_lr_lf_pretas_3_resultat_fts_202210)
+     
+SELECT
+
+  c.c_site_type "Type of survey",
+  null "EU",
+  c_iu "Implementation unit",
+  c_cluster_name "Site",
+  TO_CHAR(c.c_start, 'Month') "Month",
+  EXTRACT(YEAR FROM c.c_start) "Years",
+  c_gps_lat "Latitude",
+  c_gps_lng "Longitude",
+  NULL "Date 1st MDA",
+  NULL "Number of MDA",
+  'FTS (Ag)' "Diagnostic Test",
+  CONCAT(min(p_age_yrs), ' - ', max(p_age_yrs)) "Age(Min - Max)",
+  'school' "Survey Site",
+  'cluster' "Survey Type", -- TODO: Update the survey type
+  null "Target sample size",-- TODO: Update the sample size
+  count(p.id) "Number Examined",
+  COUNT(CASE WHEN d_final_result = 'Positive' THEN 1 ELSE NULL END) "Number of Positive",
+  ROUND(COUNT(CASE WHEN d_final_result = 'Positive' THEN 1 ELSE NULL END) * 100.0 / count(p.id), 2) "% of positive",
+  COUNT(CASE WHEN d_final_result = 'Indeterminate' THEN 1 ELSE NULL END) "Number of invalid tests", --TODO: Update the number of invalid test
+  null "Decision", --TODO: Update the decision
+  null "Lymphoedema Total patients", --TODO: Update the Total Patient Number
+  null "Lymphoedema Method Estimation", --TODO: Update the  Method Estimation
+  null "Lymphoedema Date Estimation", --TODO: Update the Date Estimation
+  null "Lymphoedema Nbr Health Facility", --TODO: Update the Nbr Health Facilities
+  null "Hydrocoele Total Patients", --TODO: Update the Total Patient Number
+  null "Hydrocoele Method Estimation", --TODO: Update the  Method Estimation
+  null "Hydrocoele Date Estimation", --TODO: Update the Date Estimation
+  null "Hydrocoele Nbr Health Facility", --TODO: Update the Nbr Health Facilities
+  null "Comments" --TODO: Update the comments
+  
+from v_espen_lr_lf_pretas_2_participant_202210 p
+  LEFT JOIN sites c on p.p_cluster_id = c.c_cluster_id
+  left JOIN dignostic d on p.p_code_id = d.d_code_id
+
+GROUP BY c.c_site_type, c_iu, c_cluster_name, c_start, "Month", "Years", c_gps_lat, c_gps_lng
+
+

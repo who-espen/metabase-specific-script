@@ -13,8 +13,8 @@
  * Variable to rename <%Epirf_Survey_Type%>, v_espen_ci_lf_pretas_3_resultat_fts_202204_v1, v_espen_ci_lf_pretas_2_participant_202204_v1,
  * espen_ci_lf_pretas_1_site_202204
  */
-  SELECT
 
+  SELECT
   'TAS1' "Type d'enquête",
   INITCAP(c_region) "Unité d'Evaluation",
   initcap(c_district) "Unité d'implémentation",
