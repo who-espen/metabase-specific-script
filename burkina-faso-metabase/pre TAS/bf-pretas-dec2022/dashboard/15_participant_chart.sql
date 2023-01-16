@@ -10,8 +10,9 @@
 
 /*
  * This query will return the participant per sex
- * Variable to rename v_espen_bf_lf_pretas_2_enrolement_202106_v2_2
+ * Variable to rename v_espen_bf_lf_pretas_2_enrolement_2022_061222_v2
  */
+ 
  select
 
   'Masculin' sexe,
@@ -21,7 +22,7 @@ FROM (
   SELECT
   	COUNT(case when p_sex = 'M' then 1 else null end ) male
 
-  FROM public.v_espen_bf_lf_pretas_2_enrolement_202106_v2_2 P
+  FROM public.v_espen_bf_lf_pretas_2_enrolement_2022_061222_v2 P
 ) src
 
   UNION
@@ -35,10 +36,5 @@ FROM (
   SELECT
   	COUNT(case when p_sex = 'F' then 1 else null end ) female
 
-  FROM v_espen_bf_lf_pretas_2_enrolement_202106_v2_2 P
+  FROM v_espen_bf_lf_pretas_2_enrolement_2022_061222_v2 P
 ) src
-  ------ Metabase filter -------
-  -- [[and {{c_cluster_id1}}]]
-  -- [[and {{cluster_name}}]]
-  -- [[and {{district}}]]
-  -- [[and {{date}}]]

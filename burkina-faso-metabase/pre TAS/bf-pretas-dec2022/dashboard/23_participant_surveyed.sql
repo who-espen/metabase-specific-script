@@ -1,0 +1,1 @@
+select count(*) from public.v_espen_bf_lf_pretas_2_enrolement_2022_061222_v2

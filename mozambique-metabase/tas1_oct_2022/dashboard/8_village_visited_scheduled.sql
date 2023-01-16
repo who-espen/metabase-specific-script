@@ -13,6 +13,7 @@
  * Variable to rename espen_mz_lf_tas1_1_site_202209_v1, <%number_villlage%>
  */
  SELECT
-	concat(count(id), '/', 28)
+	--concat(count(id))
+	TO_CHAR(COUNT(id), '999 999')
 FROM v_espen_mz_lf_tas1_1_site_202209_v1
 WHERE id IS NOT NULL

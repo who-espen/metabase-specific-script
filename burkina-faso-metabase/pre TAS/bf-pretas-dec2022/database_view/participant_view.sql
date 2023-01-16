@@ -9,36 +9,41 @@
  */
 
 /*
- * Variable to rename  espen_bf_lf_pretas_2_enrolement_202106_v2_2, v_espen_bf_lf_pretas_2_enrolement_202106_v2_2
+ * Variable to rename  espen_bf_lf_pretas_2_enrolement_2022_061222_v2, v_espen_bf_lf_pretas_2_enrolement_2022_061222_v2
  */
-create or replace view v_espen_bf_lf_pretas_2_enrolement_202106_v2_2 as
 
-SELECT 
-id, 
-p_recorder_id, 
-ds, 
-csps, 
-p_cluster_name, 
-p_cluster_id,
-p_consent, 
+CREATE OR REPLACE VIEW public.v_espen_bf_lf_pretas_2_enrolement_2022_061222_v2 AS 
+SELECT p.id,
+    p.p_recorder_id,
+    p.p_district,
+    p.p_formation_sanitaire,
+    p.p_cluster_name,
+    p.p_cluster_id,
+    p.p_consent,
 
-case when p_id_method = 'scanner' then p_barcode_id else manual_code end p_barcode_id,
+case when p_id_method = 'scanner' then p_barcode_id else p_code_id end p_barcode_id,
 
-numero_famille, 
-numero_enquete,
-numero_enquete_complet, 
-p_age_yrs, 
-p_sex,
-status, 
-ivm_alb, 
-avm_alb_derniere_campagne, 
-nb_fois_ivm_alb, 
-migration,
-migration_autre, 
-lymphoedeme, 
-hydrocele, 
-p_ending_survey_note,
-commentaires, 
-p_start
-FROM public.espen_bf_lf_pretas_2_enrolement_202106_v2_2 p;
+    p.p_numero_famille,
+    p.p_numero_enquete,
+    p.p_numero_enquete_complet,
+    p.p_age_yrs,
+    p.p_sex,
+    p.p_status,
+    p.p_nb_fois_ivm_alb,
+    p.p_jamais_ivm,
+    p.p_migration,
+    p.p_migration_autre,
+    p.p_lymphoedeme,
+    p.p_hydrocele,
+    p.p_ending_survey_note,
+    p.p_commentaires,
+    p.p_start
+   FROM espen_bf_lf_pretas_2_enrolement_2022_061222_v2 p;
+   
+  
+  
+
+
+
+
 

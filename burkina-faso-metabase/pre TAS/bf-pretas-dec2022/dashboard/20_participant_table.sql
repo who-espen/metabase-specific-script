@@ -10,6 +10,6 @@
  */
 
 /*
- * Variable to rename v_espen_bf_lf_pretas_2_enrolement_202106_v2_2
+ * Variable to rename v_espen_bf_lf_pretas_2_enrolement_2022_061222_v2
  */
-select * from v_espen_bf_lf_pretas_2_enrolement_202106_v2_2
+select * from v_espen_bf_lf_pretas_2_enrolement_2022_061222_v2

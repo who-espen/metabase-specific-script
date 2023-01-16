@@ -10,7 +10,7 @@
 
 /*
  * A query for listing all records that use the same ID twice
- * Variable to rename metabase_lf_pretas_duplicates_202106, v_espen_bf_lf_pretas_2_enrolement_202106_v2_2, v_espen_bf_lf_pretas_3_resultat_202106_v2_1
+ * Variable to rename metabase_bf_lf_pretas_duplicates_202212, v_espen_bf_lf_pretas_2_enrolement_2022_061222_v2, v_espen_bf_lf_pretas_3_resultats_2022_06122022_v2
  */
 SELECT
   "Formulaire",
@@ -39,7 +39,7 @@ FROM (
   p.p_start date,
   m.status "Statut"
 
-FROM metabase_lf_pretas_duplicates_202106 AS m, v_espen_bf_lf_pretas_2_enrolement_202106_v2_2 AS p
+FROM metabase_bf_lf_pretas_duplicates_202212 AS m, v_espen_bf_lf_pretas_2_enrolement_2022_061222_v2 AS p
   WHERE p.id = m.id_participant
 
 UNION ALL
@@ -47,7 +47,7 @@ UNION ALL
 SELECT
   m.form "Formulaire",
   d.d_cluster_id "Code Site",
-  d.village "Nom Site",
+  d.d_cluster_name "Nom Site",
   m.barcode_results "ID Participant",
   d.d_recorder_id "Code Opérateur",
   null "Age en années",
@@ -57,13 +57,9 @@ SELECT
   d.d_start date,
   status "Statut"
 
-FROM metabase_lf_pretas_duplicates_202106 AS m, v_espen_bf_lf_pretas_3_resultat_202106_v2_1 AS d
+FROM metabase_bf_lf_pretas_duplicates_202212 AS m, v_espen_bf_lf_pretas_3_resultats_2022_06122022_v2 AS d
   WHERE d.id = m.id_results
 ) src
 
 WHERE "Formulaire" IS NOT NULL
------- Metabase filter -------
--- [[and {{cluster_id}}]]
--- [[and {{cluster_name}}]]
--- [[and {{district}}]]
--- [[and {{date}}]]
+

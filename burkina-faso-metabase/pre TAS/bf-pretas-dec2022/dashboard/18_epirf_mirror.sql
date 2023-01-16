@@ -10,8 +10,8 @@
 
 /*
  * This query is a sample of EPIRF mirror
- * Variable to rename Pre TAS, v_espen_bf_lf_pretas_3_resultat_202106_v2_1, v_espen_bf_lf_pretas_2_enrolement_202106_v2_2,
- * espen_bf_lf_pretas_1_sites_202106_v2
+ * Variable to rename Pre TAS, v_espen_bf_lf_pretas_3_resultats_2022_06122022_v2, v_espen_bf_lf_pretas_2_enrolement_2022_061222_v2,
+ * espen_bf_lf_pretas_1_village_202212_v2
  */
  SELECT
 
@@ -21,8 +21,8 @@
   c_cluster_name "Survey Site",
   TO_CHAR(c.created_at, 'Month') "Month",
   EXTRACT(YEAR FROM c.created_at) "Year",
-  gps_lat "Latitude",
-  gps_lng "Longitude",
+  c_gps_lat "Latitude",
+  c_gps_lng "Longitude",
   NULL "Date of 1st PC Round",
   NULL "Number of PC Round",
   'FTS (Ag)' "Diagnostic Test",
@@ -45,10 +45,10 @@
   null "Hydrocoele Nbr Health Facilities", --TODO: Update the Nbr Health Facilities
   null "Comments" --TODO: Update the comments
 
-FROM v_espen_bf_lf_pretas_3_resultat_202106_v2_1 d
-JOIN espen_bf_lf_pretas_1_sites_202106_v2 c on d.d_cluster_id = c.c_cluster_id1
-JOIN v_espen_bf_lf_pretas_2_enrolement_202106_v2_2 p on p.p_barcode_id = d.d_barcode_id
+FROM v_espen_bf_lf_pretas_3_resultats_2022_06122022_v2 d
+JOIN espen_bf_lf_pretas_1_village_202212_v2 c on d.d_cluster_id = c.c_cluster_id1
+JOIN v_espen_bf_lf_pretas_2_enrolement_2022_061222_v2 p on p.p_barcode_id = d.d_barcode_id
 
-GROUP BY c_district, c_cluster_name, "Month", "Year", gps_lat, gps_lng
+GROUP BY c_district, c_cluster_name, "Month", "Year", c_gps_lat, c_gps_lng
 
 

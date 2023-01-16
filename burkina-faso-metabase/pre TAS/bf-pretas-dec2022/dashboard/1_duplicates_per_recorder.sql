@@ -11,7 +11,7 @@
 
 /*
  * A query to display the number of duplicates per recorder
- * Variable to rename metabase_lf_pretas_duplicates_202106? espen_bf_lf_pretas_3_resultat_202007_v2_1
+ * Variable to rename metabase_bf_lf_pretas_duplicates_202212? espen_bf_lf_pretas_3_resultats_2022_06122022_v2
  */
  SELECT
 
@@ -27,8 +27,8 @@ FROM (
     d_cluster_id::int cluster_id,
     d_cluster_name cluster_name
 
-    FROM public.metabase_lf_pretas_duplicates_202106 m
-    JOIN v_espen_bf_lf_pretas_3_resultat_202106_v2_1 d ON d.id = m.id_results
+    FROM public.metabase_bf_lf_pretas_duplicates_202212 m
+    JOIN v_espen_bf_lf_pretas_3_resultats_2022_06122022_v2 d ON d.id = m.id_results
 
     GROUP BY d.d_recorder_id, d_district, d_cluster_id, d_cluster_name
 
@@ -42,8 +42,8 @@ FROM (
    	p_cluster_id::int cluster_id,
    	p_cluster_name cluster_name
 
-    FROM public.metabase_lf_pretas_duplicates_202106 m
-    JOIN espen_bf_lf_pretas_2_enrolement_202106_v2_2 p ON p.id = m.id_participant
+    FROM public.metabase_bf_lf_pretas_duplicates_202212 m
+    JOIN espen_bf_lf_pretas_2_enrolement_2022_061222_v2 p ON p.id = m.id_participant
 
   group by p.p_recorder_id, p_district, p_cluster_id, p_cluster_name
 

@@ -10,7 +10,7 @@
 
 /*
  * A query for listing all records that use the same ID twice
- * Variable to rename v_espen_bf_lf_pretas_2_enrolement_202106_v2_2, v_espen_bf_lf_pretas_3_resultat_202106_v2_1, metabase_lf_pretas_orphaned_202106
+ * Variable to rename v_espen_bf_lf_pretas_2_enrolement_2022_061222_v2, v_espen_bf_lf_pretas_3_resultats_2022_06122022_v2, metabase_bf_lf_pretas_orphaned_202212
  */
 
   /*
@@ -25,7 +25,7 @@
 
 /*
  * A query for listing all records that use the same ID twice
- * Variable to rename v_espen_bf_lf_pretas_2_enrolement_202106_v2_2, v_espen_bf_lf_pretas_3_resultat_202106_v2_1, metabase_lf_pretas_orphaned_202106
+ * Variable to rename v_espen_bf_lf_pretas_2_enrolement_2022_061222_v2, v_espen_bf_lf_pretas_3_resultats_2022_06122022_v2, metabase_bf_lf_pretas_orphaned_202212
  */
 
     SELECT
@@ -41,9 +41,9 @@
       p_start "Date",
       m.status "Statut"
 
-    FROM v_espen_bf_lf_pretas_2_enrolement_202106_v2_2 p
-      LEFT JOIN v_espen_bf_lf_pretas_3_resultat_202106_v2_1 d on p.p_barcode_id = d.d_barcode_id
-      LEFT JOIN metabase_lf_pretas_orphaned_202106 m on m.id_participant = p.id
+    FROM v_espen_bf_lf_pretas_2_enrolement_2022_061222_v2 p
+      LEFT JOIN v_espen_bf_lf_pretas_3_resultats_2022_06122022_v2 d on p.p_barcode_id = d.d_barcode_id
+      LEFT JOIN metabase_bf_lf_pretas_orphaned_202212 m on m.id_participant = p.id
       WHERE d.id isNULL 
 
     UNION ALL
@@ -61,9 +61,9 @@
       d_start "Date",
       m.status "Statut"
 
-    FROM v_espen_bf_lf_pretas_3_resultat_202106_v2_1 d
-      LEFT JOIN v_espen_bf_lf_pretas_2_enrolement_202106_v2_2 p on p.p_barcode_id = d.d_barcode_id
-      LEFT JOIN metabase_lf_pretas_orphaned_202106 m on m.id_results = d.id
+    FROM v_espen_bf_lf_pretas_3_resultats_2022_06122022_v2 d
+      LEFT JOIN v_espen_bf_lf_pretas_2_enrolement_2022_061222_v2 p on p.p_barcode_id = d.d_barcode_id
+      LEFT JOIN metabase_bf_lf_pretas_orphaned_202212 m on m.id_results = d.id
       WHERE p.id isNULL
 
 

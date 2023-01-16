@@ -10,7 +10,7 @@
 
 /*
  * The result from three from joint
- * Variable to rename v_espen_bf_lf_pretas_3_resultat_202106_v2_1, v_espen_bf_lf_pretas_2_enrolement_202106_v2_2, espen_bf_lf_pretas_1_sites_202106_v2
+ * Variable to rename v_espen_bf_lf_pretas_3_resultats_2022_06122022_v2, v_espen_bf_lf_pretas_2_enrolement_2022_061222_v2, espen_bf_lf_pretas_1_village_202212_v2
  */
 SELECT 
   c_district "District", 
@@ -18,8 +18,8 @@ SELECT
   c_cluster_id1 "Code Site", 
   c_cluster_leader "Responsable Site", 
   c_consent "Consentement Responsable", 
-  gps_lat "Latitude", 
-  gps_lng "Dongitude",
+  c_gps_lat "Latitude", 
+  c_gps_lng "Dongitude",
   p_consent "Consentement Particiapnt",
   p_sex "Sexe", 
   p_age_yrs "Age en année", 
@@ -38,5 +38,5 @@ SELECT
   d_final_result "Résultat Final", 
 
   c_date "Date"
-FROM public.v_espen_bf_lf_pretas_1_sites_202106_v2 c, v_espen_bf_lf_pretas_2_enrolement_202106_v2_2 p, v_espen_bf_lf_pretas_3_resultat_202106_v2_1 d
+FROM public.v_espen_bf_lf_pretas_1_village_202212_v2 c, v_espen_bf_lf_pretas_2_enrolement_2022_061222_v2 p, v_espen_bf_lf_pretas_3_resultats_2022_06122022_v2 d
 where p.p_cluster_id = c.c_cluster_id1 and p.p_barcode_id = d.d_barcode_id;
