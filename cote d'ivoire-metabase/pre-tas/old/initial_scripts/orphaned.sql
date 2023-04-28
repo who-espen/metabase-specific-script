@@ -203,3 +203,11 @@ END;
 
 COMMIT;
 
+
+
+
+/*******************************************************************************************************************************************
+ * Triggers
+ *******************************************************************************************************************************************/
+ CREATE TRIGGER <%metabase_lf_tas_result_duplicates_202004_trigger%> AFTER INSERT OR UPDATE OR DELETE ON <%v_ab_cde_fgh_3_fts%>
+FOR EACH ROW EXECUTE PROCEDURE <%identify_diag_result_duplicate%>()
