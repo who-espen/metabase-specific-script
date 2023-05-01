@@ -22,4 +22,4 @@
 - <%identify_participant_duplicate%>
 - <%identify_kk_result_duplicate%>
 - <%identify_urine_result_duplicate%>
-- metabase_sch_sth_ia_orphaned_202304
+- metabase_bf_202301_sch_sth_orphaned
