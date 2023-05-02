@@ -5,7 +5,7 @@ FROM (
         SELECT
             COUNT(
                 case
-                    when p_sex = 'Masculin' then 1
+                    when p_sex = 'M' then 1
                     else null
                 end
             ) male
@@ -20,7 +20,7 @@ FROM (
         SELECT
             COUNT(
                 case
-                    when p_sex = 'Feminin' then 1
+                    when p_sex = 'F' then 1
                     else null
                 end
             ) female
