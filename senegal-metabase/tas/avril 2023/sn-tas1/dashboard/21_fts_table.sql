@@ -1,4 +1,3 @@
-
 /*
  * File: 21_fts_table.sql
  * File Created: Wednesday, 6th May 2020 1:54:08 pm
@@ -10,6 +9,7 @@
  */
 
 /*
- * Variable to rename v_espen_sn_lf_tas1_3_fts_result_202104_v2
+ * Variable to rename v_espen_sn_lf_tas3_20305_3_fts_result
  */
-select * from v_espen_sn_lf_tas1_3_fts_result_202104_v2
+
+select * from v_espen_sn_lf_tas3_20305_3_fts_result 

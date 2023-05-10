@@ -10,42 +10,43 @@
 
 /*
  * This query will return the participant per sex
- * Variable to rename v_espen_sn_lf_tas1_2_partcipants_202104_v2
+ * Variable to rename v_espen_sn_lf_tas3_20305_2_partcipants
  */
- select
 
-  'Masculin' sexe,
-  sum(male) total
-
+select
+    'Masculin' sexe,
+    sum(male) total
 FROM (
-  SELECT
-  	COUNT(case when p_sex = 'Male' then 1 else null end ) male
-
-  FROM public.v_espen_sn_lf_tas1_2_partcipants_202104_v2 P
-
-  GROUP BY  p_cluster_id, p_cluster_name, p_start
-) src
-
-  UNION
-
-   select
-
-  'Féminin' sexe,
-  sum(female) total
-
+        SELECT
+            COUNT(
+                case
+                    when p_sex = 'Male' then 1
+                    else null
+                end
+            ) male
+        FROM
+            public.v_espen_sn_lf_tas3_20305_2_partcipants P
+        GROUP BY
+            p_cluster_id,
+            p_cluster_name,
+            p_start
+    ) src
+UNION
+select
+    'Féminin' sexe,
+    sum(female) total
 FROM (
-  SELECT
-  	COUNT(case when p_sex = 'Female' then 1 else null end ) female
-
-  FROM v_espen_sn_lf_tas1_2_partcipants_202104_v2 P
-
-  GROUP BY   p_cluster_id, p_cluster_name, p_start
-) src
-
-
-
-  ------ Metabase filter -------
-  -- [[and {{c_cluster_id}}]]
-  -- [[and {{cluster_name}}]]
-  -- [[and {{district}}]]
-  -- [[and {{date}}]]
+        SELECT
+            COUNT(
+                case
+                    when p_sex = 'Female' then 1
+                    else null
+                end
+            ) female
+        FROM
+            v_espen_sn_lf_tas3_20305_2_partcipants P
+        GROUP BY
+            p_cluster_id,
+            p_cluster_name,
+            p_start
+    ) src 

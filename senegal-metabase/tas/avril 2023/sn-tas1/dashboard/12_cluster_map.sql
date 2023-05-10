@@ -10,22 +10,19 @@
 
 /*
  * This query will use the GPS data to display a pin map of clusters.
- * Variable to rename espen_sn_lf_tas1_1_sites_202104_v2
+ * Variable to rename v_espen_sn_lf_tas3_20305_1_site
  */
- SELECT
 
- c_eu_name,
- c_commune,
- c_cluster_id,
- c_cluster_name,
- c_gps_lat,
- c_gps_lng,
- c_start
 
-FROM v_espen_sn_lf_tas1_1_sites_202104_v2
-
-  ------ Metabase filter -------
-  -- [[and {{c_cluster_id}}]]
-  -- [[and {{cluster_name}}]]
-  -- [[and {{district}}]]
-  -- [[and {{date}}]]
+SELECT
+DISTINCT ON (c_cluster_id)
+    c_eu_name,
+    c_commune,
+    c_cluster_id,
+    c_cluster_name,
+    c_gps_lat,
+    c_gps_lng,
+    c_start
+FROM
+    v_espen_sn_lf_tas3_20305_1_site
+    

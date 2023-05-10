@@ -9,6 +9,7 @@
  */
 
 /*
- * Variable to rename v_espen_sn_lf_tas1_1_sites_202104_v2
+ * Variable to rename v_espen_sn_lf_tas3_20305_1_site
  */
-select * from v_espen_sn_lf_tas1_1_sites_202104_v2
+
+select * from v_espen_sn_lf_tas3_20305_1_site 

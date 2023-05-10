@@ -10,9 +10,13 @@
 
 /*
  * This card will list all records with innacurate GPS
- * Variable to rename espen_sn_lf_tas1_1_sites_202104_v2, <%number_villlage%>
+ * Variable to rename v_espen_sn_lf_tas3_20305_1_site, <%number_villlage%>
  */
- SELECT
-	concat(count(id), '/', 28)
-FROM v_espen_sn_lf_tas1_1_sites_202104_v2
-WHERE id IS NOT NULL
+
+with sites as (
+        select DISTINCT c_cluster_id
+        from
+            v_espen_sn_lf_tas3_20305_1_site
+    )
+SELECT count(*)
+FROM sites

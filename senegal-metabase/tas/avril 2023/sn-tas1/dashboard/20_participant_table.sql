@@ -1,4 +1,3 @@
-
 /*
  * File: 20_participant_table.sql
  * File Created: Wednesday, 6th May 2020 1:53:33 pm
@@ -10,6 +9,7 @@
  */
 
 /*
- * Variable to rename v_espen_sn_lf_tas1_2_partcipants_202104_v2
+ * Variable to rename v_espen_sn_lf_tas3_20305_2_partcipants
  */
-select * from v_espen_sn_lf_tas1_2_partcipants_202104_v2
+
+select * from v_espen_sn_lf_tas3_20305_2_partcipants 

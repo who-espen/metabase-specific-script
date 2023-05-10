@@ -10,34 +10,34 @@
 
 /*
  * The result from three from joint
- * Variable to rename v_espen_sn_lf_tas1_3_fts_result_202104_v2, v_espen_sn_lf_tas1_2_partcipants_202104_v2, espen_sn_lf_tas1_1_sites_202104_v2
+ * Variable to rename v_espen_sn_lf_tas3_20305_3_fts_result, v_espen_sn_lf_tas3_20305_2_partcipants, v_espen_sn_lf_tas3_20305_1_site
  */
- SELECT
 
-  c_eu_code,
-  c_district,
-  c_cluster_id1,
-  c_cluster_name,
-  c_gps_lat,
-  c_gps_lng,
-  c_population,
-  c_present,
-  c_site,
-  c_site_type,
-  p_consent,
-  p_sex,
-  p_age_yrs,
-  p_how_long_lived,
-  p_generate_id,
-  d_lotnumber1,
-  d_result1,
-  d_why_invalid1,
-  d_lotnumber2,
-  d_result2,
-  d_why_invalid2,
-  d_final_result,
-  d_start
-
-from v_espen_sn_lf_tas1_3_fts_result_202104_v2 d
-left join espen_sn_lf_tas1_1_sites_202104_v2 c on d.d_cluster_id::int = c.c_cluster_id1
-right join v_espen_sn_lf_tas1_2_partcipants_202104_v2 p on p.p_generate_id = d.d_generate_id
+SELECT
+    c_eu_code,
+    c_eu_name,
+    c_cluster_id1,
+    c_cluster_name,
+    c_gps_lat,
+    c_gps_lng,
+    c_population,
+    c_present,
+    c_site,
+    c_site_type,
+    p_consent,
+    p_sex,
+    p_age_yrs,
+    p_how_long_lived,
+    p_generate_id,
+    d_lotnumber1,
+    d_result1,
+    d_why_invalid1,
+    d_lotnumber2,
+    d_result2,
+    d_why_invalid2,
+    d_final_result,
+    d_start
+from
+    v_espen_sn_lf_tas3_20305_3_fts_result d
+    left join v_espen_sn_lf_tas3_20305_1_site c on d.d_cluster_id:: int = c.c_cluster_id1
+    right join v_espen_sn_lf_tas3_20305_2_partcipants p on p.p_generate_id = d.d_generate_id
