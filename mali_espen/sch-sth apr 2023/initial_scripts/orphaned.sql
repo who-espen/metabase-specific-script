@@ -131,7 +131,7 @@ CREATE OR REPLACE FUNCTION UPDATE_SCH_STH_ORPHANED_PARTICIPANT_WITHOUT_KK_202304
 	UPDATE
 	    metabase_ml_sch_sth_impact_202305_orphaned
 	SET status = 'Solved'
-	where id_participant NOT IN (
+	where id_participant::int NOT IN (
 	        SELECT p.id
 	        FROM
 	            v_lf_orphaned_of_participants p
