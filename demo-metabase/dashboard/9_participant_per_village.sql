@@ -1,4 +1,3 @@
-
 /*
  * File: 9_participant_per_village.sql
  * File Created: Tuesday, 5th May 2020 8:04:12 pm
@@ -11,19 +10,20 @@
 
 /*
  * This query will display the number of participants per village
- * Variable to rename espen_ng_lf_pretas_1_site_202211_v1, v_espen_ng_lf_pretas_2_participant_202211
+ * Variable to rename espen_ng_lf_pretas_1_site_202102_v2_1, v_espen_ng_lf_pretas_2_participant_202102_v2_1
  */
+
 SELECT
-DISTINCT ON  (c_cluster_id)
-	c_recorder "Recorder ID",
-	c_district "LGA",
-	c_cluster_id "Site IF",
-  c_cluster_name "Site",
-	count (p.id) "Total Participants"
-
-FROM v_espen_ng_lf_pretas_1_site_202211_v1 c
-JOIN v_espen_ng_lf_pretas_2_participant_202211 p ON p.p_cluster_id = c.c_cluster_id
-
-
-
-GROUP BY c_recorder, c_cluster_id, c_district, c_cluster_name
+    DISTINCT ON (c_cluster_id) c_recorder "Recorder ID",
+    c_district "LGA",
+    c_cluster_id "Site IF",
+    c_cluster_name "Site",
+    count (p.id) "Total Participants"
+FROM
+    v_espen_ng_lf_pretas_1_site_202102_v2_1 c
+    JOIN v_espen_ng_lf_pretas_2_participant_202102_v2_1 p ON p.p_cluster_id = c.c_cluster_id
+GROUP BY
+    c_recorder,
+    c_cluster_id,
+    c_district,
+    c_cluster_name

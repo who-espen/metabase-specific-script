@@ -12,13 +12,15 @@
  * This card will list all records with innacurate GPS
  * Variable to rename espen_bj_oncho_prestop_1_site
  */
- SELECT
-	c_recorder "Recorder",
-	c_district "District",
-	c_cluster_id "Code Site",
-	c_gps_lat "Latitude",
-	c_gps_lng "Longitude",
- 	c_gps_acc "Accuracy",
+
+SELECT
+    c_recorder "Recorder",
+    c_district "District",
+    c_cluster_id "Code Site",
+    c_gps_lat "Latitude",
+    c_gps_lng "Longitude",
+    c_gps_acc "Accuracy",
     c_start "Date"
-FROM v_espen_ng_lf_pretas_1_site_202211_v1
+FROM
+    v_espen_ng_lf_pretas_1_site_202102_v2_1
 WHERE c_gps_acc > 20

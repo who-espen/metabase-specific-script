@@ -10,35 +10,37 @@
 
 /*
  * This query will return the participant per sex
- * Variable to rename v_espen_ng_lf_pretas_2_participant_202211
+ * Variable to rename v_espen_ng_lf_pretas_2_participant_202102_v2_1
  */
-  select
 
-  'Male' sexe,
-  sum(male) total
-
+select
+    'Male' sexe,
+    sum(male) total
 FROM (
-  SELECT
-  	COUNT(case when p_sex = 'Male' then 1 else null end ) male
-
-  FROM public.v_espen_ng_lf_pretas_2_participant_202211 P
-
-  
-) src
-
-  UNION
-
-   select
-
-  'Female' sexe,
-  sum(female) total
-
+        SELECT
+            COUNT(
+                case
+                    when p_sex = 'Male' then 1
+                    else null
+                end
+            ) male
+        FROM
+            public.v_espen_ng_lf_pretas_2_participant_202102_v2_1 P
+    ) src
+UNION
+select
+    'Female' sexe,
+    sum(female) total
 FROM (
-  SELECT
-  	COUNT(case when p_sex = 'Female' then 1 else null end ) female
+        SELECT
+            COUNT(
+                case
+                    when p_sex = 'Female' then 1
+                    else null
+                end
+            ) female
+        FROM
+            v_espen_ng_lf_pretas_2_participant_202102_v2_1 P
+    ) src
 
-  FROM v_espen_ng_lf_pretas_2_participant_202211 P
-
- 
-) src
-
+    

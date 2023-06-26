@@ -10,15 +10,14 @@
 
 /*
  * This query will use the GPS data to display a pin map of clusters.
- * Variable to rename espen_ng_lf_pretas_1_site_202211_v1
+ * Variable to rename espen_ng_lf_pretas_1_site_202102_v2_1
  */
- SELECT
-distinct on (c_cluster_id)
- c_cluster_id,
- c_district,
- c_cluster_name,
- c_gps_lat,
- c_gps_lng,
- c_start
 
-FROM v_espen_ng_lf_pretas_1_site_202211_v1
+SELECT
+    distinct on (c_cluster_id) c_cluster_id,
+    c_district,
+    c_cluster_name,
+    c_gps_lat,
+    c_gps_lng,
+    c_start
+FROM v_espen_ng_lf_pretas_1_site_202102_v2_1

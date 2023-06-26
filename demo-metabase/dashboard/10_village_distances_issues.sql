@@ -8,33 +8,42 @@
  * (c) 2020, WHO/AFRO/UCN/ESPEN
  */
 
-
 /*
  * This query will will display the list of nearby villages less than <%village_dist_required%> KM
- * Variable to rename espen_ng_lf_pretas_1_site_202211_v1, <%village_dist_required%>
+ * Variable to rename espen_ng_lf_pretas_1_site_202102_v2_1, <%village_dist_required%>
  */
+
 SELECT
-
-  calculate_distance(src.c_gps_lat , src.c_gps_lng , dest.c_gps_lat , dest.c_gps_lng,  'K') "Distances in KM",
-  src.c_recorder "Code Opérateur 1",
-  src.c_cluster_id "Code Site 1",
-  src.c_cluster_name "Site 1",
-  dest.c_recorder "Code Opérateur 2",
-  dest.c_cluster_id "Code Site 2",
-  dest.c_cluster_name  "Site 2",
-  src.c_gps_lat "Latitude1",
-  src.c_gps_lng "Longitude1",
-  dest.c_gps_lat "Latitude2",
-  dest.c_gps_lng "Longitude2"
-
-FROM espen_ng_lf_pretas_1_site_202211_v1 src
-  JOIN espen_ng_lf_pretas_1_site_202211_v1 dest on (
-    SELECT calculate_distance(src.c_gps_lat , src.c_gps_lng , dest.c_gps_lat , dest.c_gps_lng,  'K') < 5
-    AND src.c_cluster_id <> dest.c_cluster_id
-  )
-
-WHERE src.id IS NOT NULL
-
-  ------ Metabase filter -------
-  -- [[and {{district}}]];
-
+    calculate_distance(
+        src.c_gps_lat,
+        src.c_gps_lng,
+        dest.c_gps_lat,
+        dest.c_gps_lng,
+        'K'
+    ) "Distances in KM",
+    src.c_recorder "Code Opérateur 1",
+    src.c_cluster_id "Code Site 1",
+    src.c_cluster_name "Site 1",
+    dest.c_recorder "Code Opérateur 2",
+    dest.c_cluster_id "Code Site 2",
+    dest.c_cluster_name "Site 2",
+    src.c_gps_lat "Latitude1",
+    src.c_gps_lng "Longitude1",
+    dest.c_gps_lat "Latitude2",
+    dest.c_gps_lng "Longitude2"
+FROM
+    espen_ng_lf_pretas_1_site_202102_v2_1 src
+    JOIN espen_ng_lf_pretas_1_site_202102_v2_1 dest on (
+        SELECT
+            calculate_distance(
+                src.c_gps_lat,
+                src.c_gps_lng,
+                dest.c_gps_lat,
+                dest.c_gps_lng,
+                'K'
+            ) < 5
+            AND src.c_cluster_id <> dest.c_cluster_id
+    )
+WHERE
+    src.id IS NOT NULL ------ Metabase filter -------
+    -- [[and {{district}}]];

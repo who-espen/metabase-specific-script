@@ -12,9 +12,12 @@
  * This card will list all records with innacurate GPS
  * Variable to rename espen_bj_lf_pretas_1_site_202009_v3, <%number_villlage%>
  */
-with site as (select distinct c_cluster_id from v_espen_ng_lf_pretas_1_site_202211_v1) 
- 
-SELECT
-	TO_CHAR(COUNT(*), '999 999')
-FROM site
 
+with site as (
+        select distinct c_cluster_id
+        from
+            v_espen_ng_lf_pretas_1_site_202102_v2_1
+    )
+SELECT
+    TO_CHAR(COUNT(*), '999 999')
+FROM site
