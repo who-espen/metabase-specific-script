@@ -11,29 +11,33 @@
 /*
  * Variable to rename  espen_tg_oncho_stop_2_participants_202204, v_espen_tg_oncho_stop_2_participants_202204
  */
-create view v_espen_ng_oncho_bsc_1_capture_202208_v2 as
-SELECT 
 
+create view v_espen_ng_oncho_bsc_202306_1_capture_v2_1 as
+
+select 
+
+c.id,
 s_region,
 s_district,
 s_community,
-s_site,
+s_village_type,
 s_site_id,
 s_gps_lat,
 s_gps_lng,
 s_gps_acc,
 s_river,
+s_river_type,
 s_collector_a,
 s_collector_b,
-
-c.parent_id, 
-c.add_fly, 
-c.time_interval, 
-c.nb_collected, 
-c.weather, 
+s_date,
+c.parent_id,
+c.add_fly,
+c.time_interval,
+c.nb_collected,
+c.weather,
 c.remark,
+created_at
 
-s_date
+from public.espen_ng_oncho_bsc_202306_1_capture_v2_1 p, public.espen_ng_oncho_bsc_202306_1_capture_v2_1_s_ c 
 
-FROM public.espen_ng_oncho_bsc_1_capture_202208_v2_s_ c, public.espen_ng_oncho_bsc_1_capture_202208_v2 p
-where c.parent_id = p.id::text 
+where p.id = c.parent_id::int

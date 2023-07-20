@@ -1,0 +1,13 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "sdk-oem.cg9e3y9ijr0z.eu-west-2.rds.amazonaws.com",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "Cote d'Ivoire",
+      "database": "ivory_coast",
+      "username": "yumba"
+    }
+  ]
+}

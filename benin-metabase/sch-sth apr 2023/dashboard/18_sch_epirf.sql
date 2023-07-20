@@ -1,14 +1,3 @@
-/*
- * File: 18_epirf_mirror_sch.sql
- * File Created: Tuesday, 12th May 2020 6:14:20 pm
- * Author: Dyesse YUMBA
- * Last Modified: Thursday, 2nd July 2020 8:41:40 pm
- * Modified By: Dyesse YUMBA
- * -----
- * (c) 2020, WHO/AFRO/UCN/ESPEN
- */
-
-
 SELECT
 
   'Autres' "Type d'enquête",
