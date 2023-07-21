@@ -19,8 +19,8 @@
   c_eu_code "Evaluation Unit",
   c_district "Implementation Unit",
   c_site "Survey Site",
-  TO_CHAR(c.created_at, 'Month') "Month",
-  EXTRACT(YEAR FROM c.created_at) "Year",
+  TO_CHAR(c.c_start, 'Month') "Mois",
+  EXTRACT(YEAR FROM c.c_start) "Année",
   c_gps_lat "Latitude",
   c_gps_lng "Longitude",
   NULL "Date of 1st PC Round",
@@ -50,5 +50,7 @@ LEFT JOIN espen_ci_lf_pretas_1_site_202105_v3 c on d.d_cluster_id::int = c.c_clu
 RIGHT JOIN v_espen_ci_pretas_lf_enrollement_v7 p on p.code_id = d.code_id
 
 GROUP BY c_eu_code, c_district, c_site, "Month", "Year", c_gps_lat, c_gps_lng, c_type_site
+
+
 
 
