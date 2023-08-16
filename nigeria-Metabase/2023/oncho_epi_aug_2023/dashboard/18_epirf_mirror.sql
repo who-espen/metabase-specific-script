@@ -10,43 +10,43 @@
 
 /*
  * This query is a sample of EPIRF mirror
- * Variable to rename <%Epirf_Survey_Type%>, v_espen_sn_lf_tas2_20306_3_fts_result, v_espen_sn_lf_tas2_20306_2_partcipants,
- * v_espen_sn_lf_tas2_20306_1_site
+ * Variable to rename Pre TAS, v_espen_ng_oncho_stop_10_elisa_202206_bauchy, v_espen_ng_oncho_stop_13_participant_202206_niger,
+ * espen_ng_ng_oncho_prestop_1_site_202304_v2
  */
 
 SELECT
-    'TAS2' "Type d'enquête",
-    INITCAP(c_eu_name) "Unité d'Evaluation",
-    initcap(c_commune) "Unité d'implémentation",
-    initcap(c_cluster_name) "Site d'enquête",
-    TO_CHAR(c.c_start, 'Month') "Mois",
+    'Pre TAS' "Survey of survey",
+    null "Evaluation Unit",
+    c_district "Implementation Unit",
+    c_cluster_name "Survey Site",
+    TO_CHAR(c.created_at, 'Month') "Month",
     EXTRACT(
         YEAR
         FROM
-            c.c_start
-    ) "Années",
+            c.created_at
+    ) "Year",
     c_gps_lat "Latitude",
     c_gps_lng "Longitude",
-    NULL "Date 1ère tournées TMM",
-    NULL "Nombre de tournées TMM",
-    'FTS (Ag)' "Test Diagnostic",
+    NULL "Date of 1st PC Round",
+    NULL "Number of PC Round",
+    'FTS (Ag)' "Diagnostic Test",
     CONCAT(
         min(p_age_yrs),
         ' - ',
         max(p_age_yrs)
-    ) "Tranche d'âge(Min - Max)",
-    'école' "Site enquete",
-    'grappes' "Type d'enquête",
+    ) "Age group(Min - Max)",
+    'Community' "Survey Site",
+    'Cluster' "Survey Type",
     -- TODO: Update the survey type
-    350 "Taille Population cible",
+    300 "Target Sample Size",
     -- TODO: Update the sample size
-    count(p.id) "Examiné",
+    count(p.id) "Examinded",
     COUNT(
         CASE
             WHEN d_final_result = 'Positive' THEN 1
             ELSE NULL
         END
-    ) "Number de Positif",
+    ) "Number of Positive",
     ROUND(
         COUNT(
             CASE
@@ -55,11 +55,19 @@ SELECT
             END
         ) * 100.0 / count(p.id),
         2
-    ) "% positif",
-    null "Décision",
-    --TODO: Update the decision
-    null "Number of invalid tests",
+    ) "% positive",
+    COUNT(
+        CASE
+            WHEN (
+                d_result1 = 'Invalide'
+                or d_result2 = 'Invalide'
+            ) THEN 1
+            ELSE NULL
+        END
+    ) "Number of invalid tests",
     --TODO: Update the number of invalid test
+    null "Decision",
+    --TODO: Update the decision
     null "Lymphoedema Total Patient Number",
     --TODO: Update the Total Patient Number
     null "Lymphoedema Method Estimation",
@@ -76,22 +84,16 @@ SELECT
     --TODO: Update the Date Estimation
     null "Hydrocoele Nbr Health Facilities",
     --TODO: Update the Nbr Health Facilities
-    null "Commentaires, --TODO: Update the comments"
+    null "Comments" --TODO: Update the comments
 FROM
-    v_espen_sn_lf_tas2_20306_3_fts_result d
-    LEFT JOIN v_espen_sn_lf_tas2_20306_1_site c on d.d_cluster_id = c.c_cluster_id
-    RIGHT JOIN v_espen_sn_lf_tas2_20306_2_partcipants p on p.p_barcode_id = d.d_barcode_id
+    v_espen_ng_oncho_stop_10_elisa_202206_bauchy d
+    JOIN espen_ng_ng_oncho_prestop_1_site_202304_v2 c on d.d_cluster_id = c.c_cluster_id
+    JOIN v_espen_ng_oncho_stop_13_participant_202206_niger p on p.p_code_id = d.d_code_id
 GROUP BY
-    c_eu_name,
-    c_commune,
+    c_district,
     c_cluster_name,
-    "Mois",
-    "Années",
+    "Month",
+    "Year",
     c_gps_lat,
     c_gps_lng
-order by
-    c_eu_name,
-    c_commune,
-    c_cluster_name
-    
-    
+order by c_district, c_cluster_name
