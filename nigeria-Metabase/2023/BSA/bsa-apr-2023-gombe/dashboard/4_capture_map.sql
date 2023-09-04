@@ -8,4 +8,4 @@ select
     s_river "River",
     s_collector_a "Collector A",
     s_collector_b "Collector B"
-from public.v_espen_ng_oncho_bsc_202306_7_capture_bauchy
+from public.v_espen_ng_oncho_bsc_202304_1_capture

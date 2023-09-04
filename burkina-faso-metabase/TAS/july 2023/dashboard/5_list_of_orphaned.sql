@@ -30,7 +30,7 @@
 
 SELECT
     "Formulaire",
-    -- "Code Site",
+    "Code Site",
     "ID Participant",
     "Code Opérateur",
     "Age en années",
@@ -42,7 +42,7 @@ SELECT
 FROM (
         SELECT
             m.form "Formulaire",
-            -- p.nb_grappe "Code Site",
+            p.p_numero_ordre_grappe "Code Site",
             m.barcode_participant "ID Participant",
             p.p_code_operateur "Code Opérateur",
             p.p_age "Age en années",
@@ -59,7 +59,7 @@ FROM (
         UNION ALL
         SELECT
             m.form "Formulaire",
-            --d.nb_grappe::text "Code Site",
+            d.d_numero_ordre_grappe::text "Code Site",
             m.barcode_results "ID Participant",
             d.d_code_operateur "Code Opérateur",
             null "Age en années",

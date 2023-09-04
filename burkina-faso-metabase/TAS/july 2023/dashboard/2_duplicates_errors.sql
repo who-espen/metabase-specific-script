@@ -28,6 +28,8 @@
  * Variable to rename metabase_bf_lf_tas1_202307_duplicates, v_espen_bf_lf_tas1_202306_2_participant_v4, v_espen_bf_lf_tas1_202306_3_resultats_fts_v4
  */
 
+
+
 SELECT
     "Formulaire",
     -- "Code Site",
@@ -43,8 +45,8 @@ SELECT
 FROM (
         SELECT
             m.form "Formulaire",
-            --p.nb_grappe "Code Site",
-            p.p_nom_grappe "Nom Site",
+            p.p_numero_ordre_grappe "Code Site",
+            p.p_site "Nom Site",
             m.barcode_participant "ID Participant",
             p.p_code_operateur "Code Opérateur",
             p.p_age "Age en années",
@@ -61,8 +63,8 @@ FROM (
         UNION ALL
         SELECT
             m.form "Formulaire",
-            -- d.nb_grappe::text "Code Site",
-            d.d_nom_grappe "Nom Site",
+             d.d_numero_ordre_grappe "Code Site",
+            d.d_site "Nom Site",
             m.barcode_results "ID Participant",
             d.d_code_operateur "Code Opérateur",
             null "Age en années",
@@ -77,4 +79,6 @@ FROM (
         WHERE
             d.id = m.id_results
     ) src
-WHERE "Formulaire" IS NOT NULL
+WHERE "Formulaire" IS NOT null
+
+

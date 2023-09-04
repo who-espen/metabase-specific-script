@@ -13,6 +13,7 @@
  * Variable to rename espen_bf_lf_tas3_1_sites_202307, <%village_dist_required%>
  */
 
+
 SELECT
     calculate_distance(
         src.c_gps_lat,
@@ -22,11 +23,11 @@ SELECT
         'K'
     ) "Distances in KM",
     src.c_code_operateur "Code Opérateur 1",
-    src.c_num_grappe "Code Site 1",
-    src.c_nom_grappe "Site 1",
+    src.c_numero_ordre_grappe "Code Site 1",
+    src.c_site "Site 1",
     dest.c_code_operateur "Code Opérateur 2",
-    dest.c_num_grappe "Code Site 2",
-    dest.c_nom_grappe "Site 2",
+    dest.c_numero_ordre_grappe "Code Site 2",
+    dest.c_site "Site 2",
     src.c_gps_lat "Latitude1",
     src.c_gps_lng "Longitude1",
     dest.c_gps_lat "Latitude2",
@@ -42,6 +43,7 @@ FROM
                 dest.c_gps_lng,
                 'K'
             ) < 5
-            AND src.c_num_grappe <> dest.c_num_grappe
+            AND src.c_numero_ordre_grappe <> dest.c_numero_ordre_grappe
     )
 WHERE src.id IS NOT NULL
+

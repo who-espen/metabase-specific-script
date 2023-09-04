@@ -13,11 +13,14 @@
  * Variable to rename espen_bf_lf_tas3_1_sites_202307
  */
 
-SELECT
-    drs,
-    nb_grappe,
-    nom_de_la_grappe,
-    gps_lat,
-    gps_lng,
-    date_enregistrement
+select
+
+    c_ds,
+    c_site,
+    c_numero_ordre_grappe,
+    c_gps_lat,
+    c_gps_lng,
+    c_debut_enreg
+    
 FROM v_espen_bf_lf_tas1_202306_1_site_v4
+

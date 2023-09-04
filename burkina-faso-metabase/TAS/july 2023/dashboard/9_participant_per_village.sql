@@ -28,3 +28,5 @@ GROUP BY
     c.c_num_grappe,
     c_ds,
     c.c_nom_grappe
+
+    

@@ -25,3 +25,5 @@ SELECT
 FROM
     v_espen_bf_lf_tas1_202306_1_site_v4
 WHERE c_gps_acc > 20
+
+

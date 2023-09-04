@@ -21,66 +21,15 @@ select
     null "Date 1er tour",
     null "Total tours",
     count(u.id) "Urinaire - Nbr examined",
-    count(
-        case
-            when u_graduation <> '1_Negative' then 1
-            else null
-        end
-    ) "Urinaire - Nbr Positives",
-    count(
-        case
-            when u_graduation <> '1_Negative' then 1
-            else null
-        end
-    ) * 100 / count(u.id) "Urinaire - % Positives",
-    count(
-        case
-            when u_graduation = '4_( +)' then 1
-            else null
-        end
-    ) * 100 / count(u.id) "Urinaire - % Heavy intensity",
-    count(
-        case
-            when u_graduation = '6_( +++)' then 1
-            else null
-        end
-    ) * 100 / count(u.id) "Urinaire - % Moderate intensity",
+    count(  case when u_graduation <> '1_Negative' then 1 else null end ) "Urinaire - Nbr Positives",
+    count(case when u_graduation <> '1_Negative' then 1 else null end ) * 100 / count(u.id) "Urinaire - % Positives",
+    count( case when u_graduation = '4_( +)' then 1 else null end ) * 100 / count(u.id) "Urinaire - % Heavy intensity",
+    count( case when u_graduation = '6_( +++)' then 1 else null end ) * 100 / count(u.id) "Urinaire - % Moderate intensity",
     count(*) "Intestinal - Nbr examinées",
-    count(
-        case
-            when (
-                d_oeufs_autre1_a + d_oeufs_autre1_b
-            ) > 0 then 1
-            else null
-        end
-    ) "Intestinal - Nbr Positives",
-    count(
-        case
-            when (
-                d_oeufs_autre1_a + d_oeufs_autre1_b
-            ) > 0 then 1
-            else null
-        end
-    ) * 100 / count(u.id) "Intestinal - % Positives",
-    count(
-        case
-            when (
-                d_oeufs_autre1_a + d_oeufs_autre1_b
-            ) > 50 then 1
-            else null
-        end
-    ) * 100 / count(u.id) "Intestinal - % Heavy intensity",
-    count(
-        case
-            when (
-                d_oeufs_autre1_a + d_oeufs_autre1_b
-            ) <= 50
-            and (
-                d_oeufs_autre1_a + d_oeufs_autre1_b
-            ) > 10 then 1
-            else null
-        end
-    ) * 100 / count(u.id) "Intestinal - % Moderate intensity",
+    count( case when ( d_oeufs_autre1_a + d_oeufs_autre1_b ) > 0 then 1 else null end ) "Intestinal - Nbr Positives",
+    count( case when ( d_oeufs_autre1_a + d_oeufs_autre1_b ) > 0 then 1 else null  end ) * 100 / count(u.id) "Intestinal - % Positives",
+    count( case when ( d_oeufs_autre1_a + d_oeufs_autre1_b ) > 50 then 1 else null end ) * 100 / count(u.id) "Intestinal - % Heavy intensity",
+    count( case when ( d_oeufs_autre1_a + d_oeufs_autre1_b ) <= 50 and ( d_oeufs_autre1_a + d_oeufs_autre1_b ) > 10 then 1 else null end  ) * 100 / count(u.id) "Intestinal - % Moderate intensity",
     null "Décision"
 from
     v_espen_bf_202305_sch_impact_assessment_2_enrolement_v1_1 p
