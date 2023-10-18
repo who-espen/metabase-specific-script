@@ -1,0 +1,62 @@
+create view v_espen_ss_oncho_cov_3_202309_full_v2 as
+
+SELECT 
+
+c.id, 
+p.p_recorder_id "Recorder ID",
+p.p_gps_lat "Latitude",
+p.p_gps_lng "Longitude", 
+p.p_gps_acc "Accuracy",
+p.p_county "County",
+p.p_payam "Payam",
+p.p_boma "Boma", 
+p.p_village "Village", 
+p.p_hh_id "HH ID",
+
+parent_id,
+c.p_consent "Consent",
+c.p_index "Index",
+--c.p_position,
+c.p_code_id "Full ID",
+c.p_age_yrs "Age in Yrs",
+c.p_sex "Sex",
+c.p_person_responding "Person responding",
+c.p_relationship_hhh "Relationship HHH",
+c.p_relationship_hhh_other "Other Relationship HHH",
+c.p_education_level "Education Level",
+c.p_how_long_lived "How long lived",
+c.p_pregnant_breastfeeding "Pregnant Breastfeeding",
+c.p_heard_oncho "Heard ONCHO",
+c.p_were_in_village "Where in Village",
+c.p_received_ivm "Received IV%",
+c.p_reason_not_received_ivm "Reason not received IVM",
+c.p_reason_not_received_ivm_other "Other Reason not received IVM",
+c.p_swallow_ivm "Swallow IVM",
+c.p_swallow_ivm_in_front "Swallow IVM in front",
+c.p_why_swallow_ivm "Why Swallow IVM",
+c.p_why_swallow_ivm_other "Why Swallow IVM Other",
+c.p_side_effect "Side Effect",
+c.p_side_effect_details "Side Effect Details",
+c.p_heard_lf "Heard LF",
+c.p_received_alb "Receivrd ALB",
+c.p_reason_not_received_alb "Reason not received ALB",
+c.p_reason_not_received_alb_other "Other Reason not received ALB",
+c.p_swallow_alb "Swallow ALB",
+c.p_swallow_alb_in_front "Swallow ALB in front",
+c.p_know_mda_happen "Know MDA happen",
+c.p_know_mda_happen_other "Other Know MDA happen",
+c.p_improve_mda "Improve MDA",
+c.p_improve_mda_communication "Improve MDA communication",
+c.p_seeing_glass "Seeing glass",
+c.p_hearing_aid "Hearing aid",
+c.p_climbing_step "Cimbing step",
+c.p_remembering "Remembering",
+c.p_self_washing "Self washing",
+c.p_communicating "Communicating",
+
+c.notes,
+
+p.created_at "Date"
+
+FROM public.espen_ss_oncho_cov_3_202309_full_v2 p, public.espen_ss_oncho_cov_3_202309_full_v2_c c
+where parent_id::int = p.id
