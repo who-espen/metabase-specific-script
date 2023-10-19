@@ -10,7 +10,8 @@
 
 /*
  * A query for listing all records that use the same ID twice
- * Variable to rename metabase_ng_oncho_prestop_duplicates_202310_oem, v_espen_ng_oncho_oem_2_participant_202310, v_espen_ng_oncho_stop_3_rdtov16_202310
+ * Variable to rename metabase_ng_oncho_prestop_duplicates_202308_kano, v_espen_ng_oncho_stop_13_participant_202206_niger
+, v_espen_ng_oncho_stop_10_elisa_202206_bauchy
  */
 
 SELECT
@@ -39,8 +40,9 @@ FROM (
             p.p_date date,
             status "Status"
         FROM
-            metabase_ng_oncho_prestop_duplicates_202310_oem AS m,
-            v_espen_ng_oncho_oem_2_participant_202310 AS p
+            metabase_ng_oncho_prestop_duplicates_202308_kano AS m,
+            v_espen_ng_oncho_stop_13_participant_202206_niger
+ AS p
         WHERE
             p.id = m.id_participant -- UNION ALL
             --  SELECT
@@ -56,8 +58,8 @@ FROM (
             --     d.d_date date,
             --     status "Status"
             -- FROM
-            --     metabase_ng_oncho_prestop_duplicates_202310_oem AS m,
-            --     public.v_espen_ng_oncho_stop_3_rdtov16_202310 AS d
+            --     metabase_ng_oncho_prestop_duplicates_202308_kano AS m,
+            --     public.v_espen_ng_oncho_stop_10_elisa_202206_bauchy AS d
             -- WHERE
             --     d.id = m.id_results
     ) src

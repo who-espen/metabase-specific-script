@@ -10,7 +10,8 @@
 
 /*
  * This query will display the number of participants per village
- * Variable to rename espen_ng_ng_oncho_prestop_1_site_202304_v2, v_espen_ng_oncho_oem_2_participant_202310
+ * Variable to rename espen_ng_ng_oncho_prestop_1_site_202304_v2, v_espen_ng_oncho_stop_13_participant_202206_niger
+
  */
 
 SELECT
@@ -21,12 +22,14 @@ SELECT
     count (p.id) "Total Participants",
     c_population "Total Population"
 FROM
-    public.v_espen_ng_oncho_oem_1_site_202310 c
-    JOIN v_espen_ng_oncho_oem_2_participant_202310 p ON p.p_cluster_id = c.c_cluster_id --WHERE id IS NOT NULL+
+    public.v_espen_ng_oncho_stop_1_site_202307_kano c
+    JOIN v_espen_ng_oncho_stop_13_participant_202206_niger
+ p ON p.p_cluster_id = c.c_cluster_id --WHERE id IS NOT NULL+
 GROUP BY
     c_recorder_id,
     c_cluster_name,
     c_cluster_id,
     c_district,
     c_population
+
     

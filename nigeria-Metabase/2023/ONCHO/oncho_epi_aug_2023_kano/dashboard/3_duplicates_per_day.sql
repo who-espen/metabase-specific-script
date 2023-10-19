@@ -10,16 +10,18 @@
 
 /*
  * A query to display the total records of duplicates per day
- * Variable to rename metabase_ng_oncho_prestop_duplicates_202310_oem, espen_ng_oncho_stop_3_rdtov16_202310, espen_ng_ng_oncho_prestop_2_participant_202304_v2
+ * Variable to rename metabase_ng_oncho_prestop_duplicates_202308_kano, espen_ng_oncho_stop_10_elisa_202206_bauchy, espen_ng_ng_oncho_prestop_2_participant_202304_v2
  */
 
 SELECT
     COUNT(barcode_participant),
     p.p_start:: date
 FROM
-    metabase_ng_oncho_prestop_duplicates_202310_oem AS m,
-    v_espen_ng_oncho_oem_2_participant_202310 AS p
+    metabase_ng_oncho_prestop_duplicates_202308_kano AS m,
+    v_espen_ng_oncho_stop_13_participant_202206_niger
+ AS p
 WHERE
     m.id IS NOT NULL
     AND m.id_participant = p.id
 GROUP BY p.p_start:: DATE
+

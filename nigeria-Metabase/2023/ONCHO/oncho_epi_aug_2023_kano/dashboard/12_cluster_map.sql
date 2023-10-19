@@ -20,4 +20,4 @@ SELECT
     c_gps_lat,
     c_gps_lng,
     c_start
-FROM v_espen_ng_oncho_oem_1_site_202310
+FROM v_espen_ng_oncho_stop_1_site_202307_kano

@@ -22,5 +22,5 @@ SELECT
     c_gps_acc "Accuracy",
     c_date "Date"
 FROM
-    v_espen_ng_oncho_oem_1_site_202310
+    v_espen_ng_oncho_stop_1_site_202307_kano
 WHERE c_gps_acc > 20

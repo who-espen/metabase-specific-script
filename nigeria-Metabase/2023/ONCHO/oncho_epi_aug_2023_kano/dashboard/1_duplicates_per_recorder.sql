@@ -10,7 +10,7 @@
 
 /*
  * A query to display the number of duplicates per recorder
- * Variable to rename metabase_ng_oncho_prestop_duplicates_202310_oem? espen_ng_oncho_stop_3_rdtov16_202310
+ * Variable to rename metabase_ng_oncho_prestop_duplicates_202308_kano? espen_ng_oncho_stop_10_elisa_202206_bauchy
  */
 
 SELECT
@@ -20,11 +20,14 @@ SELECT
     p_cluster_id:: int cluster_id,
     p_cluster_name cluster_name
 FROM
-    public.metabase_ng_oncho_prestop_duplicates_202310_oem m
-    JOIN public.v_espen_ng_oncho_oem_2_participant_202310 p ON p.id = m.id_participant
+    public.metabase_ng_oncho_prestop_duplicates_202308_kano m
+    JOIN public.v_espen_ng_oncho_stop_13_participant_202206_niger
+ p ON p.id = m.id_participant
 group by
     p.p_recorder_id,
     p_district,
     p_cluster_id,
     p_cluster_name
+    
+    order by "Total duplicates" desc
     

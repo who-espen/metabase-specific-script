@@ -12,8 +12,7 @@
  * Variable to rename  espen_ng_ng_oncho_prestop_2_participant_202304_v2, v_espen_ng_oncho_oem_2_participant_202310
  */
 
-
- create view v_espen_ng_oncho_stop_2_participant_202310 as
+create view v_espen_ng_oncho_oem_2_participant_202310 as
 
 SELECT 
 
