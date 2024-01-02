@@ -15,21 +15,25 @@
  */
   SELECT
 
-  'TAS2' "Survey of survey",
-  INITCAP(c_eu_name) "Evaluation Unit",
-  null "Implementation Unit",
-  INITCAP(c_cluster_name) "Survey Site",
-  TO_CHAR(c.created_at, 'Month') "Month",
-  EXTRACT(YEAR FROM c.created_at) "Year",
+  'TAS3' "Type d'enquete",
+  INITCAP(c_eu_name) "Unité d'évaluation",
+  initcap(c_commune) "Unité d'implémentation",
+  INITCAP(c_cluster_name) "Site",
+  TO_CHAR(c.created_at, 'Month') "Mois",
+  EXTRACT(YEAR FROM c.created_at) "Année",
   c_gps_lat "Latitude",
   c_gps_lng "Longitude",
-  NULL "Date of 1st PC Round",
-  NULL "Number of PC Round",
-  'FTS (Ag)' "Diagnostic Test",
-  CONCAT(min(p_age_yrs), ' - ', max(p_age_yrs)) "Age group(Min - Max)",
-  'école' "Survey Site",
-  'grappes' "Survey Type", -- TODO: Update the survey type
+  NULL "Date 1ère tournée",
+  NULL "nombre total de tournée",
+  NULL "nombre total de tournée avec couverture effective",
+  'Ecole' "Site enquêté",
+  'Systématique' "Methode sélection des sites",
+  'Méthode selection personnes' "Commodité",
+  
   50 "Target Sample Size",-- TODO: Update the sample size
+  CONCAT(min(p_age_yrs), ' - ', max(p_age_yrs)) "Age group(Min - Max)",  
+  'FTS (Ag)' "Diagnostic Test",
+  
   count(p.id) "Examinded",
   COUNT(CASE WHEN d_final_result = 'Positif' THEN 1 ELSE NULL END) "Number of Positive",
   ROUND(COUNT(CASE WHEN d_final_result = 'Positif' THEN 1 ELSE NULL END) * 100.0 / count(p.id), 2) "% positive",
@@ -45,8 +49,10 @@
   null "Hydrocoele Nbr Health Facilities", --TODO: Update the Nbr Health Facilities
   null "Comments" --TODO: Update the comments
 
-FROM v_espen_bj_lf_tas3_202304_3_fts_result_v1 d
-JOIN espen_bj_lf_tas3_202304_1_sites c on d.d_cluster_id::int = c.c_cluster_id
-JOIN v_espen_bj_lf_tas3_202304_2_partcipants_v1_1 p on p.p_code_id = d.d_code_id
+FROM v_espen_bj_lf_tas3_202304_2_partcipants_v1_1 p
+left join v_espen_bj_lf_tas3_202304_3_fts_result_v1 d on d.d_code_id = p.p_code_id 
+left join espen_bj_lf_tas3_202304_1_sites c on p.p_cluster_id = c.c_cluster_id
 
-GROUP BY c_eu_name, c_cluster_name, "Month", "Year", c_gps_lat, c_gps_lng
+GROUP BY c_eu_name, c_commune, c_cluster_name, "Mois", "Année", c_gps_lat, c_gps_lng
+
+order by c_eu_name, c_commune, c_cluster_name

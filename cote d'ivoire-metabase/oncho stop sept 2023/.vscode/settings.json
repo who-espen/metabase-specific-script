@@ -1,0 +1,13 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "sdk-oem.cg9e3y9ijr0z.eu-west-2.rds.amazonaws.com",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "Côte d'Ivoire ESPEN 2",
+      "database": "cote_d_ivoire_espen_2",
+      "username": "yumba"
+    }
+  ]
+}
