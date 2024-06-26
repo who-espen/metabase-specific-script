@@ -1,0 +1,21 @@
+## List of indexes to add
+
+- **site table**: c_cluster_id, c_gps_lat, c_gps_lng,
+- **participant table**: p_cluster_id, p_code_id, p_generate_id
+- **FTS table**: d_generate_id, d_code_id
+
+## Variable to replace
+
+- v_espen_ng_lf_pretas_202404_1_site_v2
+- espen_ng_lf_pretas_202404_1_site_v2
+- v_espen_ng_lf_pretas_202404_3_fts_v2
+- espen_ng_lf_tas_202404_3_resultat_fts_jgw_v3
+- espen_ng_lf_pretas_202404_2_participant_v2
+- v_espen_ng_lf_pretas_202404_2_participant_v2
+- metabase_ng_lf_pretas_duplicates_202404
+- identify_participant_duplicate_pretas_202212
+- identify_pretas_diag_result_duplicate_202212,
+- metabase_ng_lf_pretas_result_duplicates_202212_trigger
+- metabase_ng_lf_pretas_duplicates_202404_trigger
+- metabase_ng_lf_pretas_orphaned_202404
+- metabase_ng_lf_pretas_action_todo_202212

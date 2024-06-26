@@ -1,0 +1,32 @@
+-- public.v_espen_tz_sch_sth_impact_2405_2_child source
+create view v_espen_tz_sch_sth_impact_2405_2_child as
+SELECT c.id,
+    p.meta_instance_id,
+    p.p_recorder,
+    p.p_district,
+    p.p_ward,
+    p.p_site,
+    p.p_site_id,
+    c.parent_id,
+    c.p_consent,
+    c.p_assent,
+    c.p_sex,
+    c.p_age_yrs,
+    c.p_grade,
+    c.p_collected_stool,
+    c.p_not_collected_stool,
+    c.p_reasons_not_collected_stool,
+    c.p_collected_urine,
+    c.p_not_collected_urine,
+    c.p_reason_not_collected_urine,
+    c.p_barcode_id,
+    c.p_child_treat_pzq,
+    c.p_child_treat_alb,
+    c.p_water_play,
+    c.p_water_fish,
+    c.p_remarks,
+    p.p_start,
+    'v2'::text AS p_version
+   FROM espen_tz_sch_sth_impact_2405_2_child p,
+    public.espen_tz_sch_sth_impact_2405_2_child_tz_st_p_2405 c
+  WHERE p.id::text = c.parent_id
