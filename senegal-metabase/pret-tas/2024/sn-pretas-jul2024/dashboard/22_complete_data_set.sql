@@ -10,7 +10,7 @@
 
 /*
  * The result from three from joint
- * Variable to rename v_espen_sn_lf_pretas_3_fts_result_202307, v_espen_sn_lf_pretas_2_partcipants_202307_v1_3, espen_sn_lf_pretas_1_sites_202307
+ * Variable to rename v_espen_sn_lf_pretas_3_fts_result_202307, v_espen_sn_lf_pretas_20407_2_fts_v3, espen_sn_lf_pretas_1_sites_202307
  */
 
 SELECT
@@ -40,4 +40,4 @@ SELECT
 from
     v_espen_sn_lf_pretas_3_fts_result_202307 d
     left join espen_sn_lf_pretas_1_sites_202307 c on d.d_cluster_id:: int = c.c_cluster_id1
-    right join v_espen_sn_lf_pretas_2_partcipants_202307_v1_3 p on p.p_barcode_id = d.d_barcode_id
+    right join v_espen_sn_lf_pretas_20407_2_fts_v3 p on p.p_barcode_id = d.d_barcode_id

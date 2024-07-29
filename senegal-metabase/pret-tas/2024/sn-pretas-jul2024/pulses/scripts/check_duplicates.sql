@@ -15,11 +15,11 @@ LANGUAGE PLPGSQL AS
 	    src.id,
 	    src.p_barcode_id
 	FROM
-	    v_espen_sn_lf_pretas_2_partcipants_202307_v1_3 src
+	    v_espen_sn_lf_pretas_20407_2_fts_v3 src
 	WHERE (
 	        SELECT count (*)
 	        FROM
-	            v_espen_sn_lf_pretas_2_partcipants_202307_v1_3 inr
+	            v_espen_sn_lf_pretas_20407_2_fts_v3 inr
 	        WHERE
 	            src.p_barcode_id = inr.p_barcode_id
 	    ) > 1;
@@ -61,12 +61,12 @@ LANGUAGE PLPGSQL AS
 	            src.id,
 	            src.p_barcode_id
 	        FROM
-	            v_espen_sn_lf_pretas_2_partcipants_202307_v1_3 src
+	            v_espen_sn_lf_pretas_20407_2_fts_v3 src
 	        WHERE (
 	                SELECT
 	                    count (*)
 	                FROM
-	                    v_espen_sn_lf_pretas_2_partcipants_202307_v1_3 inr
+	                    v_espen_sn_lf_pretas_20407_2_fts_v3 inr
 	                WHERE
 	                    src.p_barcode_id = inr.p_barcode_id
 	            ) > 1

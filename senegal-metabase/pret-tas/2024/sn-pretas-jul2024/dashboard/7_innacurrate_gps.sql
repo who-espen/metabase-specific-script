@@ -14,7 +14,7 @@
  */
 
 SELECT
-    c_recorder "Opérateur",
+    c_recorder   "Opérateur",
     c_district "District",
     c_cluster_id "Code Site",
     c_gps_lat "Latitude",
@@ -22,5 +22,5 @@ SELECT
     c_gps_acc "Précision",
     c_start "Date"
 FROM
-    v_espen_sn_lf_pretas_1_sites_202307
+    v_espen_sn_lf_pretas_20407_2_fts_v3
 WHERE c_gps_acc > 20

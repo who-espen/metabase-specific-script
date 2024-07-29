@@ -10,7 +10,7 @@
 
 /*
  * This query will return the participant per sex
- * Variable to rename v_espen_sn_lf_pretas_2_partcipants_202307_v1_3
+ * Variable to rename v_espen_sn_lf_pretas_20407_2_fts_v3
  */
 
 select
@@ -25,7 +25,7 @@ FROM (
                 end
             ) male
         FROM
-            v_espen_sn_lf_pretas_2_partcipants_202307_v1_3 P
+            v_espen_sn_lf_pretas_20407_2_fts_v3 P
         GROUP BY
             p_district,
             p_cluster_id,
@@ -44,7 +44,7 @@ FROM (
                 end
             ) female
         FROM
-            v_espen_sn_lf_pretas_2_partcipants_202307_v1_3 P
+            v_espen_sn_lf_pretas_20407_2_fts_v3 P
         GROUP BY
             p_district,
             p_cluster_id,

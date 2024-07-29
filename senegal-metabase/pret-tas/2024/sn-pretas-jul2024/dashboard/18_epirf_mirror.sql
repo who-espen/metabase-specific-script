@@ -1,52 +1,14 @@
-/*
- * File: 18_epirf_mirror.sql
- * File Created: Wednesday, 6th May 2020 11:49:40 am
- * Author: Dyesse YUMBA
- * Last Modified: Wednesday, 6th May 2020 1:36:50 pm
- * Modified By: Dyesse YUMBA
- * -----
- * (c) 2020, WHO/AFRO/UCN/ESPEN
- */
 
-/*
- * This query is a sample of EPIRF mirror
- * Variable to rename <%Epirf_Survey_Type%>, v_espen_sn_lf_pretas_3_fts_result_202307, v_espen_sn_lf_pretas_2_partcipants_202307_v1_3,
- * espen_sn_lf_pretas_1_sites_202307
- */
-
-SELECT
-with src as (
-        select
-            distinct on (c_cluster_id) c_region,
-            c_district,
-            c_cluster_name,
-            c_cluster_id,
-            c_gps_lat,
-            c_gps_lng,
-            c_start
-        from
-            public.v_espen_sn_lf_pretas_1_sites_202307
-    )
-SELECT
-    case
-        when (
-            c_cluster_id = '101'
-            or c_cluster_id = '103'
-            or c_cluster_id = '107'
-            or c_cluster_id = '109'
-            or c_cluster_id = '111'
-            or c_cluster_id = '113'
-        ) then 'sentinelle'
-        else 'contrôle ponctuel'
-    end "Type d'ênquestes",
+select
+	case when c_cluster_name = 'Wordé' then 'Contrôle Ponctuel' else 'Site Sentinelle' end "Type d'ênquestes",
     null "Unité d'évaluation",
-    c_district "Unité d'Implémentation",
+    'Pété' "Unité d'Implémentation",
     c_cluster_name "Site de l'enquête",
-    TO_CHAR(c.c_start, 'Month') "Mois",
+    TO_CHAR(p.c_start, 'Month') "Mois",
     EXTRACT(
         YEAR
         FROM
-            c.c_start
+            p.c_start
     ) "Année",
     c_gps_lat "Latitude",
     c_gps_lng "Longitude",
@@ -85,35 +47,27 @@ SELECT
             ELSE NULL
         END
     ) "Nombre de Test Invalide",
-    --TODO: Update the number of invalid test
     null "Decision",
-    --TODO: Update the decision
     null "Lymphoedema Total de Patient",
-    --TODO: Update the Total Patient Number
     null "Lymphoedema Method d'Estimation",
-    --TODO: Update the  Method Estimation
     null "Lymphoedema Date d'Estimation",
-    --TODO: Update the Date Estimation
     null "Lymphoedema Nbr Centre de Santé",
-    --TODO: Update the Nbr Health Facilities
     null "Hydrocoele Total de Patient",
-    --TODO: Update the Total Patient Number
     null "Hydrocoele Method d'Estimation",
-    --TODO: Update the  Method Estimation
     null "Hydrocoele Date d'Estimation",
-    --TODO: Update the Date Estimation
     null "Hydrocoele Nbr Centre de santé",
-    --TODO: Update the Nbr Health Facilities
-    null "Commentaires" --TODO: Update the comments
+    null "Commentaires"
 FROM
-    v_espen_sn_lf_pretas_3_fts_result_202307 d
-    LEFT JOIN src c on d.d_cluster_id = c.c_cluster_id
-    LEFT JOIN v_espen_sn_lf_pretas_2_partcipants_202307_v1_3 p on p.p_barcode_id = d.d_barcode_id
+    v_espen_sn_lf_pretas_2407_1_sit_part_v3 p
+    LEFT JOIN public.v_espen_sn_lf_pretas_20407_2_fts_v3 d on d.d_code_id = p.p_code_id
 GROUP BY
-    c_district,
     c_cluster_name,
     "Mois",
     "Année",
     c_gps_lat,
     c_gps_lng,
     c_cluster_id
+
+
+
+    

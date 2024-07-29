@@ -10,7 +10,7 @@
 
 /*
  * A query for listing all records that use the same ID twice
- * Variable to rename metabase_sn_lf_pretas_202307_duplicates, v_espen_sn_lf_pretas_2_partcipants_202307_v1_3, v_espen_sn_lf_pretas_3_fts_result_202307
+ * Variable to rename metabase_sn_lf_pretas_202307_duplicates, v_espen_sn_lf_pretas_20407_2_fts_v3, v_espen_sn_lf_pretas_3_fts_result_202307
  */
 
 SELECT
@@ -31,7 +31,7 @@ FROM (
             p.p_cluster_id "Code Site",
             p.p_cluster_name "Nom Site",
             m.barcode_participant "ID Participant",
-            p.p_recorder_id "Code Opérateur",
+            p.c_recorder  _id "Code Opérateur",
             p.p_age_yrs "Age en années",
             p.p_how_long_lived "Nbr année vécue dans le site",
             p.p_sex "Sexe",
@@ -40,7 +40,7 @@ FROM (
             status "Statut"
         FROM
             metabase_sn_lf_pretas_202307_duplicates AS m,
-            v_espen_sn_lf_pretas_2_partcipants_202307_v1_3 AS p
+            v_espen_sn_lf_pretas_20407_2_fts_v3 AS p
         WHERE
             p.id = m.id_participant
         UNION ALL
@@ -49,7 +49,7 @@ FROM (
             d.d_cluster_id "Nom Site",
             d.d_cluster_name "Nom Site",
             m.barcode_results "ID Participant",
-            d.d_recorder_id "Code Opérateur",
+            d.d_recorder_id_id "Code Opérateur",
             null "Age en années",
             null "Nbr année vécue dans le site",
             null "Sexe",

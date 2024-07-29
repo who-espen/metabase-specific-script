@@ -13,7 +13,7 @@
  * Variable to rename espen_sn_lf_pretas_1_sites_202307, <%number_villlage%>
  */
 
-with sites as (select distinct c_cluster_id from v_espen_sn_lf_pretas_1_sites_202307 )
+with sites as (select distinct c_cluster_id from v_espen_sn_lf_pretas_20407_2_fts_v3 )
 
 SELECT count(c_cluster_id)
 FROM

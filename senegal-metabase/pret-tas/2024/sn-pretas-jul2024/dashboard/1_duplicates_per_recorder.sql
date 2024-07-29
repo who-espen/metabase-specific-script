@@ -18,7 +18,7 @@ SELECT
     sum("Total des doublants") as "Total des doublants"
 FROM (
         SELECT
-            d.d_recorder_id "Opérateurs",
+            d.d_recorder_id_id "Opérateurs",
             count(m.id) "Total des doublants",
             d_district district,
             d_cluster_id cluster_id,
@@ -27,22 +27,22 @@ FROM (
             public.metabase_sn_lf_pretas_202307_duplicates m
             JOIN v_espen_sn_lf_pretas_3_fts_result_202307 d ON d.id = m.id_results
         GROUP BY
-            d.d_recorder_id,
+            d.d_recorder_id_id,
             d_district,
             d_cluster_id,
             d_cluster_name
         UNION
         SELECT
-            p.p_recorder_id "Opérateurs",
+            p.c_recorder  _id "Opérateurs",
             count(m.id) "Total des doublants",
             p_district district,
             p_cluster_id cluster_id,
             p_cluster_name cluster_name
         FROM
             public.metabase_sn_lf_pretas_202307_duplicates m
-            JOIN v_espen_sn_lf_pretas_2_partcipants_202307_v1_3 p ON p.id = m.id_participant:: int
+            JOIN v_espen_sn_lf_pretas_20407_2_fts_v3 p ON p.id = m.id_participant:: int
         group by
-            p.p_recorder_id,
+            p.c_recorder  _id,
             p_district,
             p_cluster_id,
             p_cluster_name

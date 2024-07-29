@@ -6,12 +6,12 @@
 
 ## Variable to replace
 
-- v_espen_sn_lf_pretas_1_sites_202307
+- v_espen_sn_lf_pretas_20407_2_fts_v3
 - espen_sn_lf_pretas_1_sites_202307
 - v_espen_sn_lf_pretas_3_fts_result_202307
 - espen_sn_lf_pretas_3_fts_result_202307
 - espen_sn_lf_pretas_2_partcipants_202307_v1_3
-- v_espen_sn_lf_pretas_2_partcipants_202307_v1_3
+- v_espen_sn_lf_pretas_20407_2_fts_v3
 - metabase_sn_lf_pretas_202307_duplicates
 - identify_participant_duplicate_pretas_202307
 - identify_pretas_diag_result_duplicate_202307,

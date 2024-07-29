@@ -21,10 +21,10 @@ SELECT
         dest.c_gps_lng,
         'K'
     ) "Distances in KM",
-    src.c_recorder "Code Opérateur 1",
+    src.c_recorder   "Code Opérateur 1",
     src.c_cluster_id "Code Site 1",
     src.c_cluster_name "Site 1",
-    dest.c_recorder "Code Opérateur 2",
+    dest.c_recorder   "Code Opérateur 2",
     dest.c_cluster_id "Code Site 2",
     dest.c_cluster_name "Site 2",
     src.c_gps_lat "Latitude1",

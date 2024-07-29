@@ -10,7 +10,7 @@ SELECT distinct on (c_cluster_id)
     c_gps_lat,
     c_gps_lng
 FROM
-    v_espen_sn_lf_pretas_1_sites_202307 c
+    v_espen_sn_lf_pretas_20407_2_fts_v3 c
     LEFT JOIN v_espen_sn_lf_pretas_3_fts_result_202307 d on c.c_cluster_id = d.d_cluster_id
 where
     d_final_result = 'Positive' 

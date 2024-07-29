@@ -9,7 +9,7 @@
  */
 
 /*
- * Variable to rename v_espen_sn_lf_pretas_2_partcipants_202307_v1_3
+ * Variable to rename v_espen_sn_lf_pretas_20407_2_fts_v3
  */
 
-select * from v_espen_sn_lf_pretas_2_partcipants_202307_v1_3 
+select * from v_espen_sn_lf_pretas_20407_2_fts_v3 

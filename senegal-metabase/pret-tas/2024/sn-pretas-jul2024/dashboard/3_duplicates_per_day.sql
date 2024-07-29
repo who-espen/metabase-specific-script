@@ -18,7 +18,7 @@ SELECT
     p.p_start:: date
 FROM
     metabase_sn_lf_pretas_202307_duplicates AS m,
-    v_espen_sn_lf_pretas_2_partcipants_202307_v1_3 AS p
+    v_espen_sn_lf_pretas_20407_2_fts_v3 AS p
 WHERE
     m.id IS NOT NULL
     AND m.id_participant = p.id
