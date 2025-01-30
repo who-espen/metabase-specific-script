@@ -12,83 +12,34 @@
  * This query is a sample of EPIRF mirror
  * Variable to rename v_espen_gn_oncho_oem_202310_2_participant_v2
  */
+select 
 
-SELECT
-    'Mapping' "Survey Type",
-    c.c_region "State/Province/Region",
-    c.c_district "Implementation Unit",
-    c.c_cluster_name "Community Surveyed",
-    TO_CHAR(c.created_at, 'Month') "Month",
-    EXTRACT(
-        YEAR
-        FROM
-            c.created_at
-    ) "Year",
-    c_gps_lat "Latitude",
-    c_gps_lng "Longitude",
-    NULL "Date Of the 1st PC Round",
-    -- Ask the programm manageger this information
-    NULL "Treatment Strategy",
-    -- Ask the programm manageger this information
-    NULL "Pre-control Prevalence",
-    -- Ask the programm manageger this information
-    NULL "Number of rounds of PC",
-    -- Ask the programm manageger this information
-    -- MF skin snip --
+'Pre-Stop' "Type d'enquête",
+c_district "Unité Admin 1",
+c_sub_district "Unité Admin 2",
+c_cluster_name "Site",
+TO_CHAR(p_start, 'Month') "Mois",
+    EXTRACT(YEAR FROM p_start ) "Années",
+ c_gps_lat,
+ c_gps_lng,
+ null "Date 1ère Tournée",
+ null "Stratégie traitement",
+ null "Prévalence Pré-control",
+ null "Nombre Tournée",
     NULL "MF skin snip Method of diagnostic",
     NULL "MF skin snip examined",
     NULL "MF skin snip Age group",
     NULL "MF skin snip Positives",
     NULL "MF skin snip % Positives",
     NULL "MF skin snip CMFL",
-    -- Serology --
-    'RDT' "Serology Diagnostic",
-    'Convinent' "Serology Sampling Method",
-    -- cluster for 2nd line village
-    CONCAT(
-        min(p_age_yrs_yrs),
-        ' - ',
-        max(p_age_yrs_yrs)
-    ) "Serology Age group(Min - Max)",
-    COUNT(p.id) "Serology Examined",
-    COUNT(
-        case
-            when d_lab_ov16 = 'Positive' then 1
-            else NULL
-        end
-    ) "Serology Number of Positive",
-    ROUND(
-        COUNT(
-            case
-                when d_lab_ov16 = 'Positive' then 1
-                else NULL
-            end
-        ) * 100.0 / count(*),
-        2
-    ) "Serology % positive",
-    -- PCR in black flies --
-    NULL "PCR Number of black flies examined",
-    NULL "PCR Species of the vector",
-    NULL "PCR % poolscreen positive",
-    -- Crab infestation --
-    NULL "Crab infestation examined",
-    NULL "Crab infestation Species of the vector",
-    NULL "Crab infestation % mf positive"
-FROM
-    v_espen_gn_oncho_oem_202310_2_participant_v2 p
-    LEFt JOIN v_espen_gn_oncho_oem_202310_1_site_v3 c on c.c_cluster_name_id1 = p.p_cluster_name_id:: int
-    LEFt JOIN v_espen_gn_oncho_oem_3_resultat_ov16_202206_v3 d on d.r_barcode_id1 = p.p_barcode_id1
-WHERE
-    p.is IS NOT NULL ------ Metabase filter -------
-    -- [[and {{c_cluster_name_id}}]]
-    -- [[and {{cluster_name}}]]
-    -- [[and {{district}}]]
-    -- [[and {{date}}]]
-GROUP BY
-    "State/Province/Region",
-    "Implementation Unit",
-    "Community Surveyed",
-    "Month",
-    "Year",
-    c_gps_lat,
-    c_gps_lng
+ 'ELISA' "Diag Sérologie",
+ 'Raisonné' "Serologie Méthode",
+ count(*) "Sérologie Nbr éxaminé"
+ 
+
+from public.v_espen_gn_oncho_oem_202310_2_participant_v2 p
+left join public.v_espen_gn_oncho_oem_202310_1_site_v3 c on p.p_cluster_name  = c.c_cluster_name and p.p_sub_district = c.c_sub_district 
+
+group by c_district, c_sub_district, c_cluster_name,  "Mois", "Années", c_gps_lat, c_gps_lng
+
+order by c_district, c_sub_district, c_cluster_name
