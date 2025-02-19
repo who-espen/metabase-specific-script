@@ -52,13 +52,13 @@ CREATE OR REPLACE FUNCTION update_demo_lf_9999_orphaned_participant_without_fts_
 	    )
 	SELECT
 	    id,
-	    c_recorder,
+	    p_recorder,
 	    p_code_id,
 	    'Participant without FTS results'
 	FROM (
 	        SELECT
 	            p.id,
-	            c_recorder,
+	            p_recorder,
 	            p_code_id
 	        FROM
 	            v_espen_demo_lf_tas_9999_2_part_v2 p
