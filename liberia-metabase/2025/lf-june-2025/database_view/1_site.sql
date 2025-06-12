@@ -1,0 +1,22 @@
+CREATE OR REPLACE VIEW public.v_espen_lr_lf_pretas_1_site_202506
+AS SELECT id,
+    c_recorder,
+    c_date_visit,
+    c_site_type,
+    c_county_iu,
+    c_district_eu,
+    c_cluster_name1,
+    c_cluster_id1,
+    c_cluster_name2,
+    c_cluster_name,
+    c_cluster_id,
+    c_cluster_leader,
+    c_population,
+    c_eligib_pop,
+    c_eligib_pop_present,
+    c_gps_lat,
+    c_gps_lng,
+    c_gps_acc,
+    c_comment,
+    c_start
+   FROM espen_lr_lf_pretas_1_site_202506 c;

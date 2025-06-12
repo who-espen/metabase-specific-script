@@ -43,7 +43,7 @@ union all
 select
 
 'Cumulative Duplicates'  as "Type",
-count(*) from public.metabase_ng_lf_2411_tas1_duplicates_sk_kd
+count(*) from public.metabase_lr_lf_2506_pretas_duplicates
 
 
 

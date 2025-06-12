@@ -1,5 +1,5 @@
 CREATE TABLE
-    IF NOT EXISTS metabase_ng_lf_2411_tas1_duplicates_sk_kd(
+    IF NOT EXISTS metabase_lr_lf_2506_pretas_duplicates(
         id SERIAL PRIMARY KEY,
         id_participant INT NULL,
         barcode_participant VARCHAR(255) NULL,
@@ -12,34 +12,39 @@ CREATE TABLE
  * Adding unique index in the duplicates tables
  */
 
-CREATE UNIQUE INDEX IF NOT EXISTS idx_duplicates_participant_id_barcode_ng_2411_sk_kd  ON metabase_ng_lf_2411_tas1_duplicates_sk_kd(
+CREATE UNIQUE INDEX IF NOT EXISTS idx_duplicates_participant_id_barcode_lr_2506  ON metabase_lr_lf_2506_pretas_duplicates(
     id_participant,
     barcode_participant
 );
 
-CREATE UNIQUE INDEX IF NOT EXISTS idx_duplicates_results_fts_id_barcode_ng_2411_sk_kd  ON metabase_ng_lf_2411_tas1_duplicates_sk_kd(
+CREATE UNIQUE INDEX IF NOT EXISTS idx_duplicates_results_fts_id_barcode_lr_2506  ON metabase_lr_lf_2506_pretas_duplicates(
     id_results_fts,
     barcode_results_fts
 );
 
-ALTER TABLE metabase_ng_lf_2411_tas1_duplicates_sk_kd
-  ADD CONSTRAINT unique_idx_duplicates_participant_id_barcode_ng_2411_sk_kd  
-  UNIQUE USING INDEX idx_duplicates_participant_id_barcode_ng_2411_sk_kd ;
+ALTER TABLE metabase_lr_lf_2506_pretas_duplicates
+  ADD CONSTRAINT unique_idx_duplicates_participant_id_barcode_lr_2506  
+  UNIQUE USING INDEX idx_duplicates_participant_id_barcode_lr_2506 ;
 
-ALTER TABLE metabase_ng_lf_2411_tas1_duplicates_sk_kd
-  ADD CONSTRAINT unique_idx_duplicates_results_fts_id_barcode_ng_2411_sk_kd 
-  UNIQUE USING INDEX idx_duplicates_results_fts_id_barcode_ng_2411_sk_kd ;
+ALTER TABLE metabase_lr_lf_2506_pretas_duplicates
+  ADD CONSTRAINT unique_idx_duplicates_results_fts_id_barcode_lr_2506 
+  UNIQUE USING INDEX idx_duplicates_results_fts_id_barcode_lr_2506 ;
 
+
+-- Granting access
+
+GRANT SELECT ON metabase_lr_lf_2506_pretas_duplicates TO espen_reader ;
+GRANT SELECT ON metabase_lr_lf_2506_pretas_duplicates TO oem_owner ;
 
 /*******************************************************************************************
 * new scripts
 *********************************************************************************************/
-CREATE OR REPLACE FUNCTION update_tas1_ng_2411_mapping_dups_table_from_participant_sk_kd 
+CREATE OR REPLACE FUNCTION update_pretas_lr_2506_mapping_dups_table_from_participant 
 () RETURNS TRIGGER LANGUAGE PLPGSQL AS $$ 
 BEGIN
 
 INSERT INTO
-    metabase_ng_lf_2411_tas1_duplicates_sk_kd(
+    metabase_lr_lf_2506_pretas_duplicates(
         id_participant,
         barcode_participant,
         form
@@ -62,7 +67,7 @@ FROM (
                 WHERE
                     src.p_code_id = inr.p_code_id
             ) > 1
-    ) p ON CONFLICT ON CONSTRAINT unique_idx_duplicates_participant_id_barcode_ng_2411_sk_kd 
+    ) p ON CONFLICT ON CONSTRAINT unique_idx_duplicates_participant_id_barcode_lr_2506 
 DO NOTHING;
 
  RETURN NEW;
@@ -73,7 +78,7 @@ $$;
 /*****************************************************************************/
 
 CREATE TRIGGER metabase_ng_lf_tas1_dups_part_2411_trigger_sk_kd  AFTER INSERT OR UPDATE OR DELETE ON espen_ng_lf_tas_2411_1_sit_part_sk_kd_v23
-FOR EACH ROW EXECUTE PROCEDURE update_tas1_ng_2411_mapping_dups_table_from_participant_sk_kd ();
+FOR EACH ROW EXECUTE PROCEDURE update_pretas_lr_2506_mapping_dups_table_from_participant ();
 
 /**********************************************************************************/
 
@@ -85,7 +90,7 @@ BEGIN
 
 -- insert the duplicates on history tables
 INSERT INTO
-    metabase_ng_lf_2411_tas1_duplicates_sk_kd(
+    metabase_lr_lf_2506_pretas_duplicates(
         id_results_fts,
         barcode_results_fts,
         form
@@ -108,7 +113,7 @@ FROM (
                 WHERE
                     src.d_code_id = inr.d_code_id
             ) > 1
-    ) p ON CONFLICT ON CONSTRAINT unique_idx_duplicates_results_fts_id_barcode_ng_2411_sk_kd 
+    ) p ON CONFLICT ON CONSTRAINT unique_idx_duplicates_results_fts_id_barcode_lr_2506 
 DO NOTHING;
 
  RETURN NEW;

@@ -11,7 +11,7 @@
 
 /*
  * A query to display the number of duplicates per recorder
- * Variable to rename metabase_ng_lf_2411_tas1_duplicates_sk_kd? espen_ng_lf_tas_202405_3_resultat_fts_jgw_v3
+ * Variable to rename metabase_lr_lf_2506_pretas_duplicates? espen_ng_lf_tas_202405_3_resultat_fts_jgw_v3
  */
 
 
@@ -29,7 +29,7 @@ FROM (
     d_cluster_id::int cluster_id,
     d_cluster_name cluster_name
 
-    FROM public.metabase_ng_lf_2411_tas1_duplicates_sk_kd m
+    FROM public.metabase_lr_lf_2506_pretas_duplicates m
     JOIN v_espen_ng_lf_tas_2411_2_fts_yb_v2_3 d ON d.id = m.id_results
 
     GROUP BY d.d_recorder_id, d_district, d_cluster_id, d_cluster_name
@@ -44,7 +44,7 @@ FROM (
    	p_cluster_id::int cluster_id,
    	p_cluster_name cluster_name
 
-    FROM public.metabase_ng_lf_2411_tas1_duplicates_sk_kd m
+    FROM public.metabase_lr_lf_2506_pretas_duplicates m
     JOIN v_espen_ng_lf_tas_2411_2_fts_yb_v2_3_v2 p ON p.id = m.id_participant
 
   group by p.p_recorder_id, p_district, p_cluster_id, p_cluster_name

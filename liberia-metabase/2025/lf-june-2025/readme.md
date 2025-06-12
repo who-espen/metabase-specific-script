@@ -12,10 +12,10 @@
 - espen_ng_lf_tas_202405_3_resultat_fts_jgw_v3
 - espen_ng_lf_tas_202405_2_part_ben_oy_v2
 - v_espen_ng_lf_tas_2411_2_fts_yb_v2_3_v2
-- metabase_ng_lf_2411_tas1_duplicates_sk_kd
+- metabase_lr_lf_2506_pretas_duplicates
 - identify_participant_duplicate_tas_202212
 - identify_tas_diag_result_duplicate_202212,
 - metabase_ng_lf_tas_result_duplicates_202212_trigger
-- metabase_ng_lf_2411_tas1_duplicates_sk_kd_trigger
+- metabase_lr_lf_2506_pretas_duplicates_trigger
 - metabase_ng_lf_tas_orphaned_202405
 - metabase_ng_lf_tas_action_todo_202212
