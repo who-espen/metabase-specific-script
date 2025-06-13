@@ -58,12 +58,12 @@ FROM (
             src.id,
             src.p_code_id
         FROM
-            v_espen_ng_lf_tas_2411_1_sit_part_sk_kd_v23 src
+            v_espen_lr_lf_pretas_2_child_202506 src
         WHERE (
                 SELECT
                     count (*)
                 FROM
-                    v_espen_ng_lf_tas_2411_1_sit_part_sk_kd_v23 inr
+                    v_espen_lr_lf_pretas_2_child_202506 inr
                 WHERE
                     src.p_code_id = inr.p_code_id
             ) > 1
@@ -77,14 +77,14 @@ $$;
 
 /*****************************************************************************/
 
-CREATE TRIGGER metabase_ng_lf_tas1_dups_part_2411_trigger_sk_kd  AFTER INSERT OR UPDATE OR DELETE ON espen_ng_lf_tas_2411_1_sit_part_sk_kd_v23
+CREATE TRIGGER metabase_lr_lf_pretas_dups_part_2506_trigger  AFTER INSERT OR UPDATE OR DELETE ON espen_lr_lf_pretas_2_child_202506
 FOR EACH ROW EXECUTE PROCEDURE update_pretas_lr_2506_mapping_dups_table_from_participant ();
 
 /**********************************************************************************/
 
 
 
-CREATE OR REPLACE FUNCTION update_lf_ng_tas1_2411_mapping_dups_table_from_fts_sk_kd 
+CREATE OR REPLACE FUNCTION update_lf_lr_pretas_2506_mapping_dups_table_from_fts 
 () RETURNS TRIGGER LANGUAGE PLPGSQL AS $$ 
 BEGIN
 
@@ -104,12 +104,12 @@ FROM (
             src.id,
             src.d_code_id
         FROM
-            v_espen_ng_lf_tas_2411_2_fts_yb_v2_3 src
+            v_espen_lr_lf_pretas_3_results_fts_mf_202506 src
         WHERE (
                 SELECT
                     count (*)
                 FROM
-                    v_espen_ng_lf_tas_2411_2_fts_yb_v2_3 inr
+                    v_espen_lr_lf_pretas_3_results_fts_mf_202506 inr
                 WHERE
                     src.d_code_id = inr.d_code_id
             ) > 1
@@ -123,7 +123,7 @@ $$;
 
 /*****************************************************************************/
 
-CREATE TRIGGER metabase_ng_lf_tas1_dups_fts_202411_trigger_sk_kd  AFTER INSERT OR UPDATE OR DELETE ON espen_ng_lf_tas_2411_2_fts_yb_v2_3
-FOR EACH ROW EXECUTE PROCEDURE update_lf_ng_tas1_2411_mapping_dups_table_from_fts_sk_kd ();
+CREATE TRIGGER metabase_lr_lf_pretas_dups_fts_202506_trigger  AFTER INSERT OR UPDATE OR DELETE ON espen_lr_lf_pretas_3_results_fts_mf_202506
+FOR EACH ROW EXECUTE PROCEDURE update_lf_lr_pretas_2506_mapping_dups_table_from_fts ();
 
 /**********************************************************************************/

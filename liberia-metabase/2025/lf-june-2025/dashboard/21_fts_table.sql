@@ -10,6 +10,6 @@
  */
 
 /*
- * Variable to rename v_espen_ng_lf_tas_2411_2_fts_yb_v2_3
+ * Variable to rename v_espen_lr_lf_pretas_3_results_fts_mf_202506
  */
-select * from v_espen_ng_lf_tas_2411_2_fts_yb_v2_3
+select * from v_espen_lr_lf_pretas_3_results_fts_mf_202506

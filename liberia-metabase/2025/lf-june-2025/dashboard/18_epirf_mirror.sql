@@ -10,7 +10,7 @@
 
 /*
  * This query is a sample of EPIRF mirror
- * Variable to rename Pre TAS, v_espen_ng_lf_tas_2411_2_fts_yb_v2_3, v_espen_ng_lf_tas_2411_2_fts_yb_v2_3_v2,
+ * Variable to rename Pre TAS, v_espen_lr_lf_pretas_3_results_fts_mf_202506, v_espen_lr_lf_pretas_3_results_fts_mf_202506_v2,
  * espen_ng_lf_tas_202405_1_s_ben_oy
  */
   SELECT
@@ -45,9 +45,9 @@
   null "Hydrocoele Nbr Health Facilities", --TODO: Update the Nbr Health Facilities
   null "Comments" --TODO: Update the comments
 
-FROM v_espen_ng_lf_tas_2411_2_fts_yb_v2_3 d
+FROM v_espen_lr_lf_pretas_3_results_fts_mf_202506 d
 JOIN espen_ng_lf_tas_202405_1_s_ben_oy c on d.d_cluster_id = c.c_cluster_id
-JOIN v_espen_ng_lf_tas_2411_2_fts_yb_v2_3_v2 p on p.p_code_id = d.d_code_id
+JOIN v_espen_lr_lf_pretas_3_results_fts_mf_202506_v2 p on p.p_code_id = d.d_code_id
 
 GROUP BY c_district, c_cluster_name, "Month", "Year", c_gps_lat, c_gps_lng
 

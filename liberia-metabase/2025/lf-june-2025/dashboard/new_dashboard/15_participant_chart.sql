@@ -10,7 +10,7 @@
 
 /*
  * This query will return the participant per sex
- * Variable to rename v_espen_ng_lf_tas_2411_1_sit_part_sk_kd_v23
+ * Variable to rename v_espen_lr_lf_pretas_2_child_202506
  */
  
   select
@@ -22,7 +22,7 @@ FROM (
   SELECT
   	COUNT(case when p_sex = 'Male' then 1 else null end ) male
 
-  FROM public.v_espen_ng_lf_tas_2411_1_sit_part_sk_kd_v23 P
+  FROM public.v_espen_lr_lf_pretas_2_child_202506 P
 
   
 ) src
@@ -38,7 +38,7 @@ FROM (
   SELECT
   	COUNT(case when p_sex = 'Female' then 1 else null end ) female
 
-  FROM v_espen_ng_lf_tas_2411_1_sit_part_sk_kd_v23 P
+  FROM v_espen_lr_lf_pretas_2_child_202506 P
 
  
 ) src

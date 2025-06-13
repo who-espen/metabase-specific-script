@@ -30,7 +30,7 @@ FROM (
     d_cluster_name cluster_name
 
     FROM public.metabase_lr_lf_2506_pretas_duplicates m
-    JOIN v_espen_ng_lf_tas_2411_2_fts_yb_v2_3 d ON d.id = m.id_results
+    JOIN v_espen_lr_lf_pretas_3_results_fts_mf_202506 d ON d.id = m.id_results
 
     GROUP BY d.d_recorder_id, d_district, d_cluster_id, d_cluster_name
 
@@ -45,7 +45,7 @@ FROM (
    	p_cluster_name cluster_name
 
     FROM public.metabase_lr_lf_2506_pretas_duplicates m
-    JOIN v_espen_ng_lf_tas_2411_2_fts_yb_v2_3_v2 p ON p.id = m.id_participant
+    JOIN v_espen_lr_lf_pretas_3_results_fts_mf_202506_v2 p ON p.id = m.id_participant
 
   group by p.p_recorder_id, p_district, p_cluster_id, p_cluster_name
 

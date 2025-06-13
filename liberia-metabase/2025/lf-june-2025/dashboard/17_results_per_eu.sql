@@ -10,7 +10,7 @@
 
 /*
  * This query will display the FTS result by sex and result.
- * Variable to rename v_espen_ng_lf_tas_2411_2_fts_yb_v2_3_v2, espen_ng_lf_tas_202405_1_s_ben_oy
+ * Variable to rename v_espen_lr_lf_pretas_3_results_fts_mf_202506_v2, espen_ng_lf_tas_202405_1_s_ben_oy
  */
  SELECT
 c_cluster_id "Site ID",
@@ -28,9 +28,9 @@ COUNT(CASE WHEN (p_sex = 'Female' and d_final_result = 'Negative') THEN 1 ELSE N
 COUNT(CASE WHEN ( d_final_result = 'Negative') THEN 1 ELSE NULL END) "Total Negative",
 COUNT(CASE WHEN ( d_final_result = 'Invalid') THEN 1 ELSE NULL END) "Total Invalid"
 
-FROM v_espen_ng_lf_tas_2411_2_fts_yb_v2_3 d
+FROM v_espen_lr_lf_pretas_3_results_fts_mf_202506 d
 LEFT JOIN espen_ng_lf_tas_202405_1_s_ben_oy c on d.d_cluster_id::int = c.c_cluster_id
-RIGHT JOIN v_espen_ng_lf_tas_2411_2_fts_yb_v2_3_v2 p on p.p_code_id = d.d_code_id
+RIGHT JOIN v_espen_lr_lf_pretas_3_results_fts_mf_202506_v2 p on p.p_code_id = d.d_code_id
 
 WHERE p.id IS NOT NULL
 

@@ -10,7 +10,7 @@
 
 /*
  * A query for listing all records that use the same ID twice
- * Variable to rename metabase_lr_lf_2506_pretas_duplicates, v_espen_ng_lf_tas_2411_2_fts_yb_v2_3_v2, v_espen_ng_lf_tas_2411_2_fts_yb_v2_3
+ * Variable to rename metabase_lr_lf_2506_pretas_duplicates, v_espen_lr_lf_pretas_3_results_fts_mf_202506_v2, v_espen_lr_lf_pretas_3_results_fts_mf_202506
  */
 
 SELECT
@@ -40,7 +40,7 @@ FROM (
   p.p_start date,
   status "Status"
 
-FROM metabase_lr_lf_2506_pretas_duplicates AS m, v_espen_ng_lf_tas_2411_2_fts_yb_v2_3_v2 AS p
+FROM metabase_lr_lf_2506_pretas_duplicates AS m, v_espen_lr_lf_pretas_3_results_fts_mf_202506_v2 AS p
   WHERE p.id = m.id_participant
 
 UNION ALL
@@ -58,7 +58,7 @@ SELECT
   d.d_start date,
   status "Status"
 
-FROM metabase_lr_lf_2506_pretas_duplicates AS m, v_espen_ng_lf_tas_2411_2_fts_yb_v2_3 AS d
+FROM metabase_lr_lf_2506_pretas_duplicates AS m, v_espen_lr_lf_pretas_3_results_fts_mf_202506 AS d
   WHERE d.id = m.id_results
 ) src
 

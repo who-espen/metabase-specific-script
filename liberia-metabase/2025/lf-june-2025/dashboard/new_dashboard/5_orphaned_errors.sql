@@ -2,18 +2,18 @@
  
  select
   
-      p.c_cluster_id "Code Site",
+      p.p_cluster_id "Code Site",
       NULL "Nom du Site",
       p_code_id "ID Participant",
-      c_recorder "Recorder ID",
+      p_recorder "Recorder ID",
       p_age_yrs "Age (yrs)",
       p_sex "Sex",
       NULL "Diagnostic Results",
       'Participant data' "Record",
-      c_start "Date"
+      p_start "Date"
 
-    FROM v_espen_ng_lf_tas_2411_1_sit_part_sk_kd_v23 p
-    where (select count(*) from v_espen_ng_lf_tas_2411_1_sit_part_sk_kd_v23 k where p.p_code_id = k.p_code_id) > 1
+    FROM v_espen_lr_lf_pretas_2_child_202506 p
+    where (select count(*) from v_espen_lr_lf_pretas_2_child_202506 k where p.p_code_id = k.p_code_id) > 1
 
     UNION ALL
 
@@ -24,9 +24,14 @@
       d_recorder "Recorder ID",
       NULL "Age (yrs)",
       NULL "Sex",
-      d_final_result "Diagnostic Results",
+      CASE WHEN d_fts_result1= 'Positive' AND d_fts_result2 = 'Positive' THEN 'Positive'
+      WHEN d_fts_result1 = 'Positive' AND d_fts_result2 = 'Negative' THEN 'Negative'
+      WHEN d_fts_result1 = 'Positive' AND d_fts_result2 = 'Invalid' THEN 'Positive'
+      WHEN d_fts_result1 = 'Invalid' AND d_fts_result2 = 'Invalid' THEN 'Indeterminate'
+      WHEN d_fts_result1 = 'Invalid' AND d_fts_result2 = 'Negative' THEN 'Negative'
+      ELSE 'Negative' END AS "Diagnostic Results",
       'FTS results' "Record",
       d_start "Date"
 
-    FROM public.v_espen_ng_lf_tas_2411_2_fts_yb_v2_3 d
-    where (select count(*) from v_espen_ng_lf_tas_2411_2_fts_yb_v2_3 r where d.d_code_id = r.d_code_id) > 1
+    FROM public.v_espen_lr_lf_pretas_3_results_fts_mf_202506 d
+    where (select count(*) from v_espen_lr_lf_pretas_3_results_fts_mf_202506 r where d.d_code_id = r.d_code_id) > 1

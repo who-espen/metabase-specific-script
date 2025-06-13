@@ -16,7 +16,7 @@
  SELECT
  COUNT(barcode_participant) "Total duplicates",
  p.p_start::date "Date"
-FROM metabase_lr_lf_2506_pretas_duplicates AS m, v_espen_ng_lf_tas_2411_2_fts_yb_v2_3_v2 AS p
+FROM metabase_lr_lf_2506_pretas_duplicates AS m, v_espen_lr_lf_pretas_3_results_fts_mf_202506_v2 AS p
 WHERE m.id IS NOT NULL AND m.id_participant = p.id
 
 GROUP BY p.p_start::DATE
@@ -26,7 +26,7 @@ UNION ALL
 SELECT
  COUNT(barcode_results) "Total duplicates",
  d.d_start::date "Date"
-FROM metabase_lr_lf_2506_pretas_duplicates AS m, v_espen_ng_lf_tas_2411_2_fts_yb_v2_3 AS d
+FROM metabase_lr_lf_2506_pretas_duplicates AS m, v_espen_lr_lf_pretas_3_results_fts_mf_202506 AS d
 WHERE m.id IS NOT NULL AND m.id_results = d.id
 
 GROUP BY d.d_start::DATE

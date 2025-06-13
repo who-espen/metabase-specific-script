@@ -3,8 +3,8 @@
 SELECT
     count(*)
 FROM
-	            v_espen_ng_lf_tas_2411_1_sit_part_sk_kd_v23 p
-	            LEFT JOIN v_espen_ng_lf_tas_2411_2_fts_yb_v2_3 d on p.p_code_id = d.d_code_id
+	            v_espen_lr_lf_pretas_2_child_202506 p
+	            LEFT JOIN v_espen_lr_lf_pretas_3_results_fts_mf_202506 d on p.p_code_id = d.d_code_id
 	        WHERE
 	            d.id isnull
 ) 
@@ -15,8 +15,8 @@ FROM
 select 
 	count(*)
 FROM
-	            v_espen_ng_lf_tas_2411_1_sit_part_sk_kd_v23 p
-	            RIGHT JOIN v_espen_ng_lf_tas_2411_2_fts_yb_v2_3 d on p.p_code_id = d.d_code_id
+	            v_espen_lr_lf_pretas_2_child_202506 p
+	            RIGHT JOIN v_espen_lr_lf_pretas_3_results_fts_mf_202506 d on p.p_code_id = d.d_code_id
 	        WHERE
 	            p.id isnull
 )
@@ -33,5 +33,5 @@ union all
 select
 
 'Cumulative Orphaned'  as "Type",
-count(*) from public.metabase_ng_lf_2411_tas1_orphaned_sk_kd 
+count(*) from public.metabase_lr_lf_2506_pretas_orphaned 
 

@@ -10,7 +10,7 @@
 
 /*
  * The result from three from joint
- * Variable to rename v_espen_ng_lf_tas_2411_2_fts_yb_v2_3, v_espen_ng_lf_tas_2411_2_fts_yb_v2_3_v2, espen_ng_lf_tas_202405_1_s_ben_oy
+ * Variable to rename v_espen_lr_lf_pretas_3_results_fts_mf_202506, v_espen_lr_lf_pretas_3_results_fts_mf_202506_v2, espen_ng_lf_tas_202405_1_s_ben_oy
  */
 SELECT 
   c_district "District", 
@@ -38,5 +38,5 @@ SELECT
   d_final_result "Final Result", 
 
   c_start "Date"
-FROM public.v_espen_ng_lf_tas_2411_2_fts_yb_v2_3_v2 c, v_espen_ng_lf_tas_2411_2_fts_yb_v2_3_v2 p, v_espen_ng_lf_tas_2411_2_fts_yb_v2_3 d
+FROM public.v_espen_lr_lf_pretas_3_results_fts_mf_202506_v2 c, v_espen_lr_lf_pretas_3_results_fts_mf_202506_v2 p, v_espen_lr_lf_pretas_3_results_fts_mf_202506 d
 where p.p_cluster_id = c.c_cluster_id and p.p_code_id = d.d_code_id;

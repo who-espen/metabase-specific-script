@@ -8,7 +8,7 @@ k.d_recorder "Recorder ID", count(m.id) "Total Duplicates"
 
 FROM
     public.metabase_lr_lf_2506_pretas_duplicates m
-    JOIN v_espen_ng_lf_tas_2411_2_fts_yb_v2_3 k ON k.id = m.id_results_fts :: int
+    JOIN v_espen_lr_lf_pretas_3_results_fts_mf_202506 k ON k.id = m.id_results_fts :: int
 
 GROUP BY k.d_recorder 
 
@@ -16,13 +16,13 @@ UNION all
 
 SELECT 
 
-p.c_recorder "Recorder ID", count(m.id) "Total Duplicates" 
+p.p_recorder "Recorder ID", count(m.id) "Total Duplicates" 
 
 FROM
     public.metabase_lr_lf_2506_pretas_duplicates m
-    JOIN v_espen_ng_lf_tas_2411_1_sit_part_sk_kd_v23 p ON (p.id = m.id_participant:: int)
+    JOIN v_espen_lr_lf_pretas_2_child_202506 p ON (p.id = m.id_participant:: int)
 
-group by p.c_recorder 
+group by p.p_recorder 
 
 
 ) src 

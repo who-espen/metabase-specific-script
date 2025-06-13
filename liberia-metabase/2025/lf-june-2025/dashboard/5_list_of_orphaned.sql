@@ -10,7 +10,7 @@
 
 /*
  * A query for listing all records that use the same ID twice
- * Variable to rename v_espen_ng_lf_tas_2411_2_fts_yb_v2_3_v2, v_espen_ng_lf_tas_2411_2_fts_yb_v2_3, metabase_ng_lf_tas_orphaned_202405
+ * Variable to rename v_espen_lr_lf_pretas_3_results_fts_mf_202506_v2, v_espen_lr_lf_pretas_3_results_fts_mf_202506, metabase_ng_lf_tas_orphaned_202405
  */
 
     SELECT
@@ -25,8 +25,8 @@
       p_start "Date",
       status "Status"
 
-    FROM v_espen_ng_lf_tas_2411_2_fts_yb_v2_3_v2 p
-      LEFT JOIN v_espen_ng_lf_tas_2411_2_fts_yb_v2_3 d on p.p_code_id = d.d_code_id
+    FROM v_espen_lr_lf_pretas_3_results_fts_mf_202506_v2 p
+      LEFT JOIN v_espen_lr_lf_pretas_3_results_fts_mf_202506 d on p.p_code_id = d.d_code_id
       LEFT JOIN metabase_ng_lf_tas_orphaned_202405 m on m.id_participant = p.id
       WHERE d.id isNULL --and p_start > '2020-09-25'
 
@@ -45,7 +45,7 @@
       d_start "Date",
       status "Status"
 
-    FROM v_espen_ng_lf_tas_2411_2_fts_yb_v2_3 d
-      LEFT JOIN v_espen_ng_lf_tas_2411_2_fts_yb_v2_3_v2 p on p.p_code_id = d.d_code_id
+    FROM v_espen_lr_lf_pretas_3_results_fts_mf_202506 d
+      LEFT JOIN v_espen_lr_lf_pretas_3_results_fts_mf_202506_v2 p on p.p_code_id = d.d_code_id
       LEFT JOIN metabase_ng_lf_tas_orphaned_202405 m on m.id_results = d.id
       WHERE p.id isNULL --and p_start > '2020-09-25'

@@ -13,7 +13,7 @@
  * Variable to rename espen_bj_lf_tas_1_site_202009_v3, <%number_villlage%>
  */
 
-with site as (select distinct c_cluster_id from v_espen_ng_lf_tas_2411_2_fts_yb_v2_3_v2) 
+with site as (select distinct c_cluster_id from v_espen_lr_lf_pretas_3_results_fts_mf_202506_v2) 
  
 SELECT
 	TO_CHAR(COUNT(*), '999 999')
