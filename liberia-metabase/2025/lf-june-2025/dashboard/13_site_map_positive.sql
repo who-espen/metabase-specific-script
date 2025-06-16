@@ -14,7 +14,7 @@
   c_start
 
 FROM v_espen_lr_lf_pretas_2_child_202506 c
-LEFT JOIN v_espen_lr_lf_pretas_3_results_fts_mf_202506 d on c.c_cluster_id = d.d_cluster_id
+LEFT JOIN v_espen_lr_lf_pretas_3_results_fts_mf_202506 d on c.p_cluster_id = d.d_cluster_id
 
 where d_final_result = 'Positive'
 
