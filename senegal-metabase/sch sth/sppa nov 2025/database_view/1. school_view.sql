@@ -1,0 +1,47 @@
+create view v_espen_sn_sppa_impact_2511_1_site_v2 as
+
+SELECT 
+
+id, 
+w_recorder, 
+w_region, 
+w_district, 
+w_type_enquete, 
+w_subdistrict, 
+w_site_name, 
+w_site_code, 
+w_director_name, 
+w_survey_location_type, 
+w_consent_school, 
+w_consent_village,
+w_source_exist_school, 
+w_source_exist_village, 
+w_source_type, 
+w_source_place,
+w_source_type2, 
+w_source_type2_other, 
+w_toilet_school, 
+w_toilet_type, 
+w_toilet_clean, 
+w_toilet_use, 
+w_washing_hand, 
+w_soap,
+w_sanitizer,
+w_flies_access_faeces, 
+w_washing_hand_2, 
+w_soaw_2, 
+w_sanitiser_2, 
+w_place_defecate_school, 
+w_defecate_in_village, 
+w_water_point, 
+w_place_water_point, 
+w_water_point_used,
+w_gps_lat, 
+w_gps_lng, 
+w_gps_acc,
+ w_remarks, 
+ w_start
+
+FROM public.espen_sn_sppa_impact_2511_1_site_v2 c
+
+
