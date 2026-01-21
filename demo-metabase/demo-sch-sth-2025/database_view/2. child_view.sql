@@ -1,0 +1,63 @@
+
+create view v_espen_demo_sppa_impact_2511_2_child as 
+
+select
+c.id, 
+p.p_recorder,
+p.p_admin1,
+p.p_district, 
+p.p_survey_type, 
+p.p_subdistrict, 
+p.p_site,
+p.p_site_code,
+p.p_consent_note,
+p.p_id_type,
+ 
+c.parent_id,
+c.p_code_id, 
+c.p_age_yrs, 
+c.p_years_lived_in_village,
+c.p_sex,
+c.p_class,
+c.p_residence,
+c.p_source_drinking_water, 
+c.p_source_drinking_water_other,
+c.p_source_water_for_cooking,
+c.p_surface_water,
+c.p_duration_to_reach_water_source, 
+c.p_who_goes_to_source,
+c.p_nb_20_litres_collected,
+c.p_treat_water, 
+c.p_water_acticity,
+c.p_water_acticity_other, 
+c.p_water_activity_play, 
+c.p_water_activity_fish,
+ c.p_toilet_facility, 
+ c.p_water_facility_other,
+ c.p_share_water_facility,
+ c.p_nb_households_using_toilet,
+ c.p_last_time_passed_stool,
+ c.p_last_time_passed_stool_other,
+ c.p_usually_wash_hand,
+ c.p_usually_wash_hand_other,
+ c.p_when_wash_hands_soap,
+ c.p_why_wash_hands, 
+ c.p_where_wash_hands, 
+ c.p_knows_bilh,
+ c.p_manif_bilh,
+ c.p_peed_blood_1_time, 
+ c.p_peed_blood_know, 
+ c.p_child_treat_pzq, 
+ c.p_child_treat_pzq_mdb,
+ c.p_nb_people_in_household, 
+ c.p_children_under_3, 
+ c.p_dewormin_last_6_months,
+ c.p_sample_collected, 
+ c.p_remarks, 
+ c.p_note_thanks, 
+ 
+ p.p_start
+
+FROM public.espen_demo_sppa_impact_2511_2_child p, public.espen_demo_sppa_impact_2511_2_child_p9999_2 c 
+
+where p.id = c.parent_id::int

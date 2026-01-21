@@ -1,0 +1,78 @@
+create view v_espen_sn_sppa_impact_2510_3_resultat as
+
+SELECT 
+
+c.id,
+p.r_recorder,
+p.r_admin1,
+p.r_district,
+p.r_subdistrict,
+p.r_site,
+p.r_site_code, 
+p.r_id_type, 
+
+c.parent_id,
+c.r_code_id,
+c.r_test, 
+c.r_grading, 
+c.r_urine_vol,
+c.r_urine_positif,
+c.r_sh_egp,
+c.r_sh_egr_10ml,
+ c.r_k_positif,
+ c.r_sch_man_sa,
+ c.r_sch_man_sb, 
+ c.r_sch_man_intensity,
+ c.r_sch_man_heavy_intensity, 
+ c.r_sch_man_moderate_intensity,
+ c.r_ascaris_lumb_sa, 
+ c.r_ascaris_lumb_sb, 
+ c.r_ascaris_lumb_intensity,
+ c.r_ascaris_lumb_heavy_intensity, 
+ c.r_ascaris_lumb_moderate_intensity,
+ c.r_hookworm_sa, 
+ c.r_hookworm_sb, 
+ c.r_hookworm_intensity,
+ c.r_hookworm_heavy_intensity,
+ c.r_hookworm_moderate_intensity,
+ c.r_trichuris_sa,
+ c.r_trichuris_sb, 
+ c.r_trichuris_intensity, 
+ c.r_trichuris_heavy_intensity,
+ c.r_trichuris_moderate_intensity,
+ c.r_autre_parasite,
+ c.r_autre_parasite_detail, 
+ c.r_oxyure_sa, 
+ c.r_oxyure_sb,
+ c.r_oxyure_intensity,
+ c.r_giardia_sa,
+ c.r_giardia_sb,
+ c.r_giardia_intensity,
+ c.r_taenia_sa,
+ c.r_taenia_sb, 
+ c.r_taenia_intensity, 
+ c.r_hymenolepis_sa,
+ c.r_hymenolepis_sb,
+ c.r_hymenolepis_intensity,
+ c.r_eel_sa, 
+ c.r_eel_sb,
+c.r_eel_intensity,
+c.r_diphyllobothrium_sa, 
+c.r_diphyllobothrium_sb, 
+c.r_diphyllobothrium_intensity,
+c.r_isospera_sa,
+c.r_isospera_sb, 
+c.r_isospera_intensity, 
+c.r_fluke_sa, 
+c.r_fluke_sb,
+c.r_fluke_intensity,
+c.r_remarks,
+
+p.r_start
+
+FROM public.espen_sn_sppa_impact_2510_3_resultat p, public.espen_sn_sppa_impact_2510_3_resultat_r9999 c
+
+where p.id = c.parent_id::int
+
+
+
